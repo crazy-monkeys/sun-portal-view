@@ -47,7 +47,7 @@ export default {
     },
     go(){
       this.$router.push({
-        name:'ClaimForm1'
+        name:'ClaimForm'
       })
     },
   }

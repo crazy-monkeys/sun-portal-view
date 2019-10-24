@@ -11,14 +11,14 @@ module.exports = {
         assetsPublicPath: '/',
         proxyTable: {
             "/product": {
-                target: 'http://192.168.101.6:8080/portal-api',
+                target: 'http://portal-sit.threeape.cn/sun-portal',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/product': '/product'
                 }
             },
             "/service": {
-                target: 'http://192.168.101.6:8080/portal-api',
+                target: 'http://portal-sit.threeape.cn/sun-portal',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/service': '/service'
@@ -63,7 +63,7 @@ module.exports = {
         // Paths
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsSubDirectory: 'static',
-        assetsPublicPath: '/',
+        assetsPublicPath: './',
 
         /**
          * Source Maps

@@ -92,6 +92,7 @@
               class="datePicker"
               v-model="form.installDate"
               type="date"
+              value-format="yyyy-MM-dd"
               placeholder="选择日期">
             </el-date-picker>
           </el-form-item>
@@ -259,7 +260,7 @@ export default {
               }
             }else{
                 if(data[i][j] || data[i][j]===0){
-                  params.append(data[i]+j,data[i][j])
+                  params.append(i+'.'+j,data[i][j])
                 }
             }
           }
@@ -329,6 +330,7 @@ export default {
     }
   },
   created(){
+    console.log(process.env.API_ROOT)
   },
 };
 </script>

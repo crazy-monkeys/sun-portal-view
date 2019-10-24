@@ -14,11 +14,11 @@ import { stringify } from 'qs'
 
 //获取 product model
 export const productInfo = data => {
-    return request('get', `/product/info/${data.serialNumber}`).then(result => result)
+    return request('get', `${serverUrl}/product/info/${data.serialNumber}`).then(result => result)
 }
 
 
 //reg submit
 export const submit = data => {
-    return request('post', `/service/call`, data).then(result => result)
+    return request('post', `${serverUrl}/service/call`, data).then(result => result)
 }
