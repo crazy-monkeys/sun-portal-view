@@ -4,5 +4,5 @@ const devEnv = require('./dev.env')
 
 module.exports = merge(devEnv, {
     NODE_ENV: '"testing"',
-    API_ROOT: '"http://portal-sit.threeape.cn/sun/portal-api"'
+    API_ROOT: '"http://portal-sit.threeape.cn/sun-portal-api"'
 })

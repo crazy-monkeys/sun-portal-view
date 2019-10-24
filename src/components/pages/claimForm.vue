@@ -18,6 +18,7 @@
               class="datePicker"
               v-model="form.installDate"
               type="date"
+              value-format="yyyy-MM-dd"
               placeholder="选择日期">
             </el-date-picker>
           </el-form-item>

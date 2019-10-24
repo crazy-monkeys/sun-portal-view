@@ -11,14 +11,14 @@ module.exports = {
         assetsPublicPath: '/',
         proxyTable: {
             "/product": {
-                target: 'http://portal-sit.threeape.cn/sun-portal',
+                target: 'http://portal-sit.threeape.cn/sun-portal-api',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/product': '/product'
                 }
             },
             "/service": {
-                target: 'http://portal-sit.threeape.cn/sun-portal',
+                target: 'http://portal-sit.threeape.cn/sun-portal-api',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/service': '/service'
