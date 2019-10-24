@@ -1,0 +1,319 @@
+<template>
+  <el-container class="registration" direction="vertical">
+    <Breadcrumb :breadcrumbList='breadcrumbList' />
+    <div class="desc">
+      描述区域
+    </div>
+    <el-form size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
+      <h2>Contact Details</h2>
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <el-form-item label="First name">
+            <el-input v-model="form.firstName"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Last name">
+            <el-input v-model="form.lastName"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Email">
+            <el-input v-model="form.email" prefix-icon="el-icon-message">
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Contact Number">
+            <el-input v-model="form.contactNumber"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+
+      <h2>Product Details</h2>
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <el-form-item label="Product serial number">
+            <el-input v-model="form.ProductSerialNumber"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Product model">
+            <el-input v-model="form.productModel"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      
+
+      <h2>Installation Details</h2>
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <el-form-item label="Street address">
+            <el-input v-model="form.streetAddress"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Installation date">
+            <el-date-picker
+              class="datePicker"
+              v-model="form.installationDate"
+              type="date"
+              placeholder="选择日期">
+            </el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Suburb">
+            <el-input v-model="form.suburb"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Installer">
+            <el-input v-model="form.installer"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Post code">
+            <el-input v-model="form.postCode"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="CEC accreditation number">
+            <el-input v-model="form.cecAccreditationNumber"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="State">
+            <el-select v-model="form.state" placeholder="请选择" clearable filterable>
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Invoice upload">
+            <el-upload
+              class="upload-demo"
+              style="width:100%"
+              ref="upload"
+              :limit="1"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :on-preview="handlePreview"
+              :on-remove="handleRemove"
+              :file-list="fileList"
+              :auto-upload="false">
+              <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">选取文件</el-input>
+            </el-upload>
+            <!-- <el-input type="file" v-model="form.invoiceUpload"></el-input> -->
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Country">
+            <el-select v-model="form.country" placeholder="请选择" clearable filterable>
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Electrical Compliance Certificate">
+            <el-upload
+              class="upload-demo"
+              style="width:100%"
+              ref="upload"
+              :limit="1"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :on-preview="handlePreview"
+              :on-remove="handleRemove"
+              :file-list="fileList"
+              :auto-upload="false">
+              <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">选取文件</el-input>
+            </el-upload>
+            <!-- <el-input type="file" v-model="form.electricalComplianceCertificate" @change="changeFile"></el-input> -->
+          </el-form-item>
+        </el-col>
+      </el-row>
+
+
+      <h2>Suggestions</h2>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-form-item label="Do you have any product suggestions?">
+            <el-input type="textarea" v-model="form.suggestions" resize="none" :rows="4"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label=" ">
+            <el-checkbox v-model="form.checked">I have read and agree to Sungrow's warranty terms.</el-checkbox>
+          </el-form-item>
+        </el-col>
+      </el-row>
+
+
+      <el-form-item class="sub">
+        <el-button type="primary" @click="onSubmit">Submit</el-button>
+        <el-button @click="reset">reset</el-button>
+      </el-form-item>
+    </el-form>
+  </el-container>
+</template>
+
+<script>
+import Breadcrumb from '../coms/Breadcrumb'
+export default {
+  name: "SigleItem",
+  components:{
+    Breadcrumb
+  },
+  data() {
+    return {
+      options: [{
+          value: '1',
+          label: '选项1'
+        }, {
+          value: '2',
+          label: '选项2'
+        }, {
+          value: '3',
+          label: '选项3'
+        }, {
+          value: '4',
+          label: '选项4'
+        }, {
+          value: '5',
+          label: '选项5'
+      }],
+      breadcrumbList:[
+        {
+          path:'/warranty/extension',
+          name:'Warranty'
+        },
+        {
+          path:'/warranty/extension',
+          name:'Extension'
+        },
+        {
+          path:'/warranty/extension/sigleItem',
+          name:'Sigle Item'
+        }
+      ],
+      fileList:[],
+      form: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        contactNumber: '',
+        ProductSerialNumber: '',
+        productModel: '',
+        streetAddress: '',
+        installationDate:'',
+        suburb:'',
+        installer:'',
+        postCode:'',
+        cecAccreditationNumber:'',
+        invoiceUpload:'',
+        country:'',
+        electricalComplianceCertificate:'',
+        suggestions:'',
+        checked:false
+      }
+    };
+  },
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    onSubmit() {
+      console.log('submit!');
+    },
+    reset(){},
+    changeFile(val){
+      console.log(val)
+    },
+    submitUpload() {
+      this.$refs.upload.submit();
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    }
+  }
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang='scss' >
+.registration {
+  height: 100%;
+  .desc {
+    border:1px dashed #FF7F00;
+    height: 500px;
+    line-height: 500px;
+    text-align: center;
+    // background: orange;
+    font-size: 30px
+  }
+  .form{
+    padding: 20px;
+    h2{
+      padding: 10px 0;
+      color: #FF7F00
+    }
+    .datePicker,.el-select{
+      width: 100% ;
+    }
+    .el-upload{
+      width: 100%;
+    }
+    .upload-demo{
+      >div{
+        width: 100%;
+      }
+      ul{
+        box-sizing: border-box;
+        // padding: 0 1px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        &:focus{
+          border: none;
+          outline:none !important;
+        }
+        li{
+          // box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          padding: 1px;
+          line-height: 32px;
+          height: 32px;
+          margin-top: 0;
+          .el-icon-close{
+            top: 9px;
+          }
+        }
+        li:hover{
+          background-color: transparent;
+        }
+        li:focus{
+          border: none;
+          outline:none !important;
+        }
+      }
+    }
+    .sub{
+      margin-top: 20px;
+    }
+  }
+}
+
+</style>
