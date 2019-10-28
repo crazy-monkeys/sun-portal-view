@@ -159,7 +159,7 @@
 
 <script>
 import Breadcrumb from '../coms/Breadcrumb'
-import { productInfo,submit } from '@/api/registration'
+import { productInfo,submitReg } from '@/api/registration'
 export default {
   name: "Registration",
   components:{
@@ -274,7 +274,7 @@ export default {
       //   console.log(i,this.form[i])
       //   formData.append(i,this.form[i])
       // }
-      submit(params).then(res=>{
+      submitReg(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
           this.$message.success('提交成功，3秒后跳转首页')

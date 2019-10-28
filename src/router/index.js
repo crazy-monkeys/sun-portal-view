@@ -52,7 +52,13 @@ export default new Router({
                 path: 'warranty/extension/sigleItem',
                 name: 'SigleItem',
                 component: resolve => require(['@/components/pages/sigleItem'], resolve),
+            },
+            {
+                path: '/warranty/extension/multipleItems',
+                name: 'MultipleItems',
+                component: resolve => require(['@/components/pages/multipleItems'], resolve),
             }
+
         ]
     }]
 })

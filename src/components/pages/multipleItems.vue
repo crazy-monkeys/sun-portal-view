@@ -1,5 +1,5 @@
 <template>
-  <el-container class="sigleItem" direction="vertical">
+  <el-container class="multipleItems" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
     <div class="desc">
       描述区域
@@ -101,112 +101,91 @@
         </el-col>
       </el-row>
 
-      <h2>Product Details</h2>
+      <h2>Product list</h2>
       <el-row :gutter="20">
-        <el-col :span="6">
-          <el-form-item label="Serial number">
-            <el-input v-model="form.serialNumber" @blur='getProductInfo'></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="Product model">
-            <el-input v-model="form.productModel" :readonly="true"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-
-        <el-form-item label="Installation date (if applicable)">
-            <el-date-picker
-              class="datePicker"
-              v-model="form.installDate"
-              type="date"
-              value-format="yyyy-MM-dd"
-              placeholder="选择日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
+        
       </el-row>
-
-
-      <h2>Installation Address</h2>
-      <el-row :gutter="20">
-        <el-col :span="24">
-          <el-form-item label="The installation address is">
-            <el-radio-group v-model="shippingAddressRadio">
-              <el-radio label="1" value='1'>Same as billing address</el-radio>
-              <el-radio label="2" value='2'>Other address (Please fill in below)</el-radio>
-              <el-radio label="3" value='3'>Not applicable</el-radio>
-            </el-radio-group>
-          </el-form-item>
-        </el-col>
-       <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="Country" >
-            <el-select v-model="form.countryCode" placeholder="请选择" clearable filterable>
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="City/District">
-            <el-input v-model="form.cityName"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="State/Province">
-            <el-input v-model="form.stateName"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="Post code">
-            <el-input v-model="form.postCode"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="Address Line 1">
-            <el-input v-model="form.addressLine1"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="Address Line 2">
-            <el-input v-model="form.addressLine2"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-
-      <h2>Warranty type to purchase</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="Warranty type">
-            <el-select v-model="form.warrantyType" placeholder="请选择" clearable filterable @change="getAmount">
-              <el-option
-                v-for="item in warrantyTypes"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="Purchase order (if applicable)">
+          <el-form-item label="Purchase Order">
             <el-input v-model="form.purchaseOrder"></el-input>
           </el-form-item>
         </el-col>
+        
+        <el-table
+          :data="form.products"
+          style="width: 100%"
+          @row-click='rowClick'
+          show-summary>
+          <el-table-column
+            prop=""
+            label="Serial number"
+            width="">
+            <template slot-scope="scope">
+              <el-form-item label="">
+                <el-input v-model="scope.row.serialNumber" size="small"  @blur="getProductInfo(scope.$index)"></el-input>
+              </el-form-item>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop=""
+            label="Product model"
+            width="">
+            <template slot-scope="scope">
+              <el-form-item label="">
+                <el-input v-model="scope.row.productModel" size="small" :readonly="true"></el-input>
+              </el-form-item>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop=""
+            label="Warranty type">
+            <template slot-scope="scope">
+              <el-form-item label="">
+                <el-select v-model="scope.row.warrantyType" placeholder="请选择" clearable filterable @change="getAmount(scope.$index)">
+                  <el-option
+                    v-for="item in warrantyTypes"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="amount"
+            label="Amount">
+            <!-- <template slot-scope="scope">
+              <el-form-item label="">
+                <el-input v-model="scope.row.amount" size="small" :readonly="true"></el-input>
+              </el-form-item>
+            </template> -->
+          </el-table-column>
+          <el-table-column
+            prop=""
+            label="Amount">
+            <template slot="header" slot-scope="scope">
+                <el-button size="small" type='text' @click="addRow">添加</el-button>
+           </template>
+            <template slot-scope="scope">
+               <el-button
+                size="small"
+                type="text"
+                @click="delRow(scope.$index)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
       </el-row>
 
-      <h2>The total amount you need to pay is (GST excluded):</h2>
+      <!-- <h2>The total amount you need to pay is (GST excluded):</h2>
       <el-row :gutter="20">
         <el-col :span="6">
           <el-form-item label="Total amount (excl. GST)">
             <el-input v-model="form.amount" :readonly="true"></el-input>
           </el-form-item>
         </el-col>
-      </el-row>
+      </el-row> -->
 
       <el-row :gutter="20">
         <el-col :span="24">
@@ -232,7 +211,7 @@ import Breadcrumb from '../coms/Breadcrumb'
 import { productInfo,submitSingle,getAmount } from '@/api/registration'
 
 export default {
-  name: "SigleItem",
+  name: "MultipleItems",
   components:{
     Breadcrumb
   },
@@ -279,8 +258,8 @@ export default {
           name:'Extension'
         },
         {
-          path:'/warranty/extension/sigleItem',
-          name:'Sigle Item'
+          path:'/warranty/extension/multipleItems',
+          name:'Multiple Items'
         }
       ],
       fileList:[],
@@ -306,51 +285,46 @@ export default {
         sendEmail:'',
         contactNumber: '',
 
+        products:[
 
-
-
-        serialNumber: '',
-        productModel: '',
-        installDate:'',
-
-
-
-        shippingAddress:'',
-
-        countryCode:'',
-        cityName:'',
-        stateName:'',
-        postCode:'',
-        addressLine1:'',
-        addressLine2:'',
-
-
-        warrantyType:'',
+        ],
         purchaseOrder:'',
         amount:'',
         checked:false,
         type:3
-      }
+      },
+      rowData:{},
     };
   },
   methods: {
-    getAmount(){
+    rowClick(row){
+      this.rowData = row
+    },
+    addRow(){
+      this.form.products.push(
+        {
+          serialNumber:'',
+          productId:'',
+          productModel:'',
+          warrantyType:'',
+          amount:'',
+          deliveryDate:''
+        }
+      )
+    },
+    delRow(index){
+      this.form.products.splice(index,1)
+    },
+    getAmount(index){
       var data ={
-        productId:this.product.id,
-        productModel:this.product.productModel,
-        deliveryDate:this.product.deliveryDate,
-        warrantyType:this.form.warrantyType,
+        productId:this.rowData.productId,
+        productModel:this.rowData.productModel,
+        deliveryDate:this.rowData.deliveryDate,
+        warrantyType:this.form.products[index].warrantyType
       }
       getAmount(data).then(res=>{
         if(res.data.code==1){
-          this.form.amount  = res.data.data
-          this.form.products = [{
-            productId:this.product.id,
-            productModel:this.product.productModel,
-            warrantyType:this.form.warrantyType,
-            purchaseOrder:this.form.purchaseOrder,
-            amount:this.form.amount,
-          }]
+          this.form.products[index].amount  = res.data.data
         }
       })
     },
@@ -363,13 +337,13 @@ export default {
     handlePreview(file) {
       console.log(file);
     },
-    getProductInfo(){
-      if(this.form.serialNumber){
-        productInfo({serialNumber:this.form.serialNumber}).then(res=>{
+    getProductInfo(index){
+      if(this.form.products[index].serialNumber){
+        productInfo({serialNumber:this.form.products[index].serialNumber}).then(res=>{
           if(res.data.code==1){
-            this.product = res.data.data
-            this.form.productModel = res.data.data.productModel
-            
+            this.form.products[index].productId = res.data.data.productId
+            this.form.products[index].productModel = res.data.data.productModel
+            this.form.products[index].deliveryDate = res.data.data.deliveryDate
           }
         }).catch(err=>{
           console.log(err)
@@ -390,10 +364,10 @@ export default {
               for(let x in data[i][j]){
                 // console.log(data[i][j][x])
                 if(data[i][j][x] || data[i][j][x]===0){
-                  // if(data[i][j].constructor==Array){
+                  // if(data[i][j].constructor===Array){
                     params.append(i+'['+j+']'+'.'+x,data[i][j][x])
                   // }else{
-                    // params.append(i+'.'+j+'.'+x,data[i][j][x])
+                    params.append(i+'.'+j+'.'+x,data[i][j][x])
                   // }
                 }
               }
@@ -489,8 +463,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss' >
-.sigleItem {
+.multipleItems {
   height: 100%;
+  .el-table{
+    .el-form-item{
+      margin-bottom: 0;
+    }
+  }
   .desc {
     border:1px dashed #FF7F00;
     height: 500px;

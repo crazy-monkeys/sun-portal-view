@@ -47,7 +47,11 @@ export default {
         name:'SigleItem'
       })
     },
-    multipleBtn(){},
+    multipleBtn(){
+      this.$router.push({
+        name:'MultipleItems'
+      })
+    },
   }
 };
 </script>

@@ -18,7 +18,20 @@ export const productInfo = data => {
 }
 
 
-//reg submit
-export const submit = data => {
-    return request('post', `${serverUrl}/service/call`, data).then(result => result)
+//claim submit
+export const submitClaim = data => {
+        return request('post', `${serverUrl}/service/call`, data).then(result => result)
+    }
+    //reg submit
+export const submitReg = data => {
+    return request('post', `${serverUrl}/service/mt/regist`, data).then(result => result)
+}
+
+
+export const submitSingle = data => {
+        return request('post', `${serverUrl}/service/ei/register`, data).then(result => result)
+    }
+    //获取 amount
+export const getAmount = data => {
+    return request('post', `${serverUrl}/product/info/price`, data).then(result => result)
 }
