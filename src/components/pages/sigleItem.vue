@@ -1,5 +1,5 @@
 <template>
-  <el-container class="registration" direction="vertical">
+  <el-container class="sigleItem" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
     <div class="desc">
       描述区域
@@ -253,7 +253,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss' >
-.registration {
+.sigleItem {
   height: 100%;
   .desc {
     border:1px dashed #FF7F00;

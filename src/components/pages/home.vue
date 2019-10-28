@@ -1,6 +1,6 @@
 <template>
   <el-container class="home">
-    home
+    <img src="../../../static/home.jpg" alt="">
   </el-container>
 </template>
 
@@ -21,8 +21,11 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang='scss' scoped>
 .home {
   height: 500px;
+  img{
+    width: 100%;
+  }
 }
 </style>
