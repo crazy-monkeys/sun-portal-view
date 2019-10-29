@@ -337,7 +337,7 @@ export default {
     getAmount(){
       var data ={
         productId:this.product.id,
-        productModel:this.product.productModel,
+        productModel:this.product.productModelValue,
         deliveryDate:this.product.deliveryDate,
         warrantyType:this.form.warrantyType,
       }
@@ -346,7 +346,7 @@ export default {
           this.form.amount  = res.data.data
           this.form.products = [{
             productId:this.product.id,
-            productModel:this.product.productModel,
+            productModel:this.product.productModelValue,
             warrantyType:this.form.warrantyType,
             purchaseOrder:this.form.purchaseOrder,
             amount:this.form.amount,
@@ -368,7 +368,7 @@ export default {
         productInfo({serialNumber:this.form.serialNumber}).then(res=>{
           if(res.data.code==1){
             this.product = res.data.data
-            this.form.productModel = res.data.data.productModel
+            this.form.productModel = res.data.data.productModelValue
             
           }
         }).catch(err=>{

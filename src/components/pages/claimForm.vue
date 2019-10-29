@@ -399,11 +399,11 @@ export default {
       if(this.form.productNumber){
         productInfo({serialNumber:this.form.productNumber}).then(res=>{
           if(res.data.code==1){
-            this.form.productModel = res.data.data.productModel
+            this.form.productModel = res.data.data.productModelValue
             // this.form.productId = [res.data.data.id]
             this.form.products = [{
               productId:res.data.data.id,
-              productModel:res.data.data.productModel,
+              productModel:res.data.data.productModelValue,
             }]
           }
         }).catch(err=>{
