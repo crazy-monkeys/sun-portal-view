@@ -320,21 +320,12 @@ export default {
       radio:'',
       submitLoading:false,
       options: [{
-          value: '1',
-          label: '选项1'
+          value: 'AU',
+          label: 'Australia'
         }, {
           value: '2',
           label: '选项2'
-        }, {
-          value: '3',
-          label: '选项3'
-        }, {
-          value: '4',
-          label: '选项4'
-        }, {
-          value: '5',
-          label: '选项5'
-      }],
+        }],
       breadcrumbList:[
         {
           path:'/warranty/registration',
