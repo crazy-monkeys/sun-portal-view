@@ -2,7 +2,60 @@
   <el-container class="extension" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
     <div class="desc">
-      描述区域
+      <el-table
+        :data="tableData"
+        style="width: 100%;margin:20px 0;"
+        >
+        <el-table-column
+          prop="model"
+          label="Model"
+          header-align='center'
+          align='enter'
+          width="">
+        </el-table-column>
+        <el-table-column
+          prop=""
+          header-align='center'
+          align='enter'
+          label="Add 5 Years Parts Warranty"
+          width="">
+          <el-table-column
+            prop="partEarlyBirdDiscount"
+          header-align='center'
+          align='enter'
+            label="Early-bird Discount"
+            width="">
+          </el-table-column>
+          <el-table-column
+            prop="partStandard"
+          header-align='center'
+          align='enter'
+            label="Standard"
+            width="">
+          </el-table-column>
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          header-align='center'
+          align='enter'
+          label="Add 5 Years Standard Warranty">
+            <el-table-column
+              prop="standardEarlyBirdDiscount"
+          header-align='center'
+          align='enter'
+              label="Early-bird Discount"
+              width="">
+            </el-table-column>
+            <el-table-column
+              prop="standardStandard"
+          align='enter'
+          header-align='center'
+              label="Standard"
+              width="">
+            </el-table-column>
+        </el-table-column>
+      </el-table>
+      <p style="text-align:right;font-size:16px">Prices are effective from 31 July 2019</p>
     </div>
     <div class="link">
       <h2>
@@ -22,6 +75,7 @@
 
 <script>
 import Breadcrumb from '../coms/Breadcrumb'
+import {priceTab} from "@/api/registration.js"
 export default {
   name: "Extension",
   components:{
@@ -29,6 +83,7 @@ export default {
   },
   data() {
     return {
+      tableData:[],
       breadcrumbList:[
         {
           path:'/warranty/extension',
@@ -41,7 +96,17 @@ export default {
       ]
     };
   },
+  created(){
+    this.getPriceTab()
+  },
   methods: {
+    getPriceTab(){
+      priceTab().then(res=>{
+        if(res.data.code==1){
+          this.tableData = res.data.data
+        }
+      })
+    },
     sigleBtn(){
       this.$router.push({
         name:'SigleItem'
@@ -61,14 +126,15 @@ export default {
 .extension {
   height: 100%;
   .desc {
-    
-    border:1px dashed #FF7F00;
-    height: 500px;
-    line-height: 500px;
+    // height: 500px;
+    // line-height: 500px;
     text-align: center;
     // background: orange;
     font-size: 30px;
-    margin-bottom: 20px;
+    img{
+      width: 100%;
+      display: inline-block
+    }
   }
   .link{
     h2{

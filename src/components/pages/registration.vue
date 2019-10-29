@@ -2,7 +2,7 @@
   <el-container class="registration" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
     <div class="desc">
-      描述区域
+      <img src="../../../static/reg.jpeg" alt="图片">
     </div>
     <el-form :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Contact Details</h2>
@@ -97,7 +97,7 @@
             </el-date-picker>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.address.contryCode=='AU'">
           <el-form-item label="CEC accreditation number">
             <el-input v-model="form.installCec"></el-input>
           </el-form-item>
@@ -170,7 +170,7 @@ export default {
       submitLoading:false,
       options: [{
           value: 'AU',
-          label: '选项1'
+          label: 'Australia'
         }, {
           value: '2',
           label: '选项2'
@@ -340,12 +340,15 @@ export default {
 .registration {
   height: 100%;
   .desc {
-    border:1px dashed #FF7F00;
-    height: 500px;
-    line-height: 500px;
+    // height: 500px;
+    // line-height: 500px;
     text-align: center;
     // background: orange;
-    font-size: 30px
+    font-size: 30px;
+    img{
+      width: 100%;
+      display: inline-block
+    }
   }
   .form{
     padding: 20px;

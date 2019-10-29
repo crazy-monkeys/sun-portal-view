@@ -27,7 +27,80 @@
             <router-view></router-view>
       </el-main>
     </el-container>
-    <el-footer>页面底部区域</el-footer>
+    <el-footer>
+      <el-container  class="foot">
+          <img src="../../../static/footlogo.png" alt="logo">
+          <div class="linkBox">
+            <el-row :gutter="100">
+              <el-col :span="8">
+                <el-button type="text">
+                  About Sungrow
+                </el-button>
+              </el-col>
+              <el-col :span="8">
+                <el-button type="text">
+                  About Sungrow
+                </el-button>
+              </el-col><el-col :span="8">
+                <el-button type="text">
+                  About Sungrow
+                </el-button>
+              </el-col>
+            </el-row>
+            <el-row :gutter="100">
+              <el-col :span="8">
+                <el-button type="text">
+                  About Sungrow
+                </el-button>
+              </el-col>
+              <el-col :span="8">
+                <el-button type="text">
+                  About Sungrow
+                </el-button>
+              </el-col><el-col :span="8">
+                <el-button type="text">
+                  About Sungrow
+                </el-button>
+              </el-col>
+            </el-row>
+            <el-row :gutter="100">
+              <el-col :span="8">
+                <el-button type="text">
+                  About Sungrow
+                </el-button>
+              </el-col>
+              <el-col :span="8">
+                <el-button type="text">
+                  About Sungrow
+                </el-button>
+              </el-col><el-col :span="8">
+                <el-button type="text">
+                  About Sungrow
+                </el-button>
+              </el-col>
+            </el-row>
+        
+          </div>
+          
+
+      </el-container>
+      <el-container  class="foot1">
+          <p>© 2019 SUNGROW. All Rights Reserved.</p>
+          <div class="linkBox">
+            <el-row :gutter="100">
+              <el-col :span="8">
+                <a href="">Contact us</a>
+              </el-col>
+              <el-col :span="8">
+                <a href="">LegalNotice</a>
+              </el-col>
+              <el-col :span="8">
+                <a href="">PrivacyPolicy</a>
+              </el-col>
+            </el-row>
+          </div>
+      </el-container>
+    </el-footer>
   </el-container>
 </template>
 
@@ -48,7 +121,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style   scoped>
 .index {
   height: 100%;
   width: 1120px;
@@ -59,7 +132,6 @@ export default {
   /* background: red; */
   padding: 0;
   text-align: center;
-  line-height: 240px;
   font-size: 30px;
   color: #fff;
   background: #000;
@@ -75,4 +147,37 @@ export default {
 .el-header img{
     height: 240px;
   }
+  
+
+  .foot{
+    height: 240px !important;
+    background: #f5f5f5;
+    justify-content: space-between;
+  }
+  .foot img{
+      height: 50px;
+      padding: 100px;
+    }
+    .foot .linkBox{
+      padding: 50px 100px;
+    }
+    .foot .el-button{
+      margin: 0
+    }
+    .foot1{
+      background: #ee7800 !important;
+      justify-content: space-between;
+    }
+    .foot1 p{
+      padding: 0 20px;
+      font-size: 16px;
+      line-height: 47px;
+    }
+    .foot1 .linkBox{
+      padding: 0 80px;
+    }
+    .foot1 a{
+      font-size: 16px;
+      color: #fff;
+    }
 </style>
