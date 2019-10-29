@@ -20,7 +20,7 @@ export const productInfo = data => {
 
 //claim submit
 export const submitClaim = data => {
-        return request('post', `${serverUrl}/service/call`, data).then(result => result)
+        return request('post', `${serverUrl}/service/service/call`, data).then(result => result)
     }
     //reg submit
 export const submitReg = data => {
