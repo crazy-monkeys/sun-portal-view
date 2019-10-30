@@ -424,11 +424,11 @@ export default {
               for(let x in data[i][j]){
                 // console.log(data[i][j][x])
                 if(data[i][j][x] || data[i][j][x]===0){
-                  if(data[i][j].constructor===Array){
+                  // if(data[i][j].constructor===Array){
                     params.append(i+'['+j+']'+'.'+x,data[i][j][x])
-                  }else{
-                    params.append(i+'.'+j+'.'+x,data[i][j][x])
-                  }
+                  // }else{
+                    // params.append(i+'.'+j+'.'+x,data[i][j][x])
+                  // }
                 }
               }
             }else{
