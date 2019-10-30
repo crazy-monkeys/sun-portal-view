@@ -2,7 +2,7 @@
   <el-container class="claimForm" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
     <div class="desc">
-      描述区域
+      <img src="../../../static/reg.jpeg" alt="图片">
     </div>
     <el-form :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Product Details</h2>
@@ -30,7 +30,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="Want to claim an accessory?">
-            <el-input v-model="form.accessory" ></el-input>
+            <el-input v-model="form.accessory" :disabled="form.productNumber.length==0" ></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -46,13 +46,13 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="ABN" >
-            <el-input v-model="form.contact.abn" :disabled="form.businessType=='Individual' ? true :false"></el-input>
+            <el-input v-model="form.contact.abn" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         
         <el-col :span="6">
           <el-form-item label="Business Name">
-            <el-input v-model="form.contact.businessName" :disabled="form.businessType=='Individual' ? true :false"></el-input>
+            <el-input v-model="form.contact.businessName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
 
@@ -218,8 +218,8 @@
         </el-col>
       </el-row>
 
-      <h2>Other Details</h2>
-      <el-row :gutter="20">
+      <h2 v-if="form.contact.address.contryCode=='AU'||form.endUser.address.contryCode=='AU'">Other Details</h2>
+      <el-row :gutter="20" v-if="form.contact.address.contryCode=='AU'||form.endUser.address.contryCode=='AU'">
         <el-col :span="12">
           <el-row :gutter="20">
             <el-col :span="24">
@@ -544,12 +544,15 @@ export default {
 .claimForm {
   height: 100%;
   .desc {
-    border:1px dashed #FF7F00;
-    height: 500px;
-    line-height: 500px;
+    // height: 500px;
+    // line-height: 500px;
     text-align: center;
     // background: orange;
-    font-size: 30px
+    font-size: 30px;
+    img{
+      width: 100%;
+      display: inline-block
+    }
   }
   .form{
     padding: 20px;

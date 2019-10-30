@@ -31,52 +31,57 @@
       <el-container  class="foot">
           <img src="../../../static/footlogo.png" alt="logo">
           <div class="linkBox">
-            <el-row :gutter="100">
+            <el-row :gutter="0">
               <el-col :span="8">
-                <el-button type="text">
-                  About Sungrow
-                </el-button>
+                <a href="https://en.sungrowpower.com/en/company" >About Sungrow</a>
               </el-col>
               <el-col :span="8">
-                <el-button type="text">
-                  About Sungrow
-                </el-button>
+                <a href="https://en.sungrowpower.com/en/products">Products A - Z</a>
               </el-col><el-col :span="8">
-                <el-button type="text">
-                  About Sungrow
-                </el-button>
+                <a href="https://en.sungrowpower.com/en/news">Sungrow News</a>
+
               </el-col>
             </el-row>
-            <el-row :gutter="100">
+            <el-row :gutter="0">
               <el-col :span="8">
-                <el-button type="text">
-                  About Sungrow
-                </el-button>
+                <a href="https://en.sungrowpower.com/en/career">Career</a>
+                
               </el-col>
               <el-col :span="8">
-                <el-button type="text">
-                  About Sungrow
-                </el-button>
+                <a href="https://en.sungrowpower.com/en/mission">Our Mission</a>
+
+                
               </el-col><el-col :span="8">
-                <el-button type="text">
-                  About Sungrow
-                </el-button>
+                <a href="https://en.sungrowpower.com/en/how-to-buy">Distributors</a>
+
+               
               </el-col>
             </el-row>
-            <el-row :gutter="100">
+            <el-row :gutter="0">
               <el-col :span="8">
-                <el-button type="text">
-                  About Sungrow
-                </el-button>
+                <a href="https://en.sungrowpower.com/en/events">Events</a>
+
+              
               </el-col>
               <el-col :span="8">
-                <el-button type="text">
-                  About Sungrow
-                </el-button>
-              </el-col><el-col :span="8">
-                <el-button type="text">
-                  About Sungrow
-                </el-button>
+                <a href="https://en.sungrowpower.com/en/downloads">Downloads</a>
+               
+              </el-col>
+              <el-col :span="8">
+                <a href="https://en.sungrowpower.com/en/social-responsibility">Social Responsibility</a>
+
+              
+              </el-col>
+            </el-row>
+            <el-row :gutter="0">
+              <el-col :span="8">
+                <a href="https://en.sungrowpower.com/en/service">Service</a>
+
+              
+              </el-col>
+              <el-col :span="8">
+                <a href="https://en.sungrowpower.com/en/webinars">Webinars</a>
+               
               </el-col>
             </el-row>
         
@@ -158,7 +163,14 @@ export default {
       height: 50px;
       padding: 100px;
     }
+    .foot a{
+      display: inline-block;
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+    }
     .foot .linkBox{
+      width: 500px;
       padding: 50px 100px;
     }
     .foot .el-button{

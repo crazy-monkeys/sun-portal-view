@@ -102,8 +102,8 @@
             <el-input v-model="form.installCec"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
-          <el-form-item label="Invoice upload">
+        <el-col :span="6" v-if="form.address.contryCode=='AU'">
+          <el-form-item label="Invoice upload" >
             <el-upload
               class="upload-demo"
               style="width:100%"
