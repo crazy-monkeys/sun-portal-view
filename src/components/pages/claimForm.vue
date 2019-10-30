@@ -209,7 +209,7 @@
               
               <el-col :span="24">
                 <el-form-item label="Once approved, the replacement device will be shipped to">
-                  <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.shippingAddress" ></el-input>
+                  <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.shippingAddress" :readonly="true" ></el-input>
                 </el-form-item>
               </el-col>
               
@@ -376,6 +376,7 @@ export default {
           model:'',
           batteryMsg:''
         },
+        businessPartner:'',
         productNumber: '',
         productModel: '',
         productId:[],
@@ -384,6 +385,19 @@ export default {
         type:2
       }
     };
+  },
+  watch:{
+    shippingAddressRadio: {
+      handler:function (n,o) {
+        if(n==1){
+          this.form.serviceCall.shippingAddress = this.form.contact.address.cityName +this.form.contact.address.stateName+this.form.contact.address.postCode+this.form.contact.address.addressLine1+this.form.contact.address.addressLine2
+        }else if(n==2){
+          this.form.serviceCall.shippingAddress = this.form.endUser.address.cityName +this.form.endUser.address.stateName+this.form.endUser.address.postCode+this.form.endUser.address.addressLine1+this.form.endUser.address.addressLine2
+        }else{
+          this.form.serviceCall.shippingAddress = ''
+        }
+      }      
+    }
   },
   methods: {
     submitUpload() {
@@ -400,6 +414,8 @@ export default {
         productInfo({serialNumber:this.form.productNumber}).then(res=>{
           if(res.data.code==1){
             this.form.productModel = res.data.data.productModelValue
+            this.form.businessPartner = res.data.data.businessPartner
+
             // this.form.productId = [res.data.data.id]
             this.form.products = [{
               productId:res.data.data.id,
@@ -460,6 +476,7 @@ export default {
     reset(){
       this.form={
         endUser:{
+          businessPartner:'',
           person:'',
           contactNumber:"",
           contactEmail:'',

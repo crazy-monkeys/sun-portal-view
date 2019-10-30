@@ -2,7 +2,7 @@
   <el-container class="claim" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
     <div class="desc">
-      描述区域
+      <img src="../../../static/reg.jpeg" alt="图片">
     </div>
     <div class="link">
       <h2>
@@ -59,14 +59,15 @@ export default {
 .claim {
   height: 100%;
   .desc {
-    
-    border:1px dashed #FF7F00;
-    height: 500px;
-    line-height: 500px;
+    // height: 500px;
+    // line-height: 500px;
     text-align: center;
     // background: orange;
     font-size: 30px;
-    margin-bottom: 20px;
+    img{
+      width: 100%;
+      display: inline-block
+    }
   }
   .link{
     h2{
