@@ -251,9 +251,12 @@ export default {
             console.log(data[i][j])
             if(typeof(data[i][j]) == 'object'){
               for(let x in data[i][j]){
-                console.log(data[i][j][x])
                 if(data[i][j][x] || data[i][j][x]===0){
-                  params.append(i+'['+j+']'+'.'+x,data[i][j][x])
+                  if(data[i].constructor===Array){
+                    params.append(i+'['+j+']'+'.'+x,data[i][j][x])
+                  }else{
+                    params.append(i+'.'+j+'.'+x,data[i][j][x])
+                  }
                 }
               }
             }else{

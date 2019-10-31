@@ -340,32 +340,32 @@ export default {
       fileList:[],
       form: {
         endUser:{
-          person:'',
-          contactNumber:"",
-          contactEmail:'',
+          person:'1',
+          contactNumber:"1",
+          contactEmail:'1',
           address:{
-            contryCode:'',
-            cityName:'',
-            stateName:'',
-            postCode:'',
-            addressLine1:'',
-            addressLine2:'',
+            contryCode:'1',
+            cityName:'1',
+            stateName:'1',
+            postCode:'1',
+            addressLine1:'1',
+            addressLine2:'1',
           }
         },
         contact:{
           billType:'Business',
-          abn:'',
-          businessName:"",
-          person:'',
-          contactNumber:"",
-          contactEmail:'',
+          abn:'1',
+          businessName:"1",
+          person:'1',
+          contactNumber:"1",
+          contactEmail:'1',
           address:{
-            contryCode:'',
-            cityName:'',
-            stateName:'',
-            postCode:'',
-            addressLine1:'',
-            addressLine2:'',
+            contryCode:'1',
+            cityName:'1',
+            stateName:'1',
+            postCode:'1',
+            addressLine1:'1',
+            addressLine2:'1',
           }
         },
         serviceCall:{
@@ -440,11 +440,11 @@ export default {
               for(let x in data[i][j]){
                 // console.log(data[i][j][x])
                 if(data[i][j][x] || data[i][j][x]===0){
-                  // if(data[i][j].constructor===Array){
+                  if(data[i].constructor===Array){
                     params.append(i+'['+j+']'+'.'+x,data[i][j][x])
-                  // }else{
-                    // params.append(i+'.'+j+'.'+x,data[i][j][x])
-                  // }
+                  }else{
+                    params.append(i+'.'+j+'.'+x,data[i][j][x])
+                  }
                 }
               }
             }else{
@@ -459,6 +459,7 @@ export default {
           }
         }
       }
+      console.log(params)
       submitClaim(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
