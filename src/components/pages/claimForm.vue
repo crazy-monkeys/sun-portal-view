@@ -59,26 +59,26 @@
 
         <el-col :span="6">
           <el-form-item label="Contact person">
-            <el-input v-model="form.contact.person"></el-input>
+            <el-input v-model="form.contact.person" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         
         <el-col :span="6">
           <el-form-item label="Contact number">
-            <el-input v-model="form.contact.contactNumber"></el-input>
+            <el-input v-model="form.contact.contactNumber" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
 
         <el-col :span="6">
           <el-form-item label="Email">
-            <el-input  v-model="form.contact.contactEmail" prefix-icon="el-icon-message">
+            <el-input  v-model="form.contact.contactEmail" prefix-icon="el-icon-message" :disabled="form.contact.billType=='Individual' ? true :false">
             </el-input>
           </el-form-item>
         </el-col>
 
         <el-col :span="6">
           <el-form-item label="Country">
-            <el-select v-model="form.contact.address.contryCode" placeholder="请选择" clearable filterable>
+            <el-select v-model="form.contact.address.contryCode" :disabled="form.contact.billType=='Individual' ? true :false" placeholder="请选择" clearable filterable>
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -90,32 +90,33 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="City/District">
-            <el-input v-model="form.contact.address.cityName"></el-input>
+            <el-input v-model="form.contact.address.cityName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="State/Province">
-            <el-input v-model="form.contact.address.stateName"></el-input>
+            <el-input v-model="form.contact.address.stateName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="Post code">
-            <el-input v-model="form.contact.address.postCode"></el-input>
+            <el-input v-model="form.contact.address.postCode" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="Address Line 1">
-            <el-input v-model="form.contact.address.addressLine1"></el-input>
+            <el-input v-model="form.contact.address.addressLine1" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="Address Line 2">
-            <el-input v-model="form.contact.address.addressLine2"></el-input>
+            <el-input v-model="form.contact.address.addressLine2" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
-      <h2>End User Contact Details</h2>
-      <el-row :gutter="20">
+
+      <h2 v-if="form.contact.billType!='Business'">End User Contact Details</h2>
+      <el-row v-if="form.contact.billType!='Business'" :gutter="20">
         <el-col :span="6">
           <el-form-item label="Name">
             <el-input type="text" v-model="form.endUser.person" ></el-input>
@@ -170,7 +171,7 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <el-row :gutter="20">
+      <el-row  :gutter="20">
         <el-col :span="12">
           <h2>Fault Details</h2>
           <el-row :gutter="20">
@@ -209,7 +210,7 @@
               
               <el-col :span="24">
                 <el-form-item label="Once approved, the replacement device will be shipped to">
-                  <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.shippingAddress" :readonly="true" ></el-input>
+                  <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.shippingAddress" :readonly="shippingAddressRadio=='3' ? false: true" ></el-input>
                 </el-form-item>
               </el-col>
               
@@ -421,10 +422,15 @@ export default {
               productId:res.data.data.id,
               productModel:res.data.data.productModelValue,
             }]
+          }else{
+            this.form.productModel = ''
           }
         }).catch(err=>{
+            this.form.productModel = ''
           console.log(err)
         })
+      }else{
+        this.form.productModel = ''
       }
     },
     onSubmit() {

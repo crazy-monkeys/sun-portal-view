@@ -346,8 +346,13 @@ export default {
             this.form.products[index].deliveryDate = res.data.data.deliveryDate
           }
         }).catch(err=>{
+            this.form.productModel = ''
+
           console.log(err)
         })
+      }else{
+            this.form.productModel = ''
+
       }
     },
     onSubmit() {

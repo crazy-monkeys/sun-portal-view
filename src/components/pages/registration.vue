@@ -236,8 +236,11 @@ export default {
             this.form.businessPartner = res.data.data.businessPartner
           }
         }).catch(err=>{
+          this.form.productModel = ''
           console.log(err)
         })
+      }else{
+        this.form.productModel = ''
       }
     },
     onSubmit() {

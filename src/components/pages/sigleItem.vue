@@ -372,8 +372,13 @@ export default {
             
           }
         }).catch(err=>{
+            this.form.productModel = ''
+
           console.log(err)
         })
+      }else{
+            this.form.productModel = ''
+
       }
     },
     onSubmit() {
