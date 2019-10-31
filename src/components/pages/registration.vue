@@ -110,9 +110,10 @@
               ref="upload"
               :limit="1"
               action="https://jsonplaceholder.typicode.com/posts/"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :file-list="fileList"
+              :on-change='handleChange1'
+              :on-preview="handlePreview1"
+              :on-remove="handleRemove1"
+              :file-list="fileList1"
               :auto-upload="false">
               <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">选取文件</el-input>
             </el-upload>
@@ -126,6 +127,7 @@
               ref="upload"
               :limit="1"
               action="https://jsonplaceholder.typicode.com/posts/"
+              :on-change='handleChange'
               :on-preview="handlePreview"
               :on-remove="handleRemove"
               :file-list="fileList"
@@ -186,7 +188,10 @@ export default {
         }
       ],
       fileList:[],
+      fileList1:[],
       form: {
+        invoiceFile:'',
+        cecFile:'',
         contacts:{
           contactFirstName: '',
           contactLastName: '',
@@ -210,7 +215,9 @@ export default {
         installCec:'',
         suggestions:'',
         checked:false,
-        type:1
+        type:1,
+        a:'',
+        b:'',
       }
     };
   },
@@ -268,12 +275,12 @@ export default {
       submitReg(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
-          this.$message.success('提交成功，3秒后跳转首页')
-          setTimeout(() => {
-            this.$router.push({
-              name:'Home'
-            })
-          }, 3*1000);
+          this.$message.success('提交成功，单据号：'+res.data.data+ '3秒后跳转首页')
+          // setTimeout(() => {
+          //   this.$router.push({
+          //     name:'Home'
+          //   })
+          // }, 3*1000);
         }
       }).catch(err=>{
         this.submitLoading = false
@@ -318,6 +325,21 @@ export default {
     },
     handlePreview(file) {
       console.log(file);
+    },
+    handleChange(file,fileList){
+      console.log(file,fileList)
+      this.form.cecFile = file.row
+    },
+    handleRemove1(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview1(file) {
+      console.log(file);
+    },
+    handleChange1(file,fileList){
+      console.log(file,fileList)
+      this.form.invoiceFile = file.row
+
     }
   },
   created(){
