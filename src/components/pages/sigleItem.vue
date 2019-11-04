@@ -2,7 +2,7 @@
   <el-container class="sigleItem" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
     <div class="desc">
-      描述区域
+      <img src="../../../static/reg.jpeg" alt="图片">
     </div>
     <el-form size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Billing Details</h2>
@@ -511,12 +511,15 @@ export default {
 .sigleItem {
   height: 100%;
   .desc {
-    border:1px dashed #FF7F00;
-    height: 500px;
-    line-height: 500px;
+    // height: 500px;
+    // line-height: 500px;
     text-align: center;
     // background: orange;
-    font-size: 30px
+    font-size: 30px;
+    img{
+      width: 100%;
+      display: inline-block
+    }
   }
   .form{
     padding: 20px;
