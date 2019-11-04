@@ -23,8 +23,16 @@
                 <el-menu-item index="/warranty/registration">Warranty Registration</el-menu-item>
                 <el-menu-item index="/warranty/extension">Warranty Extension</el-menu-item>
             </el-submenu>
+            <el-dropdown @command="handleCommand" trigger='click'>
+              <span class="el-dropdown-link">
+                {{drop}}<i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item v-for='item in options' :command="item" :key='item.value'>{{item.label}}</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
         </el-menu>
-            <router-view></router-view>
+        <router-view></router-view>
       </el-main>
     </el-container>
     <el-footer>
@@ -110,28 +118,64 @@
 </template>
 
 <script>
+import Bus from "../../bus/bus.js";
+
 export default {
   name: "Index",
   data() {
     return {
-      activeIndex2: '/'
+      activeIndex2: '/',
+      options: [{
+
+          value: 'AU',
+          label: 'Australia'
+        }, {
+          value: '2',
+          label: '选项2'
+        }],
+        drop:'请选择',
+        dropValue:'',
     };
   },
   methods:{
     handleSelect(key, keyPath) {
         // console.log(key, keyPath);
-    }
+    },
+    handleCommand(command) {
+        // this.$message('click on item ' + command);
+        this.drop = command.label
+        this.dropValue = command.value
+        Bus.$emit("dropValue", this.dropValue);
+      }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style   scoped>
+
 .index {
   height: 100%;
   width: 1120px;
   margin: 0 auto;
 }
+.el-dropdown{
+  position: absolute;
+  right: 50px;
+  height: 60px;
+}
+.el-dropdown span{
+  display: block;
+  height: 60px;
+  line-height: 60px;
+}
+.el-dropdown-link {
+    cursor: pointer;
+    color: #fff;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
 .el-header,.el-footer {
   height: 240px !important; 
   /* background: red; */
@@ -142,6 +186,7 @@ export default {
   background: #000;
 }
 .menu {
+  position: relative;
   /* background: blue; */
   width: 200px;
   height: 100%;

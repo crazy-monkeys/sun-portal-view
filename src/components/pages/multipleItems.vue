@@ -209,7 +209,7 @@
 <script>
 import Breadcrumb from '../coms/Breadcrumb'
 import { productInfo,submitSingle,getAmount } from '@/api/registration'
-
+import Bus from "../../bus/bus.js";
 export default {
   name: "MultipleItems",
   components:{
@@ -233,20 +233,12 @@ export default {
         label: 'Additional 5 Years Standard Warranty'
       }],
       options: [{
-          value: '1',
-          label: '选项1'
-        }, {
-          value: '2',
-          label: '选项2'
-        }, {
-          value: '3',
-          label: '选项3'
-        }, {
-          value: '4',
-          label: '选项4'
-        }, {
-          value: '5',
-          label: '选项5'
+
+        value: 'AU',
+        label: 'Australia'
+      }, {
+        value: '2',
+        label: '选项2'
       }],
       breadcrumbList:[
         {
@@ -265,6 +257,7 @@ export default {
       fileList:[],
       productId:'',
       form: {
+        country:'',
         address:{
           countryCode:'',
           cityName:'',
@@ -308,7 +301,8 @@ export default {
           productModel:'',
           warrantyType:'',
           amount:'',
-          deliveryDate:''
+          deliveryDate:'',
+          businessPartner:''
         }
       )
     },
@@ -318,7 +312,7 @@ export default {
     getAmount(index){
       var data ={
         productId:this.rowData.productId,
-        productModel:this.rowData.productModel,
+        productModel:this.rowData.productModelValue,
         deliveryDate:this.rowData.deliveryDate,
         warrantyType:this.form.products[index].warrantyType
       }
@@ -341,22 +335,21 @@ export default {
       if(this.form.products[index].serialNumber){
         productInfo({serialNumber:this.form.products[index].serialNumber}).then(res=>{
           if(res.data.code==1){
-            this.form.products[index].productId = res.data.data.productId
-            this.form.products[index].productModel = res.data.data.productModel
+            this.form.products[index].productId = res.data.data.id
+            this.form.products[index].productModel = res.data.data.productModelValue
             this.form.products[index].deliveryDate = res.data.data.deliveryDate
+            this.form.products[index].businessPartner = res.data.data.businessPartner
           }
         }).catch(err=>{
-            this.form.productModel = ''
-
+          this.form.products[index].productModel=''
           console.log(err)
         })
       }else{
-            this.form.productModel = ''
-
+        this.form.products[index].productModel=''
       }
     },
     onSubmit() {
-      this.form.shippingAddress = [this.form.countryCode,this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
+      // this.form.shippingAddress = [this.form.countryCode,this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
       this.submitLoading = true
       var params = new FormData()
       var data = this.form
@@ -404,6 +397,7 @@ export default {
     },
     reset(){
       this.form = {
+        
         address:{
           countryCode:'',
           cityName:'',
@@ -462,7 +456,12 @@ export default {
     handlePreview(file) {
       console.log(file);
     }
-  }
+  },
+  mounted(){
+    Bus.$on('dropValue',(res)=>{
+      this.form.country = res
+    })
+  },
 };
 </script>
 

@@ -160,6 +160,8 @@
 </template>
 
 <script>
+import Bus from "../../bus/bus.js";
+
 import Breadcrumb from '../coms/Breadcrumb'
 import { productInfo,submitReg } from '@/api/registration'
 export default {
@@ -190,6 +192,7 @@ export default {
       fileList:[],
       fileList1:[],
       form: {
+        country:"",
         invoiceFile:'',
         cecFile:'',
         contacts:{
@@ -350,6 +353,11 @@ export default {
   },
   created(){
     console.log(process.env.API_ROOT)
+  },
+  mounted(){
+    Bus.$on('dropValue',(res)=>{
+      this.form.country = res
+    })
   },
 };
 </script>

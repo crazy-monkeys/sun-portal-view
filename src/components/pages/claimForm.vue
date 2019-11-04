@@ -78,7 +78,7 @@
 
         <el-col :span="6">
           <el-form-item label="Country">
-            <el-select v-model="form.contact.address.contryCode" :disabled="form.contact.billType=='Individual' ? true :false" placeholder="请选择" clearable filterable>
+            <el-select v-model="form.contact.address.countryCode" :disabled="form.contact.billType=='Individual' ? true :false" placeholder="请选择" clearable filterable>
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -135,7 +135,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="Country">
-            <el-select v-model="form.endUser.address.contryCode" placeholder="请选择" clearable filterable>
+            <el-select v-model="form.endUser.address.countryCode" placeholder="请选择" clearable filterable>
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -219,8 +219,8 @@
         </el-col>
       </el-row>
 
-      <h2 v-if="form.contact.address.contryCode=='AU'||form.endUser.address.contryCode=='AU'">Other Details</h2>
-      <el-row :gutter="20" v-if="form.contact.address.contryCode=='AU'||form.endUser.address.contryCode=='AU'">
+      <h2 v-if="form.contact.address.countryCode=='AU'||form.endUser.address.countryCode=='AU'">Other Details</h2>
+      <el-row :gutter="20" v-if="form.contact.address.countryCode=='AU'||form.endUser.address.countryCode=='AU'">
         <el-col :span="12">
           <el-row :gutter="20">
             <el-col :span="24">
@@ -309,6 +309,7 @@
 
 <script>
 import Breadcrumb from '../coms/Breadcrumb'
+import Bus from "../../bus/bus.js";
 import { productInfo,submitClaim } from '@/api/registration'
 export default {
   name: "ClaimForm",
@@ -340,12 +341,13 @@ export default {
       shippingAddressRadio:'',
       fileList:[],
       form: {
+        country:'',
         endUser:{
           person:'',
           contactNumber:"",
           contactEmail:'',
           address:{
-            contryCode:'',
+            countryCode:'',
             cityName:'',
             stateName:'',
             postCode:'',
@@ -361,7 +363,7 @@ export default {
           contactNumber:"",
           contactEmail:'',
           address:{
-            contryCode:'',
+            countryCode:'',
             cityName:'',
             stateName:'',
             postCode:'',
@@ -375,7 +377,8 @@ export default {
           weatherMsg:'',
           battery:'',
           model:'',
-          batteryMsg:''
+          batteryMsg:'',
+          shippingAddress:'',
         },
         businessPartner:'',
         productNumber: '',
@@ -431,6 +434,7 @@ export default {
         })
       }else{
         this.form.productModel = ''
+        this.form.accessory = ''
       }
     },
     onSubmit() {
@@ -488,7 +492,7 @@ export default {
           contactNumber:"",
           contactEmail:'',
           address:{
-            contryCode:'',
+            countryCode:'',
             cityName:'',
             stateName:'',
             postCode:'',
@@ -504,7 +508,7 @@ export default {
           contactNumber:"",
           contactEmail:'',
           address:{
-            contryCode:'',
+            countryCode:'',
             cityName:'',
             stateName:'',
             postCode:'',
@@ -542,6 +546,11 @@ export default {
     }
   },
   created(){
+  },
+  mounted(){
+    Bus.$on('dropValue',(res)=>{
+      this.form.country = res
+    })
   },
 };
 </script>

@@ -230,6 +230,7 @@
 <script>
 import Breadcrumb from '../coms/Breadcrumb'
 import { productInfo,submitSingle,getAmount } from '@/api/registration'
+import Bus from "../../bus/bus.js";
 
 export default {
   name: "SigleItem",
@@ -254,21 +255,13 @@ export default {
         label: 'Additional 5 Years Standard Warranty'
       }],
       options: [{
-          value: '1',
-          label: '选项1'
+
+          value: 'AU',
+          label: 'Australia'
         }, {
           value: '2',
           label: '选项2'
-        }, {
-          value: '3',
-          label: '选项3'
-        }, {
-          value: '4',
-          label: '选项4'
-        }, {
-          value: '5',
-          label: '选项5'
-      }],
+        }],
       breadcrumbList:[
         {
           path:'/warranty/extension',
@@ -286,6 +279,8 @@ export default {
       fileList:[],
       productId:'',
       form: {
+        country:'',
+        businessPartner:'',
         address:{
           countryCode:'',
           cityName:'',
@@ -335,24 +330,29 @@ export default {
   },
   methods: {
     getAmount(){
-      var data ={
-        productId:this.product.id,
-        productModel:this.product.productModelValue,
-        deliveryDate:this.product.deliveryDate,
-        warrantyType:this.form.warrantyType,
-      }
-      getAmount(data).then(res=>{
-        if(res.data.code==1){
-          this.form.amount  = res.data.data
-          this.form.products = [{
-            productId:this.product.id,
-            productModel:this.product.productModelValue,
-            warrantyType:this.form.warrantyType,
-            purchaseOrder:this.form.purchaseOrder,
-            amount:this.form.amount,
-          }]
+      if(this.form.warrantyType){
+        var data ={
+          productId:this.product.id,
+          productModel:this.product.productModelValue,
+          deliveryDate:this.product.deliveryDate,
+          warrantyType:this.form.warrantyType,
         }
-      })
+        getAmount(data).then(res=>{
+          if(res.data.code==1){
+            this.form.amount  = res.data.data
+            this.form.products = [{
+              productId:this.product.id,
+              productModel:this.product.productModelValue,
+              warrantyType:this.form.warrantyType,
+              purchaseOrder:this.form.purchaseOrder,
+              amount:this.form.amount,
+
+            }]
+          }
+        })
+      }else{
+
+      }
     },
     submitUpload() {
       this.$refs.upload.submit();
@@ -369,7 +369,8 @@ export default {
           if(res.data.code==1){
             this.product = res.data.data
             this.form.productModel = res.data.data.productModelValue
-            
+            this.form.businessPartner = res.data.data.businessPartner
+
           }
         }).catch(err=>{
             this.form.productModel = ''
@@ -382,7 +383,14 @@ export default {
       }
     },
     onSubmit() {
-      this.form.shippingAddress = [this.form.countryCode,this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
+      if(this.shippingAddressRadio==1){
+        this.form.shippingAddress = [this.form.address.countryCode,this.form.address.cityName,this.form.address.stateName,this.form.address.postCode,this.form.address.addressLine1,this.form.address.addressLine2].join(',')
+
+      }else if(this.shippingAddressRadio==2){
+        this.form.shippingAddress = [this.form.countryCode,this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
+      }else{
+        this.form.shippingAddress=''
+      }
       this.submitLoading = true
       var params = new FormData()
       var data = this.form
@@ -430,6 +438,7 @@ export default {
     },
     reset(){
       this.form = {
+        businessPartner:'',
         address:{
           countryCode:'',
           cityName:'',
@@ -488,7 +497,12 @@ export default {
     handlePreview(file) {
       console.log(file);
     }
-  }
+  },
+  mounted(){
+    Bus.$on('dropValue',(res)=>{
+      this.form.country = res
+    })
+  },
 };
 </script>
 
