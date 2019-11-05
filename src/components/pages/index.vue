@@ -126,15 +126,14 @@ export default {
     return {
       activeIndex2: '/',
       options: [{
-
-          value: 'AU',
-          label: 'Australia'
-        }, {
-          value: '2',
-          label: '选项2'
-        }],
-        drop:'请选择',
-        dropValue:'',
+        value: 'AU',
+        label: 'Australia'
+      }, {
+        value: '2',
+        label: '选项2'
+      }],
+      drop:'请选择',
+      dropValue:'',
     };
   },
   methods:{

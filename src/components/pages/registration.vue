@@ -251,11 +251,12 @@ export default {
       var params = new FormData()
       this.form.country = Bus.dropValue
       var data = this.form
+      // console.log(data);
       for (let i in data) {
-        console.log(i,data[i])
+        // console.log(i,data[i])
         if(typeof(data[i]) == 'object'){
           for(let j in data[i]){
-            console.log(data[i][j])
+            // console.log(data[i][j])
             if(typeof(data[i][j]) == 'object'){
               for(let x in data[i][j]){
                 if(data[i][j][x] || data[i][j][x]===0){

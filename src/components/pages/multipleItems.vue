@@ -4,7 +4,7 @@
     <div class="desc">
       <img src="../../../static/reg.jpeg" alt="图片">
     </div>
-    <el-form size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
+    <el-form :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Billing Details</h2>
       <el-row :gutter="20">
         <el-col :span="6">
