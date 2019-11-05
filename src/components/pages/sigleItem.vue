@@ -384,59 +384,59 @@ export default {
     },
     onSubmit() {
       this.submitLoading = true
-      // if(this.shippingAddressRadio==1){
-      //   this.form.shippingAddress = [this.form.address.countryCode,this.form.address.cityName,this.form.address.stateName,this.form.address.postCode,this.form.address.addressLine1,this.form.address.addressLine2].join(',')
+      if(this.shippingAddressRadio==1){
+        this.form.shippingAddress = [this.form.address.countryCode,this.form.address.cityName,this.form.address.stateName,this.form.address.postCode,this.form.address.addressLine1,this.form.address.addressLine2].join(',')
 
-      // }else if(this.shippingAddressRadio==2){
-      //   this.form.shippingAddress = [this.form.countryCode,this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
-      // }else{
-      //   this.form.shippingAddress=''
-      // }
-      // this.form.country = Bus.dropValue
-      // var params = new FormData()
-      // var data = this.form
-      // for (let i in data) {
-      //   // // console.log(i,data[i])
-      //   if(typeof(data[i]) == 'object'){
-      //     for(let j in data[i]){
-      //       // console.log(data[i][j])
-      //       if(typeof(data[i][j]) == 'object'){
-      //         for(let x in data[i][j]){
-      //           // console.log(data[i][j][x])
-      //           if(data[i][j][x] || data[i][j][x]===0){
-      //             if(data[i].constructor==Array){
-      //               params.append(i+'['+j+']'+'.'+x,data[i][j][x])
-      //             }else{
-      //               params.append(i+'.'+j+'.'+x,data[i][j][x])
-      //             }
-      //           }
-      //         }
-      //       }else{
-      //           if(data[i][j] || data[i][j]===0){
-      //               params.append(i+'.'+j,data[i][j])
-      //           }
-      //       }
-      //     }
-      //   }else{
-      //     if(data[i] || data[i]===0){
-      //       params.append(i,data[i])
-      //     }
-      //   }
-      // }
-      // submitSingle(params).then(res=>{
-      //   if(res.data.code==1){
-      //     this.submitLoading = false
-      //     this.$message.success('提交成功，单据号：'+res.data.data+ '将在3秒后跳转首页')
-      //     const timer = setTimeout(() => {
-      //       this.$router.push({
-      //         name:'Home'
-      //       })
-      //       clearTimeout(timer);
-      //     }, 3*1000);
-      //   }
-      // }).catch(err=>{
-      //   this.submitLoading = false
-      // })
+      }else if(this.shippingAddressRadio==2){
+        this.form.shippingAddress = [this.form.countryCode,this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
+      }else{
+        this.form.shippingAddress=''
+      }
+      this.form.country = Bus.dropValue
+      var params = new FormData()
+      var data = this.form
+      for (let i in data) {
+        // // console.log(i,data[i])
+        if(typeof(data[i]) == 'object'){
+          for(let j in data[i]){
+            // console.log(data[i][j])
+            if(typeof(data[i][j]) == 'object'){
+              for(let x in data[i][j]){
+                // console.log(data[i][j][x])
+                if(data[i][j][x] || data[i][j][x]===0){
+                  if(data[i].constructor==Array){
+                    params.append(i+'['+j+']'+'.'+x,data[i][j][x])
+                  }else{
+                    params.append(i+'.'+j+'.'+x,data[i][j][x])
+                  }
+                }
+              }
+            }else{
+                if(data[i][j] || data[i][j]===0){
+                    params.append(i+'.'+j,data[i][j])
+                }
+            }
+          }
+        }else{
+          if(data[i] || data[i]===0){
+            params.append(i,data[i])
+          }
+        }
+      }
+      submitSingle(params).then(res=>{
+        if(res.data.code==1){
+          this.submitLoading = false
+          this.$message.success('提交成功，单据号：'+res.data.data+ '将在3秒后跳转首页')
+          const timer = setTimeout(() => {
+            this.$router.push({
+              name:'Home'
+            })
+            clearTimeout(timer);
+          }, 3*1000);
+        }
+      }).catch(err=>{
+        this.submitLoading = false
+      })
     },
     reset(){
       this.form = {
