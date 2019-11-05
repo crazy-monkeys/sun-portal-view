@@ -142,7 +142,10 @@
             label="Warranty type">
             <template slot-scope="scope">
               <el-form-item label="">
-                <el-select v-model="scope.row.warrantyType" placeholder="请选择" clearable filterable @change="getAmount(scope.$index)">
+                <el-select v-model="scope.row.warrantyType" placeholder="请选择"
+                clearable filterable
+                @change="getAmount(scope.$index)"
+                @clear="form.products[scope.row.$index].amount=''">
                   <el-option
                     v-for="item in warrantyTypes"
                     :key="item.value"

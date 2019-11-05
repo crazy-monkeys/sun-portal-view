@@ -182,7 +182,7 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <el-form-item label="Warranty type">
-            <el-select v-model="form.warrantyType" placeholder="请选择" clearable filterable @change="getAmount">
+            <el-select v-model="form.warrantyType" placeholder="请选择" clearable filterable @change="getAmount" @clear="form.amount=''">
               <el-option
                 v-for="item in warrantyTypes"
                 :key="item.value"
