@@ -126,15 +126,14 @@ export default {
     return {
       activeIndex2: '/',
       options: [{
-
-          value: 'AU',
-          label: 'Australia'
-        }, {
-          value: '2',
-          label: '选项2'
-        }],
-        drop:'请选择',
-        dropValue:'',
+        value: 'AU',
+        label: 'Australia'
+      }, {
+        value: '2',
+        label: '选项2'
+      }],
+      drop:'请选择',
+      dropValue:'',
     };
   },
   methods:{
@@ -144,7 +143,8 @@ export default {
     handleCommand(command) {
         // this.$message('click on item ' + command);
         this.drop = command.label
-        this.dropValue = command.value
+        this.dropValue = command.value;
+        Bus.dropValue = command.value;
         Bus.$emit("dropValue", this.dropValue);
       }
   }
