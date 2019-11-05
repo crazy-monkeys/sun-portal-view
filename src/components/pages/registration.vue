@@ -256,7 +256,9 @@ export default {
       // console.log(data);
       for (let i in data) {
         // console.log(i,data[i])
-        if(typeof(data[i]) == 'object'){
+        if(i === 'invoiceFile' || i === 'cecFile') {
+          params.append(i, data[i]);
+        } else if(typeof(data[i]) == 'object'){
           for(let j in data[i]){
             // console.log(data[i][j])
             if(typeof(data[i][j]) == 'object'){
