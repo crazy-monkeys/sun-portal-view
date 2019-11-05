@@ -439,8 +439,8 @@ export default {
       this.submitLoading = true
       this.form.country = Bus.dropValue
       var params = new FormData()
-      this.fileList.forEach(item => {
-        params.append('files[]', item.raw);
+      this.fileList.forEach((item,index) => {
+        params.append('files['+index+']', item.raw);
       })
       var data = this.form
       for (let i in data) {
