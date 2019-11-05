@@ -217,6 +217,7 @@ export default {
   },
   data() {
     return {
+      submitLoading: false,
       shippingAddressRadio:"",
       billTypes:[{
         value: 'Business',
