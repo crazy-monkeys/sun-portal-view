@@ -145,7 +145,8 @@ export default {
         // this.$message('click on item ' + command);
         this.drop = command.label
         this.dropValue = command.value
-        Bus.$emit("dropValue", this.dropValue);
+        Bus.dropValue = command.value
+        Bus.$emit("dropValue", this.dropValue); 
       }
   }
 };

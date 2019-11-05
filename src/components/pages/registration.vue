@@ -249,6 +249,7 @@ export default {
     onSubmit() {
       this.submitLoading = true
       var params = new FormData()
+      this.form.country = Bus.dropValue
       var data = this.form
       for (let i in data) {
         console.log(i,data[i])
@@ -284,12 +285,13 @@ export default {
       submitReg(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
-          this.$message.success('提交成功，单据号：'+res.data.data+ '3秒后跳转首页')
-          // setTimeout(() => {
-          //   this.$router.push({
-          //     name:'Home'
-          //   })
-          // }, 3*1000);
+          this.$message.success('提交成功，单据号：'+res.data.data+ '将在3秒后跳转首页')
+          const timer = setTimeout(() => {
+            this.$router.push({
+              name:'Home'
+            })
+            clearTimeout(timer);
+          }, 3*1000);
         }
       }).catch(err=>{
         this.submitLoading = false

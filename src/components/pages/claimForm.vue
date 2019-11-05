@@ -341,6 +341,7 @@ export default {
       shippingAddressRadio:'',
       fileList:[],
       form: {
+        accessory: '',
         country:'',
         endUser:{
           person:'',
@@ -439,6 +440,7 @@ export default {
     },
     onSubmit() {
       this.submitLoading = true
+      this.form.country = Bus.dropValue
       var params = new FormData()
       var data = this.form
       for (let i in data) {
@@ -473,11 +475,12 @@ export default {
       submitClaim(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
-          this.$message.success('提交成功，3秒后跳转首页')
-          setTimeout(() => {
+          this.$message.success('提交成功，单据号：'+res.data.data+ '将在3秒后跳转首页')
+          const timer = setTimeout(() => {
             this.$router.push({
               name:'Home'
             })
+            clearTimeout(timer);
           }, 3*1000);
         }
       }).catch(err=>{
