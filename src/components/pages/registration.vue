@@ -170,28 +170,7 @@ export default {
     Breadcrumb
   },
   data() {
-    return {
-      submitLoading:false,
-      options: [{
-          value: 'AU',
-          label: 'Australia'
-        }, {
-          value: '2',
-          label: '选项2'
-        }],
-      breadcrumbList:[
-        {
-          path:'/warranty/registration',
-          name:'Warranty'
-        },
-        {
-          path:'/warranty/registration',
-          name:'Registration'
-        }
-      ],
-      fileList:[],
-      fileList1:[],
-      form: {
+    const formMod = {
         country:"",
         invoiceFile:'',
         cecFile:'',
@@ -221,7 +200,30 @@ export default {
         type:1,
         a:'',
         b:'',
-      }
+      };
+    return {
+      submitLoading:false,
+      options: [{
+          value: 'AU',
+          label: 'Australia'
+        }, {
+          value: '2',
+          label: '选项2'
+        }],
+      breadcrumbList:[
+        {
+          path:'/warranty/registration',
+          name:'Warranty'
+        },
+        {
+          path:'/warranty/registration',
+          name:'Registration'
+        }
+      ],
+      fileList:[],
+      fileList1:[],
+      formMod,
+      form: {...formMod}
     };
   },
   methods: {
@@ -299,32 +301,7 @@ export default {
       })
     },
     reset(){
-      this.form={
-        contacts:{
-          contactFirstName: '',
-          contactLastName: '',
-          contactEmail: '',
-          contactNumber: '',
-        },
-        address:{
-          contryCode:'',
-          cityName:'',
-          stateName:'',
-          addressLine1:'',
-          addressLine2:'',
-          postCode:'',
-        },
-        productNumber:'',
-        productModel:'',
-        products:[],
-        businessPartner:'',
-        installInstaller:'',
-        installDate:'',
-        installCec:'',
-        suggestions:'',
-        checked:false,
-        type:1
-      }
+      this.form={...this.formMod}
     },
     changeFile(val){
       console.log(val)
@@ -339,8 +316,8 @@ export default {
       console.log(file);
     },
     handleChange(file,fileList){
-      console.log(file,fileList)
-      this.form.cecFile = file.row
+      this.fileList = fileList.slice(-1);
+      this.form.cecFile = this.fileList[0].raw;
     },
     handleRemove1(file, fileList) {
       console.log(file, fileList);
@@ -349,8 +326,9 @@ export default {
       console.log(file);
     },
     handleChange1(file,fileList){
-      console.log(file,fileList)
-      this.form.invoiceFile = file.row
+      // console.log(file,fileList)
+      this.fileList1 = fileList.slice(-1);
+      this.form.invoiceFile = this.fileList1[0].raw
 
     }
   },

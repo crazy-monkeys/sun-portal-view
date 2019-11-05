@@ -429,7 +429,7 @@ export default {
       })
     },
     reset(){
-      this.form = { ...formMod };
+      this.form = {...this.formMod};
     },
     changeFile(val){
       console.log(val)
