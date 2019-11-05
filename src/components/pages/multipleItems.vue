@@ -312,7 +312,7 @@ export default {
     getAmount(index){
       var data ={
         productId:this.rowData.productId,
-        productModel:this.rowData.productModelValue,
+        productModel:this.rowData.productModel,
         deliveryDate:this.rowData.deliveryDate,
         warrantyType:this.form.products[index].warrantyType
       }
