@@ -238,6 +238,42 @@ export default {
     Breadcrumb
   },
   data() {
+    const formMod = {
+      submitType: 1,
+      country:'',
+      businessPartner:'',
+      address:{
+        countryCode:'',
+        cityName:'',
+        stateName:'',
+        postCode:'',
+        addressLine1:'',
+        addressLine2:'',
+      },
+      billType:'',
+      abn:'',
+      businessName:'',
+      firstName: '',
+      lastName: '',
+      email: '',
+      sendEmail:'',
+      contactNumber: '',
+      serialNumber: '',
+      productModel: '',
+      installDate:'',
+      shippingAddress:'',
+      countryCode:'',
+      cityName:'',
+      stateName:'',
+      postCode:'',
+      addressLine1:'',
+      addressLine2:'',
+      warrantyType:'',
+      purchaseOrder:'',
+      amount:'',
+      checked:false,
+      type:3
+    };
     return {
       submitLoading: false,
       shippingAddressRadio:"",
@@ -279,54 +315,8 @@ export default {
       ],
       fileList:[],
       productId:'',
-      form: {
-        country:'',
-        businessPartner:'',
-        address:{
-          countryCode:'',
-          cityName:'',
-          stateName:'',
-          postCode:'',
-          addressLine1:'',
-          addressLine2:'',
-        },
-
-        billType:'',
-        abn:'',
-        businessName:'',
-
-
-        firstName: '',
-        lastName: '',
-        email: '',
-        sendEmail:'',
-        contactNumber: '',
-
-
-
-
-        serialNumber: '',
-        productModel: '',
-        installDate:'',
-
-
-
-        shippingAddress:'',
-
-        countryCode:'',
-        cityName:'',
-        stateName:'',
-        postCode:'',
-        addressLine1:'',
-        addressLine2:'',
-
-
-        warrantyType:'',
-        purchaseOrder:'',
-        amount:'',
-        checked:false,
-        type:3
-      }
+      formMod,
+      form: { ...formMod },
     };
   },
   methods: {
@@ -439,44 +429,7 @@ export default {
       })
     },
     reset(){
-      this.form = {
-        businessPartner:'',
-        address:{
-          countryCode:'',
-          cityName:'',
-          stateName:'',
-          postCode:'',
-          addressLine1:'',
-          addressLine2:'',
-        },
-
-        billType:'',
-        abn:'',
-        businessName:'',
-
-
-        firstName: '',
-        lastName: '',
-        email: '',
-        sendEmail:'',
-        contactNumber: '',
-        serialNumber: '',
-        productModel: '',
-        installDate:'',
-        shippingAddress:'',
-
-        countryCode:'',
-        cityName:'',
-        stateName:'',
-        postCode:'',
-        addressLine1:'',
-        addressLine2:'',
-        warrantyType:'',
-        purchaseOrder:'',
-        amount:'',
-        checked:false,
-        type:3
-      }
+      this.form = { ...formMod };
     },
     changeFile(val){
       console.log(val)

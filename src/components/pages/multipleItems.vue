@@ -216,6 +216,31 @@ export default {
     Breadcrumb
   },
   data() {
+    const formMod = {
+        submitType: 2,
+        country:'',
+        address:{
+          countryCode:'',
+          cityName:'',
+          stateName:'',
+          postCode:'',
+          addressLine1:'',
+          addressLine2:'',
+        },
+        billType:'',
+        abn:'',
+        businessName:'',
+        firstName: '',
+        lastName: '',
+        email: '',
+        sendEmail:'',
+        contactNumber: '',
+        products:[],
+        purchaseOrder:'',
+        amount:'',
+        checked:false,
+        type:3,
+      };
     return {
       submitLoading: false,
       shippingAddressRadio:"",
@@ -257,36 +282,8 @@ export default {
       ],
       fileList:[],
       productId:'',
-      form: {
-        country:'',
-        address:{
-          countryCode:'',
-          cityName:'',
-          stateName:'',
-          postCode:'',
-          addressLine1:'',
-          addressLine2:'',
-        },
-
-        billType:'',
-        abn:'',
-        businessName:'',
-
-
-        firstName: '',
-        lastName: '',
-        email: '',
-        sendEmail:'',
-        contactNumber: '',
-
-        products:[
-
-        ],
-        purchaseOrder:'',
-        amount:'',
-        checked:false,
-        type:3
-      },
+      formMod,
+      form: { ...formMod },
       rowData:{},
     };
   },
@@ -399,53 +396,7 @@ export default {
       })
     },
     reset(){
-      this.form = {
-        
-        address:{
-          countryCode:'',
-          cityName:'',
-          stateName:'',
-          postCode:'',
-          addressLine1:'',
-          addressLine2:'',
-        },
-
-        billType:'',
-        abn:'',
-        businessName:'',
-
-
-        firstName: '',
-        lastName: '',
-        email: '',
-        sendEmail:'',
-        contactNumber: '',
-
-
-
-
-        serialNumber: '',
-        productModel: '',
-        installDate:'',
-
-
-
-        shippingAddress:'',
-
-        countryCode:'',
-        cityName:'',
-        stateName:'',
-        postCode:'',
-        addressLine1:'',
-        addressLine2:'',
-
-
-        warrantyType:'',
-        purchaseOrder:'',
-        amount:'',
-        checked:false,
-        type:3
-      }
+      this.form = { ...formMod };
     },
     changeFile(val){
       console.log(val)
