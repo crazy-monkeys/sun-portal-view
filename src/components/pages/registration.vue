@@ -4,11 +4,11 @@
     <div class="desc">
       <img src="../../../static/reg.jpeg" alt="图片">
     </div>
-    <el-form :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
+    <el-form :disabled="submitLoading" :rules='rules' size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Contact Details</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="First name">
+          <el-form-item label="First name" prop='contacts.contactFirstName'>
             <el-input v-model="form.contacts.contactFirstName"></el-input>
           </el-form-item>
         </el-col>
@@ -18,7 +18,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Email">
+          <el-form-item label="Email" prop='contacts.contactEmail'>
             <el-input  v-model="form.contacts.contactEmail" prefix-icon="el-icon-message">
             </el-input>
           </el-form-item>
@@ -32,8 +32,10 @@
       <h2>Product Details</h2>
       <el-row :gutter="20">
         <el-col :span="6" v-loading='pNumLoding'>
-          <el-form-item label="Product serial number">
-            <el-input v-model="form.productNumber" @blur='getProductInfo'></el-input>
+          <el-form-item label="Product serial number" prop='productNumber'>
+            <el-tooltip class="tooltip" effect="dark" :content="pNumTooltip" placement="top-start">
+              <el-input v-model="form.productNumber" @blur='getProductInfo'></el-input>
+            </el-tooltip>
           </el-form-item>
         </el-col>
         <el-col :span="6">
@@ -44,7 +46,7 @@
       </el-row>
       <h2>Installation Details</h2>
       <el-row :gutter="20">
-        <el-col :span="6">
+        <!-- <el-col :span="6">
           <el-form-item label="Country">
             <el-select v-model="form.address.contryCode" placeholder="请选择" clearable filterable>
               <el-option
@@ -55,19 +57,19 @@
               </el-option>
             </el-select>
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <el-col :span="6">
-          <el-form-item label="City/District">
+          <el-form-item label="City/District" prop='address.cityName'>
             <el-input v-model="form.address.cityName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="State/Province">
+          <el-form-item label="State/Province" prop='address.stateName'>
             <el-input v-model="form.address.stateName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Post code">
+          <el-form-item label="Post code"  prop='address.postCode'>
             <el-input v-model="form.address.postCode"></el-input>
           </el-form-item>
         </el-col>
@@ -87,8 +89,9 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Installation date">
+          <el-form-item label="Installation date" prop='installDate'>
             <el-date-picker
+              :picker-options="pickerOptions"
               class="datePicker"
               v-model="form.installDate"
               type="date"
@@ -102,39 +105,42 @@
             <el-input v-model="form.installCec"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6" v-if="form.address.contryCode=='AU'">
+        <el-col :span="6" >
           <el-form-item label="Invoice upload" >
-            <el-upload
-              class="upload-demo"
-              style="width:100%"
-              ref="upload"
-              :limit="1"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :on-change='handleChange1'
-              :on-preview="handlePreview1"
-              :on-remove="handleRemove1"
-              :file-list="fileList1"
-              :auto-upload="false">
-              <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">选取文件</el-input>
-            </el-upload>
+            <el-tooltip class="tooltip" effect="dark" :content="ivcTooltip" placement="top-start">
+              <el-upload
+                class="upload-demo"
+                style="width:100%"
+                ref="upload"
+                :limit="1"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-change='handleChange1'
+                :on-preview="handlePreview1"
+                :on-remove="handleRemove1"
+                :file-list="fileList1"
+                :auto-upload="false">
+                  <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">选取文件</el-input>
+              </el-upload>
+            </el-tooltip>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="Electrical Compliance Certificate">
-            <el-upload
-              class="upload-demo"
-              style="width:100%"
-              ref="upload"
-              :limit="1"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :on-change='handleChange'
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :file-list="fileList"
-              :auto-upload="false">
-              <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">选取文件</el-input>
-            </el-upload>
-            <!-- <el-input type="file" v-model="form.electricalComplianceCertificate" @change="changeFile"></el-input> -->
+            <el-tooltip class="tooltip" effect="dark" :content="cecTooltip" placement="top-start">
+              <el-upload
+                class="upload-demo"
+                style="width:100%"
+                ref="upload"
+                :limit="1"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-change='handleChange'
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :file-list="fileList"
+                :auto-upload="false">
+                  <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">选取文件</el-input>
+              </el-upload>
+            </el-tooltip>
           </el-form-item>
         </el-col>
       </el-row>
@@ -152,7 +158,7 @@
         </el-col>
       </el-row>
       <el-form-item class="sub">
-        <el-button type="primary" @click="onSubmit" :disabled="!form.checked" :loading='submitLoading'>Submit</el-button>
+        <el-button type="primary" @click="onSubmit('form')" :disabled="!form.checked" :loading='submitLoading'>Submit</el-button>
         <el-button @click="reset">reset</el-button>
       </el-form-item>
     </el-form>
@@ -202,6 +208,37 @@ export default {
         b:'',
       };
     return {
+      pNumTooltip:'Please refer to the nameplate on the side of the Sungrow product.',
+      ivcTooltip:'Please attach the invoice as the evidence of the installation.',
+      cecTooltip:'Please attach the Electrical Compliance Certifcate as the evidence of the installation.Normally it will provided by the installer after installation.For different states.the name for such certifcate may vary.',
+      pickerOptions:{
+        disabledDate: (time) => {
+          return time.getTime()>Date.now()
+        }
+      },
+      rules:{
+        'contacts.contactFirstName':[
+          {required:true,message:'First name is required',triggle:['change','blur']}
+        ],
+        productNumber:[
+          {required:true,message:'Serial number is required',triggle:['change','blur']}
+        ],
+        'contacts.contactEmail':[
+          {required:true,validator: this.$formTest.emailTest,triggle:['change','blur']}
+        ],
+        'address.cityName':[
+          {required:true,message:'City is required',triggle:['change','blur']}
+        ],
+        'address.stateName':[
+          {required:true,message:'State is required',triggle:['change','blur']}
+        ],
+        'address.postCode':[
+          {required:true,message:'Post code is required',triggle:['change','blur']}
+        ],
+        installDate:[
+          {required:true,message:'InstallDate is required',triggle:['change','blur']}
+        ]
+      },
       pNumLoding:false,
       submitLoading:false,
       options: [{
@@ -254,7 +291,10 @@ export default {
         this.form.productModel = ''
       }
     },
-    onSubmit() {
+    onSubmit(form){
+      this.$formTest.submitForm(this.$refs[form],this.submit)
+    },
+    submit() {
       this.submitLoading = true
       var params = new FormData()
       this.form.country = Bus.dropValue
@@ -356,10 +396,7 @@ export default {
 .registration {
   height: 100%;
   .desc {
-    // height: 500px;
-    // line-height: 500px;
     text-align: center;
-    // background: orange;
     font-size: 30px;
     img{
       width: 100%;
@@ -384,7 +421,6 @@ export default {
       }
       ul{
         box-sizing: border-box;
-        // padding: 0 1px;
         width: 100%;
         position: absolute;
         top: 0;

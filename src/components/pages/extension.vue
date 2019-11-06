@@ -23,11 +23,14 @@
             prop="partEarlyBirdDiscount"
           header-align='center'
           align='enter'
+              :formatter='formatter'
+
             label="Early-bird Discount"
             width="">
           </el-table-column>
           <el-table-column
             prop="partStandard"
+              :formatter='formatter'
           header-align='center'
           align='enter'
             label="Standard"
@@ -44,11 +47,14 @@
           header-align='center'
           align='enter'
               label="Early-bird Discount"
+              :formatter='formatter'
               width="">
             </el-table-column>
             <el-table-column
               prop="standardStandard"
           align='enter'
+              :formatter='formatter'
+
           header-align='center'
               label="Standard"
               width="">
@@ -100,6 +106,10 @@ export default {
     this.getPriceTab()
   },
   methods: {
+    formatter(row, column, cellValue, index){
+      console.log(row, column, cellValue, index)
+      return '$ ' + cellValue
+    },
     getPriceTab(){
       priceTab().then(res=>{
         if(res.data.code==1){

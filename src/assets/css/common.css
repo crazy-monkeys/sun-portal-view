@@ -103,3 +103,8 @@ input::-ms-clear {
 .clear {
     zoom: 1;
 }
+
+.el-tooltip__popper{
+    width:300px;
+    text-align:center;
+}

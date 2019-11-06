@@ -31,18 +31,6 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Country">
-            <el-select v-model="form.address.countryCode" placeholder="请选择" clearable filterable>
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
           <el-form-item label="City/District">
             <el-input v-model="form.address.cityName"></el-input>
           </el-form-item>
@@ -111,8 +99,14 @@
             <el-input v-model="form.purchaseOrder"></el-input>
           </el-form-item>
         </el-col>
-        
+        <el-col :span="6">
+          <el-form-item label="Type">
+
+            <el-checkbox v-model="form.checked1">Please select here to add multiple inverters</el-checkbox>
+          </el-form-item>
+        </el-col>
         <el-table
+          v-if="!form.checked1"
           :data="form.products"
           style="width: 100%"
           @row-click='rowClick'
@@ -169,13 +163,64 @@
             prop=""
             label="Amount">
             <template slot="header" slot-scope="scope">
-                <el-button size="small" type='text' @click="addRow">添加</el-button>
+                <el-button size="small" type='text' @click="addRow(1)">添加</el-button>
            </template>
             <template slot-scope="scope">
                <el-button
                 size="small"
                 type="text"
-                @click="delRow(scope.$index)">删除</el-button>
+                @click="delRow(scope.$index,1)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+
+        <el-table
+          v-if="form.checked1"
+          :data="form.productList"
+          style="width: 100%"
+          @row-click='rowClick'
+          >
+          
+          <el-table-column
+            prop=""
+            label="Warranty type">
+            <template slot-scope="scope">
+              <el-form-item label="">
+                <el-select v-model="scope.row.warrantyType" placeholder="请选择"
+                clearable filterable
+                @change="getAmount(scope.$index)"
+                >
+                  <el-option
+                    v-for="item in warrantyTypes"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop=""
+            label="Serial number List"
+            width="">
+            <template slot-scope="scope">
+              <el-form-item label="">
+                <el-input type="textarea" resize="none" :rows='4' v-model="scope.row.serialNumbers" size="small"  ></el-input>
+              </el-form-item>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop=""
+            label="Amount">
+            <template slot="header" slot-scope="scope">
+                <el-button size="small" type='text' @click="addRow(2)">添加</el-button>
+           </template>
+            <template slot-scope="scope">
+               <el-button
+                size="small"
+                type="text"
+                @click="delRow(scope.$index,2)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -220,10 +265,10 @@ export default {
   },
   data() {
     const formMod = {
+      checked1:false,
         submitType: 2,
         country:'',
         address:{
-          countryCode:'',
           cityName:'',
           stateName:'',
           postCode:'',
@@ -239,6 +284,7 @@ export default {
         sendEmail:'',
         contactNumber: '',
         products:[],
+        productList:[],
         purchaseOrder:'',
         amount:'',
         checked:false,
@@ -294,21 +340,34 @@ export default {
     rowClick(row){
       this.rowData = row
     },
-    addRow(){
-      this.form.products.push(
-        {
-          serialNumber:'',
-          productId:'',
-          productModel:'',
-          warrantyType:'',
-          amount:'',
-          deliveryDate:'',
-          businessPartner:''
-        }
-      )
+    addRow(type){
+      if(type==1){
+        this.form.products.push(
+          {
+            serialNumber:'',
+            productId:'',
+            productModel:'',
+            warrantyType:'',
+            amount:'',
+            deliveryDate:'',
+            businessPartner:''
+          }
+        )
+      }else{
+        this.form.productList.push(
+          {
+            serialNumbers:'',
+            warrantyType:'',
+          }
+        )
+      }
     },
-    delRow(index){
-      this.form.products.splice(index,1)
+    delRow(index,type){
+      if(type==1){
+        this.form.products.splice(index,1)
+      } else{
+        this.form.productList.splice(index,1)
+      }
     },
     getAmount(index){
       var data ={
@@ -350,7 +409,6 @@ export default {
       }
     },
     onSubmit() {
-      // this.form.shippingAddress = [this.form.countryCode,this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
       this.submitLoading = true
       this.form.country = Bus.dropValue
       var params = new FormData()
