@@ -31,7 +31,7 @@
       </el-row>
       <h2>Product Details</h2>
       <el-row :gutter="20">
-        <el-col :span="6">
+        <el-col :span="6" v-loading='pNumLoding'>
           <el-form-item label="Product serial number">
             <el-input v-model="form.productNumber" @blur='getProductInfo'></el-input>
           </el-form-item>
@@ -171,6 +171,7 @@ export default {
   },
   data() {
     return {
+      pNumLoding:false,
       submitLoading:false,
       options: [{
           value: 'AU',
@@ -227,8 +228,10 @@ export default {
   methods: {
     getProductInfo(){
       if(this.form.productNumber){
+        this.pNumLoding =true;
         productInfo({serialNumber:this.form.productNumber}).then(res=>{
           if(res.data.code==1){
+            this.pNumLoding=false
             this.form.productModel = res.data.data.productModelValue
             // this.form.productId = [res.data.data.id]
             this.form.products = [{
@@ -237,9 +240,12 @@ export default {
               productModel:res.data.data.productModelValue,
             }]
             this.form.businessPartner = res.data.data.businessPartner
+          }else{
+            this.pNumLoding=false
           }
         }).catch(err=>{
           this.form.productModel = ''
+          this.pNumLoding=false
           console.log(err)
         })
       }else{
