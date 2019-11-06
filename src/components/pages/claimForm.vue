@@ -275,8 +275,7 @@
               class=""
               ref="upload"
               action="https://jsonplaceholder.typicode.com/posts/"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
+              :on-change="uploadOnChangeHandle"
               :file-list="fileList"
               :auto-upload="false">
               <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
@@ -317,30 +316,8 @@ export default {
     Breadcrumb
   },
   data() {
-    return {
-      fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
-      radio:'',
-      submitLoading:false,
-      options: [{
-          value: 'AU',
-          label: 'Australia'
-        }, {
-          value: '2',
-          label: '选项2'
-        }],
-      breadcrumbList:[
-        {
-          path:'/warranty/registration',
-          name:'Warranty'
-        },
-        {
-          path:'/warranty/claim/form',
-          name:'Online Warranty Claim Form'
-        }
-      ],
-      shippingAddressRadio:'',
-      fileList:[],
-      form: {
+    const formMod = {
+        accessory: '',
         country:'',
         endUser:{
           person:'',
@@ -387,7 +364,31 @@ export default {
         products:[],
         installDate:'',
         type:2
-      }
+      };
+    return {
+      radio:'',
+      submitLoading:false,
+      options: [{
+          value: 'AU',
+          label: 'Australia'
+        }, {
+          value: '2',
+          label: '选项2'
+        }],
+      breadcrumbList:[
+        {
+          path:'/warranty/registration',
+          name:'Warranty'
+        },
+        {
+          path:'/warranty/claim/form',
+          name:'Online Warranty Claim Form'
+        }
+      ],
+      shippingAddressRadio:'',
+      fileList:[],
+      formMod,
+      form: { ...formMod }
     };
   },
   watch:{
@@ -407,11 +408,8 @@ export default {
     submitUpload() {
       this.$refs.upload.submit();
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
+    uploadOnChangeHandle(file, fileList) {
+      this.fileList = fileList;
     },
     getProductInfo(){
       if(this.form.productNumber){
@@ -439,7 +437,11 @@ export default {
     },
     onSubmit() {
       this.submitLoading = true
+      this.form.country = Bus.dropValue
       var params = new FormData()
+      this.fileList.forEach((item,index) => {
+        params.append('files['+index+']', item.raw);
+      })
       var data = this.form
       for (let i in data) {
         // // console.log(i,data[i])
@@ -473,11 +475,12 @@ export default {
       submitClaim(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
-          this.$message.success('提交成功，3秒后跳转首页')
-          setTimeout(() => {
+          this.$message.success('提交成功，单据号：'+res.data.data+ '将在3秒后跳转首页')
+          const timer = setTimeout(() => {
             this.$router.push({
               name:'Home'
             })
+            clearTimeout(timer);
           }, 3*1000);
         }
       }).catch(err=>{
@@ -485,52 +488,8 @@ export default {
       })
     },
     reset(){
-      this.form={
-        endUser:{
-          businessPartner:'',
-          person:'',
-          contactNumber:"",
-          contactEmail:'',
-          address:{
-            countryCode:'',
-            cityName:'',
-            stateName:'',
-            postCode:'',
-            addressLine1:'',
-            addressLine2:'',
-          }
-        },
-        contact:{
-          billType:'Business',
-          abn:'',
-          businessName:"",
-          person:'',
-          contactNumber:"",
-          contactEmail:'',
-          address:{
-            countryCode:'',
-            cityName:'',
-            stateName:'',
-            postCode:'',
-            addressLine1:'',
-            addressLine2:'',
-          }
-        },
-        serviceCall:{
-          weather:'',
-          location:'',
-          weatherMsg:'',
-          battery:'',
-          model:'',
-          batteryMsg:''
-        },
-        productNumber: '',
-        productModel: '',
-        productId:[],
-        products:[],
-        installDate:'',
-        type:2
-      }
+      this.form={ ...this.formMod }
+      this.$refs.upload.clearFiles();
     },
     changeFile(val){
       console.log(val)

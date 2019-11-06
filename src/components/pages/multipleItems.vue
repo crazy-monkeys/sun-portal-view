@@ -2,9 +2,9 @@
   <el-container class="multipleItems" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
     <div class="desc">
-      描述区域
+      <img src="../../../static/reg.jpeg" alt="图片">
     </div>
-    <el-form size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
+    <el-form :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Billing Details</h2>
       <el-row :gutter="20">
         <el-col :span="6">
@@ -142,7 +142,10 @@
             label="Warranty type">
             <template slot-scope="scope">
               <el-form-item label="">
-                <el-select v-model="scope.row.warrantyType" placeholder="请选择" clearable filterable @change="getAmount(scope.$index)">
+                <el-select v-model="scope.row.warrantyType" placeholder="请选择"
+                clearable filterable
+                @change="getAmount(scope.$index)"
+                @clear="form.products[scope.row.$index].amount=''">
                   <el-option
                     v-for="item in warrantyTypes"
                     :key="item.value"
@@ -216,7 +219,33 @@ export default {
     Breadcrumb
   },
   data() {
+    const formMod = {
+        submitType: 2,
+        country:'',
+        address:{
+          countryCode:'',
+          cityName:'',
+          stateName:'',
+          postCode:'',
+          addressLine1:'',
+          addressLine2:'',
+        },
+        billType:'',
+        abn:'',
+        businessName:'',
+        firstName: '',
+        lastName: '',
+        email: '',
+        sendEmail:'',
+        contactNumber: '',
+        products:[],
+        purchaseOrder:'',
+        amount:'',
+        checked:false,
+        type:3,
+      };
     return {
+      submitLoading: false,
       shippingAddressRadio:"",
       billTypes:[{
         value: 'Business',
@@ -256,36 +285,8 @@ export default {
       ],
       fileList:[],
       productId:'',
-      form: {
-        country:'',
-        address:{
-          countryCode:'',
-          cityName:'',
-          stateName:'',
-          postCode:'',
-          addressLine1:'',
-          addressLine2:'',
-        },
-
-        billType:'',
-        abn:'',
-        businessName:'',
-
-
-        firstName: '',
-        lastName: '',
-        email: '',
-        sendEmail:'',
-        contactNumber: '',
-
-        products:[
-
-        ],
-        purchaseOrder:'',
-        amount:'',
-        checked:false,
-        type:3
-      },
+      formMod,
+      form: { ...formMod },
       rowData:{},
     };
   },
@@ -312,7 +313,7 @@ export default {
     getAmount(index){
       var data ={
         productId:this.rowData.productId,
-        productModel:this.rowData.productModelValue,
+        productModel:this.rowData.productModel,
         deliveryDate:this.rowData.deliveryDate,
         warrantyType:this.form.products[index].warrantyType
       }
@@ -351,6 +352,7 @@ export default {
     onSubmit() {
       // this.form.shippingAddress = [this.form.countryCode,this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
       this.submitLoading = true
+      this.form.country = Bus.dropValue
       var params = new FormData()
       var data = this.form
       for (let i in data) {
@@ -384,11 +386,12 @@ export default {
       submitSingle(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
-          this.$message.success('提交成功，3秒后跳转首页')
-          setTimeout(() => {
+          this.$message.success('提交成功，单据号：'+res.data.data+ '将在3秒后跳转首页')
+          const timer = setTimeout(() => {
             this.$router.push({
               name:'Home'
             })
+            clearTimeout(timer);
           }, 3*1000);
         }
       }).catch(err=>{
@@ -396,53 +399,7 @@ export default {
       })
     },
     reset(){
-      this.form = {
-        
-        address:{
-          countryCode:'',
-          cityName:'',
-          stateName:'',
-          postCode:'',
-          addressLine1:'',
-          addressLine2:'',
-        },
-
-        billType:'',
-        abn:'',
-        businessName:'',
-
-
-        firstName: '',
-        lastName: '',
-        email: '',
-        sendEmail:'',
-        contactNumber: '',
-
-
-
-
-        serialNumber: '',
-        productModel: '',
-        installDate:'',
-
-
-
-        shippingAddress:'',
-
-        countryCode:'',
-        cityName:'',
-        stateName:'',
-        postCode:'',
-        addressLine1:'',
-        addressLine2:'',
-
-
-        warrantyType:'',
-        purchaseOrder:'',
-        amount:'',
-        checked:false,
-        type:3
-      }
+      this.form = { ...this.formMod };
     },
     changeFile(val){
       console.log(val)
@@ -475,12 +432,15 @@ export default {
     }
   }
   .desc {
-    border:1px dashed #FF7F00;
-    height: 500px;
-    line-height: 500px;
+    // height: 500px;
+    // line-height: 500px;
     text-align: center;
     // background: orange;
-    font-size: 30px
+    font-size: 30px;
+    img{
+      width: 100%;
+      display: inline-block
+    }
   }
   .form{
     padding: 20px;

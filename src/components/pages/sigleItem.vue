@@ -2,9 +2,9 @@
   <el-container class="sigleItem" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
     <div class="desc">
-      描述区域
+      <img src="../../../static/reg.jpeg" alt="图片">
     </div>
-    <el-form size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
+    <el-form :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Billing Details</h2>
       <el-row :gutter="20">
         <el-col :span="6">
@@ -182,7 +182,7 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <el-form-item label="Warranty type">
-            <el-select v-model="form.warrantyType" placeholder="请选择" clearable filterable @change="getAmount">
+            <el-select v-model="form.warrantyType" placeholder="请选择" clearable filterable @change="getAmount" @clear="form.amount=''">
               <el-option
                 v-for="item in warrantyTypes"
                 :key="item.value"
@@ -238,7 +238,44 @@ export default {
     Breadcrumb
   },
   data() {
+    const formMod = {
+      submitType: 1,
+      country:'',
+      businessPartner:'',
+      address:{
+        countryCode:'',
+        cityName:'',
+        stateName:'',
+        postCode:'',
+        addressLine1:'',
+        addressLine2:'',
+      },
+      billType:'',
+      abn:'',
+      businessName:'',
+      firstName: '',
+      lastName: '',
+      email: '',
+      sendEmail:'',
+      contactNumber: '',
+      serialNumber: '',
+      productModel: '',
+      installDate:'',
+      shippingAddress:'',
+      countryCode:'',
+      cityName:'',
+      stateName:'',
+      postCode:'',
+      addressLine1:'',
+      addressLine2:'',
+      warrantyType:'',
+      purchaseOrder:'',
+      amount:'',
+      checked:false,
+      type:3
+    };
     return {
+      submitLoading: false,
       shippingAddressRadio:"",
       billTypes:[{
         value: 'Business',
@@ -278,54 +315,8 @@ export default {
       ],
       fileList:[],
       productId:'',
-      form: {
-        country:'',
-        businessPartner:'',
-        address:{
-          countryCode:'',
-          cityName:'',
-          stateName:'',
-          postCode:'',
-          addressLine1:'',
-          addressLine2:'',
-        },
-
-        billType:'',
-        abn:'',
-        businessName:'',
-
-
-        firstName: '',
-        lastName: '',
-        email: '',
-        sendEmail:'',
-        contactNumber: '',
-
-
-
-
-        serialNumber: '',
-        productModel: '',
-        installDate:'',
-
-
-
-        shippingAddress:'',
-
-        countryCode:'',
-        cityName:'',
-        stateName:'',
-        postCode:'',
-        addressLine1:'',
-        addressLine2:'',
-
-
-        warrantyType:'',
-        purchaseOrder:'',
-        amount:'',
-        checked:false,
-        type:3
-      }
+      formMod,
+      form: { ...formMod },
     };
   },
   methods: {
@@ -370,7 +361,6 @@ export default {
             this.product = res.data.data
             this.form.productModel = res.data.data.productModelValue
             this.form.businessPartner = res.data.data.businessPartner
-
           }
         }).catch(err=>{
             this.form.productModel = ''
@@ -383,6 +373,7 @@ export default {
       }
     },
     onSubmit() {
+      this.submitLoading = true
       if(this.shippingAddressRadio==1){
         this.form.shippingAddress = [this.form.address.countryCode,this.form.address.cityName,this.form.address.stateName,this.form.address.postCode,this.form.address.addressLine1,this.form.address.addressLine2].join(',')
 
@@ -391,7 +382,7 @@ export default {
       }else{
         this.form.shippingAddress=''
       }
-      this.submitLoading = true
+      this.form.country = Bus.dropValue
       var params = new FormData()
       var data = this.form
       for (let i in data) {
@@ -425,11 +416,12 @@ export default {
       submitSingle(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
-          this.$message.success('提交成功，3秒后跳转首页')
-          setTimeout(() => {
+          this.$message.success('提交成功，单据号：'+res.data.data+ '将在3秒后跳转首页')
+          const timer = setTimeout(() => {
             this.$router.push({
               name:'Home'
             })
+            clearTimeout(timer);
           }, 3*1000);
         }
       }).catch(err=>{
@@ -437,53 +429,7 @@ export default {
       })
     },
     reset(){
-      this.form = {
-        businessPartner:'',
-        address:{
-          countryCode:'',
-          cityName:'',
-          stateName:'',
-          postCode:'',
-          addressLine1:'',
-          addressLine2:'',
-        },
-
-        billType:'',
-        abn:'',
-        businessName:'',
-
-
-        firstName: '',
-        lastName: '',
-        email: '',
-        sendEmail:'',
-        contactNumber: '',
-
-
-
-
-        serialNumber: '',
-        productModel: '',
-        installDate:'',
-
-
-
-        shippingAddress:'',
-
-        countryCode:'',
-        cityName:'',
-        stateName:'',
-        postCode:'',
-        addressLine1:'',
-        addressLine2:'',
-
-
-        warrantyType:'',
-        purchaseOrder:'',
-        amount:'',
-        checked:false,
-        type:3
-      }
+      this.form = {...this.formMod};
     },
     changeFile(val){
       console.log(val)
@@ -491,7 +437,7 @@ export default {
     submitUpload() {
       this.$refs.upload.submit();
     },
-    handleRemove(file, fileList) {5555
+    handleRemove(file, fileList) {
       console.log(file, fileList);
     },
     handlePreview(file) {
@@ -511,12 +457,15 @@ export default {
 .sigleItem {
   height: 100%;
   .desc {
-    border:1px dashed #FF7F00;
-    height: 500px;
-    line-height: 500px;
+    // height: 500px;
+    // line-height: 500px;
     text-align: center;
     // background: orange;
-    font-size: 30px
+    font-size: 30px;
+    img{
+      width: 100%;
+      display: inline-block
+    }
   }
   .form{
     padding: 20px;

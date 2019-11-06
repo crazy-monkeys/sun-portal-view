@@ -170,29 +170,7 @@ export default {
     Breadcrumb
   },
   data() {
-    return {
-      pNumLoding:false,
-      submitLoading:false,
-      options: [{
-          value: 'AU',
-          label: 'Australia'
-        }, {
-          value: '2',
-          label: '选项2'
-        }],
-      breadcrumbList:[
-        {
-          path:'/warranty/registration',
-          name:'Warranty'
-        },
-        {
-          path:'/warranty/registration',
-          name:'Registration'
-        }
-      ],
-      fileList:[],
-      fileList1:[],
-      form: {
+    const formMod = {
         country:"",
         invoiceFile:'',
         cecFile:'',
@@ -222,7 +200,31 @@ export default {
         type:1,
         a:'',
         b:'',
-      }
+      };
+    return {
+      pNumLoding:false,
+      submitLoading:false,
+      options: [{
+          value: 'AU',
+          label: 'Australia'
+        }, {
+          value: '2',
+          label: '选项2'
+        }],
+      breadcrumbList:[
+        {
+          path:'/warranty/registration',
+          name:'Warranty'
+        },
+        {
+          path:'/warranty/registration',
+          name:'Registration'
+        }
+      ],
+      fileList:[],
+      fileList1:[],
+      formMod,
+      form: {...formMod}
     };
   },
   methods: {
@@ -255,12 +257,16 @@ export default {
     onSubmit() {
       this.submitLoading = true
       var params = new FormData()
+      this.form.country = Bus.dropValue
       var data = this.form
+      // console.log(data);
       for (let i in data) {
-        console.log(i,data[i])
-        if(typeof(data[i]) == 'object'){
+        // console.log(i,data[i])
+        if(i === 'invoiceFile' || i === 'cecFile') {
+          params.append(i, data[i]);
+        } else if(typeof(data[i]) == 'object'){
           for(let j in data[i]){
-            console.log(data[i][j])
+            // console.log(data[i][j])
             if(typeof(data[i][j]) == 'object'){
               for(let x in data[i][j]){
                 if(data[i][j][x] || data[i][j][x]===0){
@@ -290,44 +296,20 @@ export default {
       submitReg(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
-          this.$message.success('提交成功，单据号：'+res.data.data+ '3秒后跳转首页')
-          // setTimeout(() => {
-          //   this.$router.push({
-          //     name:'Home'
-          //   })
-          // }, 3*1000);
+          this.$message.success('提交成功，单据号：'+res.data.data+ '将在3秒后跳转首页')
+          const timer = setTimeout(() => {
+            this.$router.push({
+              name:'Home'
+            })
+            clearTimeout(timer);
+          }, 3*1000);
         }
       }).catch(err=>{
         this.submitLoading = false
       })
     },
     reset(){
-      this.form={
-        contacts:{
-          contactFirstName: '',
-          contactLastName: '',
-          contactEmail: '',
-          contactNumber: '',
-        },
-        address:{
-          contryCode:'',
-          cityName:'',
-          stateName:'',
-          addressLine1:'',
-          addressLine2:'',
-          postCode:'',
-        },
-        productNumber:'',
-        productModel:'',
-        products:[],
-        businessPartner:'',
-        installInstaller:'',
-        installDate:'',
-        installCec:'',
-        suggestions:'',
-        checked:false,
-        type:1
-      }
+      this.form={...this.formMod}
     },
     changeFile(val){
       console.log(val)
@@ -342,8 +324,8 @@ export default {
       console.log(file);
     },
     handleChange(file,fileList){
-      console.log(file,fileList)
-      this.form.cecFile = file.row
+      this.fileList = fileList.slice(-1);
+      this.form.cecFile = this.fileList[0].raw;
     },
     handleRemove1(file, fileList) {
       console.log(file, fileList);
@@ -352,8 +334,9 @@ export default {
       console.log(file);
     },
     handleChange1(file,fileList){
-      console.log(file,fileList)
-      this.form.invoiceFile = file.row
+      // console.log(file,fileList)
+      this.fileList1 = fileList.slice(-1);
+      this.form.invoiceFile = this.fileList1[0].raw
 
     }
   },
