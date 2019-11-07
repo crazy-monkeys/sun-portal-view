@@ -293,6 +293,28 @@ export default {
       form: { ...formMod },
     };
   },
+  watch:{
+    shippingAddressRadio: {
+      handler:function (n,o) {
+        if(n==1){
+          this.form.shippingAddress =(this.form.businessName?this.form.businessName+',' :'' ) +this.form.address.addressLine1 +','+this.form.address.addressLine2+','+this.form.address.cityName+','+this.form.address.stateName+','+this.form.address.postCode 
+        }else if(n==2){
+          this.form.shippingAddress =(this.form.businessName?this.form.businessName+',' :'' ) +this.form.addressLine1 +','+this.form.addressLine2+','+this.form.cityName+','+this.form.stateName+','+this.form.postCode
+        }else{
+          this.form.shippingAddress = ''
+        }
+      }      
+    },
+    'form.billType':{
+      handler:function(n,o){
+        if(n=='Individual'){
+          this.form.abn=''
+          this.form.businessName=''
+        }else{
+        }
+      }
+    }
+  },
   methods: {
     getAmount(){
       if(this.form.warrantyType){

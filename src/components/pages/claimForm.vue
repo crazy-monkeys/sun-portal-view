@@ -194,11 +194,11 @@
         </el-col>
       </el-row>
 
-      <h2 v-if="form.countryCode=='AU'">Other Details</h2>
-      <el-row :gutter="20" v-if="form.countryCode=='AU'">
+      <h2 >Other Details</h2>
+      <el-row :gutter="20" >
         <el-col :span="12">
           <el-row :gutter="20">
-            <el-col :span="24">
+            <el-col :span="24" v-if="form.country=='AU'">
               <el-form-item label="Is the inverter exposed to the weather (e.g. rain)?">
                   <el-radio-group v-model="form.serviceCall.weather">
                     <el-radio label="Yes">Yes</el-radio>
@@ -206,7 +206,7 @@
                   </el-radio-group>
               </el-form-item>
             </el-col>
-            <el-col :span="24">
+            <el-col :span="24" v-if="form.country=='AU'">
               <el-form-item class="one" label="Inverter Installation Location" v-if="form.serviceCall.weather=='Yes' ? true:false">
                 <el-input v-model="form.serviceCall.location" ></el-input>
               </el-form-item>
@@ -220,7 +220,7 @@
         </el-col>
         <el-col :span="12">
           <el-row :gutter="20">
-            <el-col :span="24">
+            <el-col :span="24" v-if="form.country=='AU'">
               <el-form-item label="Does the inverter connect with a battery?">
                   <el-radio-group v-model="form.serviceCall.battery">
                     <el-radio label="Yes">Yes</el-radio>
@@ -228,7 +228,7 @@
                   </el-radio-group>
               </el-form-item>
             </el-col>
-            <el-col :span="24">
+            <el-col :span="24" v-if="form.country=='AU'">
               <el-form-item class="one" label="Battery brand/model" v-if="form.serviceCall.battery=='Yes' ? true:false">
                 <el-input v-model="form.serviceCall.model" ></el-input>
               </el-form-item>
@@ -293,7 +293,7 @@ export default {
   data() {
     const formMod = {
         accessory: '',
-        country:'',
+        country:Bus.dropValue,
         endUser:{
           person:'',
           contactNumber:"",
@@ -368,13 +368,38 @@ export default {
     shippingAddressRadio: {
       handler:function (n,o) {
         if(n==1){
-          this.form.serviceCall.shippingAddress = this.form.contact.address.cityName +this.form.contact.address.stateName+this.form.contact.address.postCode+this.form.contact.address.addressLine1+this.form.contact.address.addressLine2
+          this.form.serviceCall.shippingAddress =(this.form.contact.businessName?this.form.contact.businessName+',' :'' ) +this.form.contact.address.addressLine1 +','+this.form.contact.address.addressLine2+','+this.form.contact.address.cityName+','+this.form.contact.address.stateName+','+this.form.contact.address.postCode +'ATTN:'+this.form.contact.person+','+this.form.contact.contactNumber
         }else if(n==2){
-          this.form.serviceCall.shippingAddress = this.form.endUser.address.cityName +this.form.endUser.address.stateName+this.form.endUser.address.postCode+this.form.endUser.address.addressLine1+this.form.endUser.address.addressLine2
+          this.form.serviceCall.shippingAddress =(this.form.contact.businessName?this.form.contact.businessName+',' :'' ) +this.form.endUser.address.addressLine1 +','+this.form.endUser.address.addressLine2+','+this.form.endUser.address.cityName+','+this.form.endUser.address.stateName+','+this.form.endUser.address.postCode+'ATTN:'+this.form.endUser.person+','+this.form.endUser.contactNumber
         }else{
           this.form.serviceCall.shippingAddress = ''
         }
       }      
+    },
+    'form.contact.billType':{
+      handler:function(n,o){
+        if(n=='Individual'){
+          this.form.contact.abn=''
+          this.form.contact.businessName=''
+          this.form.contact.person=''
+          this.form.contact.contactNumber=''
+          this.form.contact.contactEmail=''
+          this.form.contact.address.cityName=''
+          this.form.contact.address.stateName=''
+          this.form.contact.address.postCode=''
+          this.form.contact.address.addressLine1=''
+          this.form.contact.address.addressLine2=''
+        }else{
+          this.form.endUser.person=''
+          this.form.endUser.contactNumber=''
+          this.form.endUser.contactEmail=''
+          this.form.endUser.address.cityName=''
+          this.form.endUser.address.stateName=''
+          this.form.endUser.address.postCode=''
+          this.form.endUser.address.addressLine1=''
+          this.form.endUser.address.addressLine2=''
+        }
+      }
     }
   },
   methods: {

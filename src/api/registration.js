@@ -40,3 +40,7 @@ export const getAmount = data => {
 export const priceTab = () => {
     return request('get', `${serverUrl}/price/query`).then(result => result)
 }
+
+export const multiplePrice = data => {
+    return request('post', `${serverUrl}/product/multiple/price`, data).then(result => result)
+}

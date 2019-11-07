@@ -100,12 +100,12 @@
             </el-date-picker>
           </el-form-item>
         </el-col>
-        <el-col :span="6" v-if="form.address.contryCode=='AU'">
+        <el-col :span="6" v-if="form.country=='AU'">
           <el-form-item label="CEC accreditation number">
             <el-input v-model="form.installCec"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6" >
+        <el-col :span="6" v-if="form.country=='AU'">
           <el-form-item label="Invoice upload" >
             <el-tooltip class="tooltip" effect="dark" :content="ivcTooltip" placement="top-start">
               <el-upload

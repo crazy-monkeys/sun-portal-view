@@ -4,7 +4,8 @@
     <div class="desc">
       <img src="../../../static/reg.jpeg" alt="图片">
     </div>
-    <el-form :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
+          
+    <el-form v-loading='reviewLoading'  :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Billing Details</h2>
       <el-row :gutter="20">
         <el-col :span="6">
@@ -144,7 +145,8 @@
                     v-for="item in warrantyTypes"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value">
+                    :value="item.value"
+                    >
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -188,13 +190,13 @@
               <el-form-item label="">
                 <el-select v-model="scope.row.warrantyType" placeholder="请选择"
                 clearable filterable
-                @change="getAmount(scope.$index)"
                 >
                   <el-option
                     v-for="item in warrantyTypes"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value">
+                    :value="item.value"
+                    :disabled="disableType(item.value)">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -242,21 +244,140 @@
           </el-form-item>
         </el-col>
       </el-row>
-
-
-
       
       <el-form-item class="sub">
+        <el-button type="primary" @click="review" :loading="reviewLoading">Review</el-button>
         <el-button type="primary" @click="onSubmit">Submit</el-button>
         <el-button @click="reset">reset</el-button>
       </el-form-item>
     </el-form>
+    <el-dialog
+      title="Order Review"
+      :visible.sync="reviewDia"
+      width="600px"
+      class="dia"
+      :before-close="handleClose">
+      <h3 >Please check all the contents below. If any items are incorrect, please go back to the form and update before submitting.</h3>
+    <el-form  size="small" :model="reviewForm" label-width="auto" label-position="top">
+      <el-row :gutter="20" style="border-bottom:1px dashed #000">
+        <el-col :span='12'>
+          <el-form-item label="Business name:">
+            {{form.businessName}}
+          </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+          <el-form-item label="Contact name:">
+            {{form.firstName + ' ' + form.lastName}}
+            
+      </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+          <el-form-item label="Email address:">
+            {{form.email}}
+            
+      </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+          <el-form-item label="Contact number:">
+            {{form.contactNumber}}
+        
+      </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+          <el-form-item label="Address:">
+            {{form.address.addressLine1+','+form.address.addressLine2+','+form.address.stateName+','+form.address.cityName+' '+form.address.postCode}}
+        
+      </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+          <el-form-item label="ABN:">
+            {{form.abn}}
+        
+      </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row :gutter="20">
+        <el-col :span='12'>
+      <el-form-item label="Total item:">
+        {{'$ ' +reviewForm.item}}
+      </el-form-item>
+        </el-col>
+
+
+        <el-col :span='12'>
+          <el-form-item label="Total amount (excl. GST):">
+        {{'$ ' +reviewForm.exclGst}}
+        
+      </el-form-item>
+        </el-col>
+
+        <el-col :span='12'>
+          <el-form-item label="Total GST:">
+        {{'$ ' +reviewForm.gst}}
+        
+      </el-form-item>
+        </el-col>
+
+        <el-col :span='12'>
+          <el-form-item label="Total amount (incl. GST):">
+        {{ '$ ' +reviewForm.inclGst}}
+        
+      </el-form-item>
+        </el-col>
+      </el-row>
+      
+
+      
+      
+      
+    </el-form>
+    <el-table
+    	
+      :data="reviewData"
+      style="width: 100%">
+      <el-table-column
+        prop="productModel"
+        label="Product model"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="serialNumber"
+        label="Serial number"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="type"
+        label="Warranty type"
+         width="300">
+      </el-table-column>
+      <el-table-column
+        prop="amount"
+        label="Amount"
+         width="180"
+        >
+        <template slot-scope="scope">
+          {{'$ ' + scope.row.amount}}
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="discount"
+        label="Discount"
+         width="180">
+      </el-table-column>
+    </el-table>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button size="small" @click="reviewDia = false">取 消</el-button>
+        <el-button size="small" type="primary" @click="reviewDia = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
   </el-container>
 </template>
 
 <script>
 import Breadcrumb from '../coms/Breadcrumb'
-import { productInfo,submitSingle,getAmount } from '@/api/registration'
+import { productInfo,submitSingle,getAmount,multiplePrice } from '@/api/registration'
 import Bus from "../../bus/bus.js";
 export default {
   name: "MultipleItems",
@@ -291,7 +412,11 @@ export default {
         type:3,
       };
     return {
+      reviewForm:{},
+      reviewData:[],
+      reviewDia:false,
       submitLoading: false,
+      reviewLoading: false,
       shippingAddressRadio:"",
       billTypes:[{
         value: 'Business',
@@ -337,6 +462,76 @@ export default {
     };
   },
   methods: {
+    disableType(value){
+      const arr2 = this.form.productList.map(item=>{
+        return item.warrantyType
+      })
+      console.log(arr2)
+      if(arr2.indexOf(value)!=-1){
+        return true
+      }else{
+        return false
+      }
+    },
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
+    review(){
+      if(this.form.email.length==0){
+        this.$message.error(
+          'email is required'
+        )
+      }else{
+        if(this.form.contactNumber.length==0){
+        this.$message.error(
+          'contactNumber is required'
+        )
+      }else{
+          if((this.form.firstName + ' '+this.form.lastName).length==1){
+        this.$message.error(
+          'contactName is required'
+        )
+      }else{
+        if(!this.form.address.addressLine1 || !this.form.address.addressLine2 || !this.form.address.cityName || !this.form.address.stateName || !this.form.address.postCode){
+        this.$message.error(
+          'address is required'
+        )
+      }else{
+        if(this.form.productList.length==0){
+          this.$message.error(
+            'product list is required'
+          )
+        }else{
+          this.reviewLoading = true;
+              multiplePrice(this.form.productList).then(res=>{
+                if(res.data.code==1){
+                  this.reviewLoading = false;
+                  this.reviewDia = true
+                  this.reviewData = res.data.data.products
+                  this.reviewForm = res.data.data
+                }else{
+                  this.reviewLoading = false;
+                  this.$message.error(res.data.msg)
+                }
+              }).catch(err=>{
+                  this.reviewLoading = false;
+                console.log(err)
+              })
+        }
+              
+      }
+      }
+      }
+      }
+      
+      
+      
+      
+    },
     rowClick(row){
       this.rowData = row
     },
@@ -441,6 +636,7 @@ export default {
           }
         }
       }
+      params.append('multiple',this.form.checked1)
       submitSingle(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
@@ -484,6 +680,12 @@ export default {
 <style lang='scss' >
 .multipleItems {
   height: 100%;
+  .dia{
+    h3{
+      font-style: italic;
+      color: #FF7F00
+    }
+  }
   .el-table{
     .el-form-item{
       margin-bottom: 0;
