@@ -145,7 +145,7 @@
                 <el-select v-model="scope.row.warrantyType" placeholder="请选择"
                 clearable filterable
                 @change="getAmount(scope.$index)"
-                @clear="form.products[scope.row.$index].amount=''">
+                @clear="form.products[scope.$index].amount=''">
                   <el-option
                     v-for="item in warrantyTypes"
                     :key="item.value"
