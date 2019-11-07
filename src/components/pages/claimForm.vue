@@ -75,19 +75,6 @@
             </el-input>
           </el-form-item>
         </el-col>
-
-        <el-col :span="6">
-          <el-form-item label="Country">
-            <el-select v-model="form.contact.address.countryCode" :disabled="form.contact.billType=='Individual' ? true :false" placeholder="请选择" clearable filterable>
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
         <el-col :span="6">
           <el-form-item label="City/District">
             <el-input v-model="form.contact.address.cityName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
@@ -131,18 +118,6 @@
           <el-form-item label="Email">
             <el-input  v-model="form.endUser.contactEmail" prefix-icon="el-icon-message">
             </el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="Country">
-            <el-select v-model="form.endUser.address.countryCode" placeholder="请选择" clearable filterable>
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="6">
@@ -219,8 +194,8 @@
         </el-col>
       </el-row>
 
-      <h2 v-if="form.contact.address.countryCode=='AU'||form.endUser.address.countryCode=='AU'">Other Details</h2>
-      <el-row :gutter="20" v-if="form.contact.address.countryCode=='AU'||form.endUser.address.countryCode=='AU'">
+      <h2 v-if="form.countryCode=='AU'">Other Details</h2>
+      <el-row :gutter="20" v-if="form.countryCode=='AU'">
         <el-col :span="12">
           <el-row :gutter="20">
             <el-col :span="24">
@@ -324,7 +299,6 @@ export default {
           contactNumber:"",
           contactEmail:'',
           address:{
-            countryCode:'',
             cityName:'',
             stateName:'',
             postCode:'',
@@ -340,7 +314,6 @@ export default {
           contactNumber:"",
           contactEmail:'',
           address:{
-            countryCode:'',
             cityName:'',
             stateName:'',
             postCode:'',

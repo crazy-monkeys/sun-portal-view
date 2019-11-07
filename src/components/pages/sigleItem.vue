@@ -31,18 +31,6 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Country">
-            <el-select v-model="form.address.countryCode" placeholder="请选择" clearable filterable>
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
           <el-form-item label="City/District">
             <el-input v-model="form.address.cityName"></el-input>
           </el-form-item>
@@ -139,18 +127,6 @@
             </el-radio-group>
           </el-form-item>
         </el-col>
-       <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="Country" >
-            <el-select v-model="form.countryCode" placeholder="请选择" clearable filterable>
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
         <el-col :span="6" v-if="shippingAddressRadio==2">
           <el-form-item label="City/District">
             <el-input v-model="form.cityName"></el-input>
@@ -243,7 +219,6 @@ export default {
       country:'',
       businessPartner:'',
       address:{
-        countryCode:'',
         cityName:'',
         stateName:'',
         postCode:'',
@@ -262,7 +237,6 @@ export default {
       productModel: '',
       installDate:'',
       shippingAddress:'',
-      countryCode:'',
       cityName:'',
       stateName:'',
       postCode:'',
@@ -375,10 +349,10 @@ export default {
     onSubmit() {
       this.submitLoading = true
       if(this.shippingAddressRadio==1){
-        this.form.shippingAddress = [this.form.address.countryCode,this.form.address.cityName,this.form.address.stateName,this.form.address.postCode,this.form.address.addressLine1,this.form.address.addressLine2].join(',')
+        this.form.shippingAddress = [this.form.address.cityName,this.form.address.stateName,this.form.address.postCode,this.form.address.addressLine1,this.form.address.addressLine2].join(',')
 
       }else if(this.shippingAddressRadio==2){
-        this.form.shippingAddress = [this.form.countryCode,this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
+        this.form.shippingAddress = [this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
       }else{
         this.form.shippingAddress=''
       }

@@ -8,7 +8,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '../ele/index.css'
 
 // Vue.use(ElementUI);
-
+import formTest from './tool/formTest.js'
+Vue.prototype.$formTest = formTest;
 
 import VueI18n from 'vue-i18n'
 //引入Element的语言包
