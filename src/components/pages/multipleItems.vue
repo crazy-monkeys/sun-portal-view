@@ -118,7 +118,7 @@
             width="">
             <template slot-scope="scope">
               <el-form-item label="">
-                <el-input v-model="scope.row.serialNumber" size="small"  @blur="getProductInfo(scope.$index)"></el-input>
+                <el-input v-model="scope.row.serialNumber" size="small"  @change="getProductInfo(scope.$index)"></el-input>
               </el-form-item>
             </template>
           </el-table-column>
@@ -128,7 +128,7 @@
             width="">
             <template slot-scope="scope">
               <el-form-item label="">
-                <el-input v-model="scope.row.productModel" size="small" :readonly="true"></el-input>
+                <el-input v-model="scope.row.productModel" disabled size="small" :readonly="true"></el-input>
               </el-form-item>
             </template>
           </el-table-column>
@@ -139,8 +139,9 @@
               <el-form-item label="">
                 <el-select v-model="scope.row.warrantyType" placeholder="请选择"
                 clearable filterable
+                :disabled="!scope.row.productModel"
                 @change="getAmount(scope.$index)"
-                @clear="form.products[scope.row.$index].amount=''">
+                @clear="form.products[scope.$index].amount=''">
                   <el-option
                     v-for="item in warrantyTypes"
                     :key="item.value"
@@ -377,7 +378,7 @@
 
 <script>
 import Breadcrumb from '../coms/Breadcrumb'
-import { productInfo,submitSingle,getAmount,multiplePrice } from '@/api/registration'
+import { productInfo,submitSingle,getAmount,getMaterials,getProductList ,multiplePrice} from '@/api/registration'
 import Bus from "../../bus/bus.js";
 export default {
   name: "MultipleItems",
@@ -459,6 +460,7 @@ export default {
       formMod,
       form: { ...formMod },
       rowData:{},
+      devicePower: null,
     };
   },
   methods: {
@@ -565,15 +567,14 @@ export default {
       }
     },
     getAmount(index){
-      var data ={
-        productId:this.rowData.productId,
-        productModel:this.rowData.productModel,
-        deliveryDate:this.rowData.deliveryDate,
-        warrantyType:this.form.products[index].warrantyType
-      }
-      getAmount(data).then(res=>{
+      getProductList(this.form.products.map(i => {
+          return {
+            ...i,
+            devicePower: this.devicePower
+          }
+        })).then(res=>{
         if(res.data.code==1){
-          this.form.products[index].amount  = res.data.data
+          this.form.products = res.data.data;
         }
       })
     },
@@ -588,12 +589,13 @@ export default {
     },
     getProductInfo(index){
       if(this.form.products[index].serialNumber){
-        productInfo({serialNumber:this.form.products[index].serialNumber}).then(res=>{
+        getMaterials(this.form.products[index].serialNumber).then(res=>{
           if(res.data.code==1){
             this.form.products[index].productId = res.data.data.id
             this.form.products[index].productModel = res.data.data.productModelValue
             this.form.products[index].deliveryDate = res.data.data.deliveryDate
             this.form.products[index].businessPartner = res.data.data.businessPartner
+            this.devicePower = res.data.data.devicePower
           }
         }).catch(err=>{
           this.form.products[index].productModel=''
