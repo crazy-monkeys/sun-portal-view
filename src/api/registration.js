@@ -36,6 +36,9 @@ export const getAmount = data => {
     return request('post', `${serverUrl}/product/info/price`, data).then(result => result)
 }
 
+export const getMaterials = serialNumber => request('get', `${serverUrl}/product/detail/${serialNumber}`).then(result => result)
+
+export const getProductList = data => request('post', `${serverUrl}/product/info/list/price`, data).then(result => result)
 
 export const priceTab = () => {
     return request('get', `${serverUrl}/price/query`).then(result => result)
