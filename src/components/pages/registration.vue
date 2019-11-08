@@ -100,12 +100,12 @@
             </el-date-picker>
           </el-form-item>
         </el-col>
-        <el-col :span="6" v-if="form.country=='AU'">
+        <el-col :span="6" v-if="Bus.dropValue === 'AU'">
           <el-form-item label="CEC accreditation number">
             <el-input v-model="form.installCec"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6" v-if="form.country=='AU'">
+        <el-col :span="6" v-if="Bus.dropValue === 'AU'">
           <el-form-item label="Invoice upload" >
             <el-tooltip class="tooltip" effect="dark" :content="ivcTooltip" placement="top-start">
               <el-upload
@@ -208,6 +208,7 @@ export default {
         b:'',
       };
     return {
+      Bus,
       pNumTooltip:'Please refer to the nameplate on the side of the Sungrow product.',
       ivcTooltip:'Please attach the invoice as the evidence of the installation.',
       cecTooltip:'Please attach the Electrical Compliance Certifcate as the evidence of the installation.Normally it will provided by the installer after installation.For different states.the name for such certifcate may vary.',
@@ -302,7 +303,7 @@ export default {
       // console.log(data);
       for (let i in data) {
         // console.log(i,data[i])
-        if(i === 'invoiceFile' || i === 'cecFile') {
+        if(i === 'invoiceFile' || i === 'cecFile' && data[i]) {
           params.append(i, data[i]);
         } else if(typeof(data[i]) == 'object'){
           for(let j in data[i]){

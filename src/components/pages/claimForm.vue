@@ -175,7 +175,7 @@
             <el-row :gutter="20">
               <el-col :span="24">
                 <el-form-item label="The shipping address is">
-                    <el-radio-group v-model="shippingAddressRadio">
+                    <el-radio-group v-model="shippingAddressRadio" @change="shippingAddressRadioChangeHandle">
                       <el-radio label="1" value='1'>Same as claimant</el-radio>
                       <el-radio label="2" value='2'>Same as end user</el-radio>
                       <el-radio label="3" value='3'>None of the above</el-radio>
@@ -365,17 +365,6 @@ export default {
     };
   },
   watch:{
-    shippingAddressRadio: {
-      handler:function (n,o) {
-        if(n==1){
-          this.form.serviceCall.shippingAddress =(this.form.contact.businessName?this.form.contact.businessName+',' :'' ) +this.form.contact.address.addressLine1 +','+this.form.contact.address.addressLine2+','+this.form.contact.address.cityName+','+this.form.contact.address.stateName+','+this.form.contact.address.postCode +'ATTN:'+this.form.contact.person+','+this.form.contact.contactNumber
-        }else if(n==2){
-          this.form.serviceCall.shippingAddress =(this.form.contact.businessName?this.form.contact.businessName+',' :'' ) +this.form.endUser.address.addressLine1 +','+this.form.endUser.address.addressLine2+','+this.form.endUser.address.cityName+','+this.form.endUser.address.stateName+','+this.form.endUser.address.postCode+'ATTN:'+this.form.endUser.person+','+this.form.endUser.contactNumber
-        }else{
-          this.form.serviceCall.shippingAddress = ''
-        }
-      }      
-    },
     'form.contact.billType':{
       handler:function(n,o){
         if(n=='Individual'){
@@ -403,6 +392,34 @@ export default {
     }
   },
   methods: {
+    shippingAddressRadioChangeHandle(v) {
+        if(v === '1' || v === '2'){
+          const {
+            address: {
+              addressLine1,
+              addressLine2,
+              cityName,
+              stateName,
+              postCode
+            },
+            person,
+            contactNumber,
+          } = v === '1' ? this.form.contact : this.form.endUser;
+          const str = [
+            this.form.contact.businessName,
+            addressLine1,
+            addressLine2,
+            cityName,
+            stateName,
+            postCode,
+            person ? `ATTN:${person}` : '',
+            contactNumber,
+          ].filter(i => i.trim()).join(',');
+          this.form.serviceCall.shippingAddress = str;
+        }else{
+          this.form.serviceCall.shippingAddress = ''
+        }
+    },
     submitUpload() {
       this.$refs.upload.submit();
     },

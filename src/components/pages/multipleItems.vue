@@ -95,14 +95,17 @@
         
       </el-row>
       <el-row :gutter="20">
-        <el-col :span="6">
-          <el-form-item label="Purchase Order">
-            <el-input v-model="form.purchaseOrder"></el-input>
-          </el-form-item>
+        <el-col :span="24">
+          <el-row >
+            <el-col :span="6">
+              <el-form-item label="Purchase Order">
+                <el-input v-model="form.purchaseOrder"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="24">
           <el-form-item label="Type">
-
             <el-checkbox v-model="form.checked1">Please select here to add multiple inverters</el-checkbox>
           </el-form-item>
         </el-col>
@@ -247,7 +250,7 @@
       </el-row>
       
       <el-form-item class="sub">
-        <el-button type="primary" @click="review" :loading="reviewLoading">Review</el-button>
+        <el-button v-if="form.checked1" type="primary" @click="review" :loading="reviewLoading">Review</el-button>
         <el-button type="primary" @click="onSubmit">Submit</el-button>
         <el-button @click="reset">reset</el-button>
       </el-form-item>
@@ -484,55 +487,45 @@ export default {
     },
     review(){
       if(this.form.email.length==0){
-        this.$message.error(
-          'email is required'
-        )
+        this.$message.error('email is required')
       }else{
         if(this.form.contactNumber.length==0){
-        this.$message.error(
-          'contactNumber is required'
-        )
-      }else{
-          if((this.form.firstName + ' '+this.form.lastName).length==1){
-        this.$message.error(
-          'contactName is required'
-        )
-      }else{
-        if(!this.form.address.addressLine1 || !this.form.address.addressLine2 || !this.form.address.cityName || !this.form.address.stateName || !this.form.address.postCode){
-        this.$message.error(
-          'address is required'
-        )
-      }else{
-        if(this.form.productList.length==0){
-          this.$message.error(
-            'product list is required'
-          )
+          this.$message.error('contactNumber is required')
         }else{
-          this.reviewLoading = true;
-              multiplePrice(this.form.productList).then(res=>{
-                if(res.data.code==1){
-                  this.reviewLoading = false;
-                  this.reviewDia = true
-                  this.reviewData = res.data.data.products
-                  this.reviewForm = res.data.data
-                }else{
-                  this.reviewLoading = false;
-                  this.$message.error(res.data.msg)
-                }
-              }).catch(err=>{
-                  this.reviewLoading = false;
-                console.log(err)
-              })
+          if((this.form.firstName + ' '+this.form.lastName).length==1){
+            this.$message.error('contactName is required')
+          }else{
+            if(!this.form.address.addressLine1 || !this.form.address.addressLine2 || !this.form.address.cityName || !this.form.address.stateName || !this.form.address.postCode){
+              this.$message.error('address is required')
+            }else{
+              if(this.form.productList.length==0){
+                this.$message.error(
+                  'product list is required'
+                )
+              }else{
+                this.reviewRequest();
+              }
+            }
+          }
         }
-              
       }
-      }
-      }
-      }
-      
-      
-      
-      
+    },
+    reviewRequest() {
+      this.reviewLoading = true;
+      multiplePrice(this.form.productList).then(res=>{
+        if(res.data.code==1){
+          this.reviewLoading = false;
+          this.reviewDia = true
+          this.reviewData = res.data.data.products
+          this.reviewForm = res.data.data
+        }else{
+          this.reviewLoading = false;
+          this.$message.error(res.data.msg)
+        }
+      }).catch(err=>{
+        this.reviewLoading = false;
+        console.log(err)
+      });
     },
     rowClick(row){
       this.rowData = row
@@ -565,8 +558,9 @@ export default {
       } else{
         this.form.productList.splice(index,1)
       }
+      this.getAmount();
     },
-    getAmount(index){
+    getAmount(){
       getProductList(this.form.products.map(i => {
           return {
             ...i,
@@ -639,6 +633,11 @@ export default {
         }
       }
       params.append('multiple',this.form.checked1)
+      this.form.productList.forEach((item, index) => {
+        Object.keys(item).forEach(it => {
+          params.append(`multipleProduct[${index}].${it}`, item[it]);
+        });
+      });
       submitSingle(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
