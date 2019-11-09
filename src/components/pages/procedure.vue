@@ -43,11 +43,11 @@ export default {
   },
   methods: {
     sigleBtn(){
-      this.$router.push({
-        name:'SigleItem'
-      })
+      window.open('../../../static/Sungrow Service Rebate & Service Report_201803.pdf')
     },
-    multipleBtn(){},
+    multipleBtn(){
+      window.open('../../../static/Sungrow Service photos guide v3.0_201803.pdf'  )
+    },
   }
 };
 </script>
