@@ -43,10 +43,10 @@ export default {
   },
   methods: {
     sigleBtn(){
-      window.open('../../../static/Sungrow Service Rebate & Service Report_201803.pdf')
+      window.open('../../../sun-portal/static/Sungrow Service Rebate & Service Report_201803.pdf')
     },
     multipleBtn(){
-      window.open('../../../static/Sungrow Service photos guide v3.0_201803.pdf'  )
+      window.open('../../../sun-portal/static/Sungrow Service photos guide v3.0_201803.pdf'  )
     },
   }
 };
