@@ -34,7 +34,7 @@
         <el-col :span="6" v-loading='pNumLoding'>
           <el-form-item label="Product serial number" prop='productNumber'>
             <el-tooltip class="tooltip" effect="dark" :content="pNumTooltip" placement="top-start">
-              <el-input v-model="form.productNumber" @blur='getProductInfo'></el-input>
+              <el-input v-model="form.productNumber" @change='getProductInfo'></el-input>
             </el-tooltip>
           </el-form-item>
         </el-col>
@@ -303,7 +303,7 @@ export default {
       // console.log(data);
       for (let i in data) {
         // console.log(i,data[i])
-        if(i === 'invoiceFile' || i === 'cecFile' && data[i]) {
+        if((i === 'invoiceFile'&& data[i]) || (i === 'cecFile' && data[i])) {
           params.append(i, data[i]);
         } else if(typeof(data[i]) == 'object'){
           for(let j in data[i]){
@@ -337,7 +337,8 @@ export default {
       submitReg(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
-          this.$message.success('提交成功，单据号：'+res.data.data+ '将在3秒后跳转首页')
+          this.$message.success('submitted successfully, Doc No.'+res.data.data+ 'and will jump to home page in 3 seconds')
+
           const timer = setTimeout(() => {
             this.$router.push({
               name:'Home'

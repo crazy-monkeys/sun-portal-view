@@ -132,7 +132,7 @@ export default {
         value: '2',
         label: '选项2'
       }],
-      drop:'请选择',
+      drop:'Country',
       dropValue:'',
     };
   },

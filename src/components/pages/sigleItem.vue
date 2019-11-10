@@ -412,7 +412,8 @@ export default {
       submitSingle(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
-          this.$message.success('提交成功，单据号：'+res.data.data+ '将在3秒后跳转首页')
+          this.$message.success('submitted successfully, Doc No.'+res.data.data+ 'and will jump to home page in 3 seconds')
+
           const timer = setTimeout(() => {
             this.$router.push({
               name:'Home'
