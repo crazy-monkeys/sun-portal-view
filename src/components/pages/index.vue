@@ -23,14 +23,17 @@
                 <el-menu-item index="/warranty/registration">Warranty Registration</el-menu-item>
                 <el-menu-item index="/warranty/extension">Warranty Extension</el-menu-item>
             </el-submenu>
-            <el-dropdown @command="handleCommand" trigger='click'>
-              <span class="el-dropdown-link">
-                {{drop}}<i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item v-for='item in options' :command="item" :key='item.code'>{{item.name}}</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+            <div class="drop">
+              <el-dropdown @command="handleCommand" trigger='click'>
+                <span class="el-dropdown-link">
+                  {{drop}}<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item v-for='item in options' :command="item" :key='item.code'>{{item.name}}</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
+            
         </el-menu>
         <router-view></router-view>
       </el-main>
@@ -406,13 +409,18 @@ export default {
   width: 1120px;
   margin: 0 auto;
 }
-.el-dropdown{
+.drop{
   position: absolute;
   right: 50px;
   height: 60px;
 }
+.el-dropdown{
+  /* position: absolute;
+  right: 50px;
+  height: 60px; */
+}
 .el-dropdown span{
-  display: block;
+  /* display: block; */
   height: 60px;
   line-height: 60px;
 }

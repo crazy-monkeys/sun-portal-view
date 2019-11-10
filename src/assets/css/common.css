@@ -108,3 +108,9 @@ input::-ms-clear {
     width:300px;
     text-align:center;
 }
+
+
+.el-dropdown-menu{
+    height:500px;
+    overflow:auto;
+}
