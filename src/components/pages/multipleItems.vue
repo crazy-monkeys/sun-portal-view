@@ -10,7 +10,7 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <el-form-item label="Type">
-            <el-select v-model="form.billType" placeholder="请选择" clearable filterable>
+            <el-select v-model="form.billType" placeholder="" clearable filterable>
               <el-option
                 v-for="item in billTypes"
                 :key="item.value"
@@ -140,7 +140,7 @@
             label="Warranty type">
             <template slot-scope="scope">
               <el-form-item label="">
-                <el-select v-model="scope.row.warrantyType" placeholder="请选择"
+                <el-select v-model="scope.row.warrantyType" placeholder=""
                 clearable filterable
                 :disabled="!scope.row.productModel"
                 @change="getAmount(scope.$index)"
@@ -192,7 +192,7 @@
             label="Warranty type">
             <template slot-scope="scope">
               <el-form-item label="">
-                <el-select v-model="scope.row.warrantyType" placeholder="请选择"
+                <el-select v-model="scope.row.warrantyType" placeholder=""
                 clearable filterable
                 >
                   <el-option

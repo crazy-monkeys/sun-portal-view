@@ -9,7 +9,7 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <el-form-item label="Type">
-            <el-select v-model="form.billType" placeholder="请选择" clearable filterable>
+            <el-select v-model="form.billType" placeholder="" clearable filterable>
               <el-option
                 v-for="item in billTypes"
                 :key="item.value"
@@ -158,7 +158,7 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <el-form-item label="Warranty type">
-            <el-select v-model="form.warrantyType" placeholder="请选择" clearable filterable @change="getAmount" @clear="form.amount=''">
+            <el-select v-model="form.warrantyType" placeholder="" clearable filterable @change="getAmount" @clear="form.amount=''">
               <el-option
                 v-for="item in warrantyTypes"
                 :key="item.value"

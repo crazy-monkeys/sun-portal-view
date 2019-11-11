@@ -48,7 +48,7 @@
       <el-row :gutter="20">
         <!-- <el-col :span="6">
           <el-form-item label="Country">
-            <el-select v-model="form.address.contryCode" placeholder="请选择" clearable filterable>
+            <el-select v-model="form.address.contryCode" placeholder="" clearable filterable>
               <el-option
                 v-for="item in options"
                 :key="item.value"
