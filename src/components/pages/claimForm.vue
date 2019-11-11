@@ -36,7 +36,7 @@
       </el-row>
       <h2>Claimant Contact Details</h2>
       <el-row :gutter="20">
-        <el-col :span="6">
+        <el-col :span="24">
           <el-form-item label="Type">
               <el-radio-group v-model="form.contact.billType">
                 <el-radio label="Business" value='Business'>Business</el-radio>
@@ -44,6 +44,8 @@
               </el-radio-group>
           </el-form-item>
         </el-col>
+      </el-row>
+      <el-row :gutter="20" v-if="form.contact.billType=='Business'">
         <el-col :span="6">
           <el-form-item label="ABN" v-if="form.country=='AU'">
             <el-input v-model="form.contact.abn" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
@@ -103,7 +105,7 @@
         
       </el-row>
 
-      <h2 v-if="form.contact.billType!='Business'">End User Contact Details</h2>
+      <!-- <h2 v-if="form.contact.billType!='Business'">End User Contact Details</h2> -->
       <el-row v-if="form.contact.billType!='Business'" :gutter="20">
         <el-col :span="6">
           <el-form-item label="Name">
