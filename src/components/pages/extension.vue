@@ -3,6 +3,7 @@
     <Breadcrumb :breadcrumbList='breadcrumbList' />
     <div class="desc">
       <el-table
+        v-if="country=='AU'"
         :data="tableData"
         style="width: 100%;margin:20px 0;"
         >
@@ -82,6 +83,8 @@
 <script>
 import Breadcrumb from '../coms/Breadcrumb'
 import {priceTab} from "@/api/registration.js"
+import Bus from "../../bus/bus.js";
+
 export default {
   name: "Extension",
   components:{
@@ -89,6 +92,7 @@ export default {
   },
   data() {
     return {
+      country:Bus.dropValue,
       tableData:[],
       breadcrumbList:[
         {
@@ -127,7 +131,12 @@ export default {
         name:'MultipleItems'
       })
     },
-  }
+  },
+  mounted(){
+    Bus.$on('dropValue',(res)=>{
+      this.country = res
+    })
+  },
 };
 </script>
 

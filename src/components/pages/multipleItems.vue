@@ -213,7 +213,7 @@
             width="">
             <template slot-scope="scope">
               <el-form-item label="">
-                <el-input type="textarea" resize="none" :rows='4' v-model="scope.row.serialNumbers" size="small"  ></el-input>
+                <el-input placeholder='Please enter the device serial number separated by ","' type="textarea" resize="none" :rows='4' v-model="scope.row.serialNumbers" size="small"  ></el-input>
               </el-form-item>
             </template>
           </el-table-column>
