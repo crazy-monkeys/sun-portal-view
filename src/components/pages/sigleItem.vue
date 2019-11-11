@@ -19,7 +19,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.country=='AU'">
           <el-form-item label="ABN" >
             <el-input v-model="form.abn" :disabled="form.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
@@ -216,7 +216,7 @@ export default {
   data() {
     const formMod = {
       submitType: 1,
-      country:'',
+      country:Bus.dropValue,
       businessPartner:'',
       address:{
         cityName:'',

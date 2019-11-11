@@ -45,7 +45,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="ABN" >
+          <el-form-item label="ABN" v-if="form.country=='AU'">
             <el-input v-model="form.contact.abn" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
