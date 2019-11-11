@@ -1,9 +1,9 @@
 <template>
   <el-container class="claimForm" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
-    <div class="desc">
+    <!-- <div class="desc">
       <img src="../../../static/reg.jpeg" alt="图片">
-    </div>
+    </div> -->
     <el-form :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Product Details</h2>
       <el-row :gutter="20">
@@ -76,6 +76,16 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
+          <el-form-item label="Address Line 1">
+            <el-input v-model="form.contact.address.addressLine1" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Address Line 2">
+            <el-input v-model="form.contact.address.addressLine2" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
           <el-form-item label="City/District">
             <el-input v-model="form.contact.address.cityName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
@@ -90,16 +100,7 @@
             <el-input v-model="form.contact.address.postCode" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
-          <el-form-item label="Address Line 1">
-            <el-input v-model="form.contact.address.addressLine1" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="Address Line 2">
-            <el-input v-model="form.contact.address.addressLine2" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
-          </el-form-item>
-        </el-col>
+        
       </el-row>
 
       <h2 v-if="form.contact.billType!='Business'">End User Contact Details</h2>

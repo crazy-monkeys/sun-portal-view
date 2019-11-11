@@ -32,6 +32,16 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
+          <el-form-item label="Address Line 1">
+            <el-input v-model="form.address.addressLine1"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Address Line 2">
+            <el-input v-model="form.address.addressLine2"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
           <el-form-item label="City/District">
             <el-input v-model="form.address.cityName"></el-input>
           </el-form-item>
@@ -46,16 +56,7 @@
             <el-input v-model="form.address.postCode"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
-          <el-form-item label="Address Line 1">
-            <el-input v-model="form.address.addressLine1"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="Address Line 2">
-            <el-input v-model="form.address.addressLine2"></el-input>
-          </el-form-item>
-        </el-col>
+        
       </el-row>
 
 

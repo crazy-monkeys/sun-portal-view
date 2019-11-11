@@ -46,18 +46,16 @@
       </el-row>
       <h2>Installation Details</h2>
       <el-row :gutter="20">
-        <!-- <el-col :span="6">
-          <el-form-item label="Country">
-            <el-select v-model="form.address.contryCode" placeholder="" clearable filterable>
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
+        <el-col :span="6">
+          <el-form-item label="Address Line 1">
+            <el-input v-model="form.address.addressLine1"></el-input>
           </el-form-item>
-        </el-col> -->
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Address Line 2">
+            <el-input v-model="form.address.addressLine2"></el-input>
+          </el-form-item>
+        </el-col>
         <el-col :span="6">
           <el-form-item label="City/District" prop='address.cityName'>
             <el-input v-model="form.address.cityName"></el-input>
@@ -73,16 +71,7 @@
             <el-input v-model="form.address.postCode"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
-          <el-form-item label="Address Line 1">
-            <el-input v-model="form.address.addressLine1"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="Address Line 2">
-            <el-input v-model="form.address.addressLine2"></el-input>
-          </el-form-item>
-        </el-col>
+        
         <el-col :span="6">
           <el-form-item label="Installer">
             <el-input v-model="form.installInstaller"></el-input>
