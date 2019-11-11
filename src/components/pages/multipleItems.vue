@@ -251,7 +251,7 @@
       
       <el-form-item class="sub">
         <el-button v-if="form.checked1" type="primary" @click="review" :loading="reviewLoading">Review</el-button>
-        <el-button type="primary" @click="onSubmit">Submit</el-button>
+        <el-button type="primary" @click="onSubmit" :disabled="!form.checked">Submit</el-button>
         <el-button @click="reset">reset</el-button>
       </el-form-item>
     </el-form>
