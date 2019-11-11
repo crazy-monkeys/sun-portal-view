@@ -18,7 +18,7 @@
             <el-menu-item index="/home">Home</el-menu-item>
             <el-submenu index="2">
                 <template slot="title">Warranty</template>
-                <el-menu-item index="/warranty/claim">Online Warranty Claim</el-menu-item>
+                <el-menu-item index="/warranty/claim/form">Online Warranty Claim</el-menu-item>
                 <!-- <el-menu-item index="/warranty/procedure">Warranty Claim Procedure</el-menu-item> -->
                 <el-menu-item index="/warranty/registration">Warranty Registration</el-menu-item>
                 <el-menu-item index="/warranty/extension">Warranty Extension</el-menu-item>
