@@ -177,17 +177,17 @@
           <h2>Shipping Address</h2>
             <el-row :gutter="20">
               <el-col :span="24">
-                <el-form-item label="The shipping address is">
+                <el-form-item label="">
                     <el-radio-group v-model="shippingAddressRadio" @change="shippingAddressRadioChangeHandle">
                       <el-radio label="1" value='1'>Same as claimant</el-radio>
-                      <el-radio label="2" value='2'>Same as end user</el-radio>
-                      <el-radio label="3" value='3'>None of the above</el-radio>
+                      <!-- <el-radio label="2" value='2'>Same as end user</el-radio> -->
+                      <el-radio label="3" value='3'>Other</el-radio>
                     </el-radio-group>
                 </el-form-item>
               </el-col>
               
               <el-col :span="24">
-                <el-form-item label="Once approved, the replacement device will be shipped to">
+                <el-form-item label="Shipping Address (in case that a replacement unit needs to be delivered) or Installation Adderss (in case that Sungrow Service Engineer will go on site)">
                   <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.shippingAddress" :readonly="shippingAddressRadio=='3' ? false: true" ></el-input>
                 </el-form-item>
               </el-col>
@@ -266,7 +266,7 @@
         
         <el-col :span="24">
           <el-form-item label=" ">
-            <el-checkbox v-model="form.checked">I have read and agree to Sungrow's warranty terms.</el-checkbox>
+            <el-checkbox v-model="form.checked">I have read and agree to <el-button type="text" @click="openTerm">Sungrow's warranty terms.</el-button>  </el-checkbox>
           </el-form-item>
         </el-col>
       </el-row>
@@ -395,30 +395,36 @@ export default {
     }
   },
   methods: {
+    openTerm(){
+      window.open('../../../sun-portal/static/Sungrow Manufacturer Warranty.pdf')
+    },
     shippingAddressRadioChangeHandle(v) {
-        if(v === '1' || v === '2'){
-          const {
-            address: {
+        if(v === '1' ){
+          if(this.form.contact.billType=='Business'){
+            const {
+              address: {
+                addressLine1,
+                addressLine2,
+                cityName,
+                stateName,
+                postCode
+              },
+              person,
+              contactNumber,
+            } = this.form.contact.billType=='Business' ? this.form.contact : this.form.endUser;
+            const str = [
+              this.form.contact.businessName,
               addressLine1,
               addressLine2,
               cityName,
               stateName,
-              postCode
-            },
-            person,
-            contactNumber,
-          } = v === '1' ? this.form.contact : this.form.endUser;
-          const str = [
-            this.form.contact.businessName,
-            addressLine1,
-            addressLine2,
-            cityName,
-            stateName,
-            postCode,
-            person ? `ATTN:${person}` : '',
-            contactNumber,
-          ].filter(i => i.trim()).join(',');
-          this.form.serviceCall.shippingAddress = str;
+              postCode,
+              person ? `ATTN:${person}` : '',
+              contactNumber,
+            ].filter(i => i.trim()).join(',');
+            this.form.serviceCall.shippingAddress = str;
+          }
+          
         }else{
           this.form.serviceCall.shippingAddress = ''
         }

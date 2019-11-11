@@ -188,7 +188,7 @@
       <el-row :gutter="20">
         <el-col :span="24">
           <el-form-item label=" ">
-            <el-checkbox v-model="form.checked">I have read and agree to Sungrow's warranty terms.</el-checkbox>
+            <el-checkbox v-model="form.checked">I have read and agree to <el-button type="text" @click="openTerm">Sungrow's warranty terms.</el-button>  </el-checkbox>
           </el-form-item>
         </el-col>
       </el-row>
@@ -317,6 +317,9 @@ export default {
     }
   },
   methods: {
+    openTerm(){
+      window.open('../../../sun-portal/static/Sungrow Manufacturer Warranty.pdf')
+    },
     getAmount(){
       if(this.form.warrantyType){
         var data ={
