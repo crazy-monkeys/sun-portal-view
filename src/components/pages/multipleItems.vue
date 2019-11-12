@@ -170,13 +170,13 @@
             prop=""
             label="Amount">
             <template slot="header" slot-scope="scope">
-                <el-button size="small" type='text' @click="addRow(1)">添加</el-button>
+                <el-button size="small" type='text' @click="addRow(1)">Add</el-button>
            </template>
             <template slot-scope="scope">
                <el-button
                 size="small"
                 type="text"
-                @click="delRow(scope.$index,1)">删除</el-button>
+                @click="delRow(scope.$index,1)">Delete</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -221,13 +221,13 @@
             prop=""
             label="Amount">
             <template slot="header" slot-scope="scope">
-                <el-button size="small" type='text' @click="addRow(2)">添加</el-button>
+                <el-button size="small" type='text' @click="addRow(2)">Add</el-button>
            </template>
             <template slot-scope="scope">
                <el-button
                 size="small"
                 type="text"
-                @click="delRow(scope.$index,2)">删除</el-button>
+                @click="delRow(scope.$index,2)">Delete</el-button>
             </template>
           </el-table-column>
         </el-table>

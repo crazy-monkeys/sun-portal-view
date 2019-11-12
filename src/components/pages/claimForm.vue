@@ -124,6 +124,16 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
+          <el-form-item label="Address Line 1">
+            <el-input v-model="form.endUser.address.addressLine1"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Address Line 2">
+            <el-input v-model="form.endUser.address.addressLine2"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
           <el-form-item label="City/District">
             <el-input v-model="form.endUser.address.cityName"></el-input>
           </el-form-item>
@@ -138,16 +148,7 @@
             <el-input v-model="form.endUser.address.postCode"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
-          <el-form-item label="Address Line 1">
-            <el-input v-model="form.endUser.address.addressLine1"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="Address Line 2">
-            <el-input v-model="form.endUser.address.addressLine2"></el-input>
-          </el-form-item>
-        </el-col>
+        
       </el-row>
       <el-row  :gutter="20">
         <el-col :span="12">
@@ -256,7 +257,7 @@
               :on-change="uploadOnChangeHandle"
               :file-list="fileList"
               :auto-upload="false">
-              <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+              <el-button slot="trigger" size="small" type="primary">Choose File</el-button>
               <!-- <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button> -->
               <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
             </el-upload>

@@ -1,9 +1,9 @@
 <template>
   <el-container class="registration" direction="vertical">
     <Breadcrumb :breadcrumbList='breadcrumbList' />
-    <div class="desc">
+    <!-- <div class="desc">
       <img src="../../../static/reg.jpeg" alt="图片">
-    </div>
+    </div> -->
     <el-form :disabled="submitLoading" :rules='rules' size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Contact Details</h2>
       <el-row :gutter="20">
@@ -108,7 +108,7 @@
                 :on-remove="handleRemove1"
                 :file-list="fileList1"
                 :auto-upload="false">
-                  <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">选取文件</el-input>
+                  <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">Choose File</el-input>
               </el-upload>
             </el-tooltip>
           </el-form-item>
@@ -127,7 +127,7 @@
                 :on-remove="handleRemove"
                 :file-list="fileList"
                 :auto-upload="false">
-                  <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">选取文件</el-input>
+                  <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">Choose File</el-input>
               </el-upload>
             </el-tooltip>
           </el-form-item>
