@@ -129,6 +129,16 @@
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="shippingAddressRadio==2">
+          <el-form-item label="Address Line 1">
+            <el-input v-model="form.addressLine1"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6" v-if="shippingAddressRadio==2">
+          <el-form-item label="Address Line 2">
+            <el-input v-model="form.addressLine2"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6" v-if="shippingAddressRadio==2">
           <el-form-item label="City/District">
             <el-input v-model="form.cityName"></el-input>
           </el-form-item>
@@ -143,16 +153,7 @@
             <el-input v-model="form.postCode"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="Address Line 1">
-            <el-input v-model="form.addressLine1"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="Address Line 2">
-            <el-input v-model="form.addressLine2"></el-input>
-          </el-form-item>
-        </el-col>
+        
       </el-row>
 
       <h2>Warranty type to purchase</h2>
@@ -374,14 +375,6 @@ export default {
     },
     onSubmit() {
       this.submitLoading = true
-      if(this.shippingAddressRadio==1){
-        this.form.shippingAddress = [this.form.address.cityName,this.form.address.stateName,this.form.address.postCode,this.form.address.addressLine1,this.form.address.addressLine2].join(',')
-
-      }else if(this.shippingAddressRadio==2){
-        this.form.shippingAddress = [this.form.cityName,this.form.stateName,this.form.postCode,this.form.addressLine1,this.form.addressLine2].join(',')
-      }else{
-        this.form.shippingAddress=''
-      }
       this.form.country = Bus.dropValue
       var params = new FormData()
       var data = this.form
