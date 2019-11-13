@@ -18,8 +18,8 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Email" prop='contacts.contactEmail'>
-            <el-input  v-model="form.contacts.contactEmail" prefix-icon="el-icon-message">
+          <el-form-item label="Email" prop='contacts.contactEmail' >
+            <el-input  v-model="form.contacts.contactEmail" prefix-icon="el-icon-message" placeholder="Multiple mailboxes are separated by ','">
             </el-input>
           </el-form-item>
         </el-col>
@@ -214,7 +214,7 @@ export default {
           {required:true,message:'Serial number is required',triggle:['change','blur']}
         ],
         'contacts.contactEmail':[
-          {required:true,validator: this.$formTest.emailTest,triggle:['change','blur']}
+          {required:true,message:'Email is required',triggle:['change','blur']}
         ],
         'address.cityName':[
           {required:true,message:'City is required',triggle:['change','blur']}
@@ -270,6 +270,7 @@ export default {
               productNumber: this.form.productNumber,
               productId:res.data.data.id,
               productModel:res.data.data.productModelValue,
+              dispatchedDate:res.data.data.dispatchedDate,
             }]
             this.form.businessPartner = res.data.data.businessPartner
           }else{
