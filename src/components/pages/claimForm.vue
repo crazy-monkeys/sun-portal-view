@@ -73,7 +73,7 @@
 
         <el-col :span="6">
           <el-form-item label="Email">
-            <el-input  v-model="form.contact.contactEmail" prefix-icon="el-icon-message" :disabled="form.contact.billType=='Individual' ? true :false">
+            <el-input  v-model="form.contact.contactEmail" prefix-icon="el-icon-message" :disabled="form.contact.billType=='Individual' ? true :false" placeholder="separated by ','">
             </el-input>
           </el-form-item>
         </el-col>
@@ -119,7 +119,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="Email">
-            <el-input  v-model="form.endUser.contactEmail" prefix-icon="el-icon-message">
+            <el-input  v-model="form.endUser.contactEmail" prefix-icon="el-icon-message" placeholder="separated by ','">
             </el-input>
           </el-form-item>
         </el-col>
