@@ -19,7 +19,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="Email" prop='contacts.contactEmail' >
-            <el-input  v-model="form.contacts.contactEmail" prefix-icon="el-icon-message" placeholder="separated by ','">
+            <el-input  v-model="form.contacts.contactEmail" prefix-icon="el-icon-message" placeholder="separated by ';'">
             </el-input>
           </el-form-item>
         </el-col>
