@@ -267,7 +267,7 @@ export default {
             this.form.productModel = res.data.data.productModelValue
             // this.form.productId = [res.data.data.id]
             this.form.products = [{
-              productNumber: this.form.productNumber,
+              serialNumber:this.form.productNumber,
               productId:res.data.data.id,
               productModel:res.data.data.productModelValue,
               dispatchedDate:res.data.data.dispatchedDate,
