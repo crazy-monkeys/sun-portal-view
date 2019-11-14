@@ -333,7 +333,7 @@ export default {
           if(res.data.code==1){
             this.form.amount  = res.data.data
             this.form.products = [{
-              serialNumber:this.form.productNumber,
+              serialNumber:this.form.serialNumber,
               productId:this.product.id,
               productModel:this.product.productModelValue,
               warrantyType:this.form.warrantyType,
