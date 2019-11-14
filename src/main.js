@@ -34,6 +34,16 @@ const i18n = new VueI18n({
 Vue.use(ElementUI, {
     i18n: (key, value) => i18n.t(key, value) //重点！！在注册Element时设置i18n的处理方法（这里有个小坑）
 });
+
+
+router.beforeEach((to, from, next) => {
+    /* 路由发生变化修改页面title */
+    if (to.meta.title) {
+        document.title = to.meta.title
+    }
+    next()
+})
+
 // axios
 import axios from '@/axios/http.js'
 Vue.prototype.$http = axios;
