@@ -199,8 +199,8 @@ export default {
     return {
       Bus,
       pNumTooltip:'Please refer to the nameplate on the side of the Sungrow product.',
-      ivcTooltip:'Please attach the invoice as the evidence of the installation.',
-      cecTooltip:'Please attach the Electrical Compliance Certifcate as the evidence of the installation.Normally it will provided by the installer after installation.For different states.the name for such certifcate may vary.',
+      ivcTooltip:`Please attach the invoice as the evidence of the installation.Note: The maximum attachment size per file is 10 MB.`,
+      cecTooltip:'Please attach the Electrical Compliance Certifcate as the evidence of the installation.Normally it will provided by the installer after installation.For different states.the name for such certifcate may vary. Note: The maximum attachment size per file is 10 MB.',
       pickerOptions:{
         disabledDate: (time) => {
           return time.getTime()>Date.now()
@@ -273,6 +273,7 @@ export default {
               dispatchedDate:res.data.data.dispatchedDate,
             }]
             this.form.businessPartner = res.data.data.businessPartner
+            console.log(this.form.products)
           }else{
             this.pNumLoding=false
           }
