@@ -1,5 +1,5 @@
 'use strict'
 module.exports = {
     NODE_ENV: '"production"',
-    API_ROOT: '"http://portal-sit.threeape.cn/sun-portal-api"'
+    API_ROOT: '"https://sunportalfb3323b80.cn1.hana.ondemand.com/sun-portal-api"'
 }

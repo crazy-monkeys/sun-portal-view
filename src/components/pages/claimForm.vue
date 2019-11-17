@@ -401,7 +401,6 @@ export default {
     },
     shippingAddressRadioChangeHandle(v) {
         if(v === '1' ){
-          if(this.form.contact.billType=='Business'){
             const {
               address: {
                 addressLine1,
@@ -424,8 +423,6 @@ export default {
               contactNumber,
             ].filter(i => i.trim()).join(',');
             this.form.serviceCall.shippingAddress = str;
-          }
-          
         }else{
           this.form.serviceCall.shippingAddress = ''
         }
