@@ -4,11 +4,11 @@
     <!-- <div class="desc">
       <img src="../../../static/reg.jpeg" alt="图片">
     </div> -->
-    <el-form :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
+    <el-form :disabled="submitLoading" size="small" :rules='rules' class="form" ref="form" :model="form" label-width="80px" label-position="top">
       <h2>Product Details</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="Serial number">
+          <el-form-item label="Serial number" prop='productNumber'>
             <el-input v-model="form.productNumber" @blur='getProductInfo'></el-input>
           </el-form-item>
         </el-col>
@@ -18,7 +18,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Date of installation">
+          <el-form-item label="Date of installation" prop='installDate'>
             <el-date-picker
               class="datePicker"
               v-model="form.installDate"
@@ -37,7 +37,7 @@
       <h2>Claimant Contact Details</h2>
       <el-row :gutter="20">
         <el-col :span="24">
-          <el-form-item label="Type">
+          <el-form-item label="Type" prop='contact.billType'>
               <el-radio-group v-model="form.contact.billType">
                 <el-radio label="Business" value='Business'>Business</el-radio>
                 <el-radio label="Individual" vlaue='Individual'>Individual</el-radio>
@@ -47,7 +47,7 @@
       </el-row>
       <el-row :gutter="20" v-if="form.contact.billType=='Business'">
         <el-col :span="6">
-          <el-form-item label="ABN" v-if="form.country=='AU'">
+          <el-form-item label="ABN" v-if="form.country=='AU'" >
             <el-input v-model="form.contact.abn" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
@@ -60,45 +60,45 @@
 
 
         <el-col :span="6">
-          <el-form-item label="Contact person">
+          <el-form-item label="Contact person" prop='contact.person'>
             <el-input v-model="form.contact.person" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         
         <el-col :span="6">
-          <el-form-item label="Contact number">
+          <el-form-item label="Contact number" prop='contact.contactNumber'>
             <el-input v-model="form.contact.contactNumber" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
 
         <el-col :span="6">
-          <el-form-item label="Email">
+          <el-form-item label="Email" prop='contact.contactEmail'>
             <el-input  v-model="form.contact.contactEmail" prefix-icon="el-icon-message" :disabled="form.contact.billType=='Individual' ? true :false" placeholder="separated by ','">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Address Line 1">
+          <el-form-item label="Address Line 1" prop='contact.address.addressLine1'>
             <el-input v-model="form.contact.address.addressLine1" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Address Line 2">
+          <el-form-item label="Address Line 2" prop='contact.address.addressLine2'>
             <el-input v-model="form.contact.address.addressLine2" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="City/District">
+          <el-form-item label="City/District" prop='contact.address.cityName'>
             <el-input v-model="form.contact.address.cityName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="State/Province">
+          <el-form-item label="State/Province" prop='contact.address.stateName'>
             <el-input v-model="form.contact.address.stateName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Post code">
+          <el-form-item label="Post code" prop='contact.address.postCode'>
             <el-input v-model="form.contact.address.postCode" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
@@ -108,43 +108,43 @@
       <!-- <h2 v-if="form.contact.billType!='Business'">End User Contact Details</h2> -->
       <el-row v-if="form.contact.billType!='Business'" :gutter="20">
         <el-col :span="6">
-          <el-form-item label="Name">
+          <el-form-item label="Name" prop='endUser.address.person'>
             <el-input type="text" v-model="form.endUser.person" ></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Contact number">
+          <el-form-item label="Contact number" prop='endUser.address.contactNumber'>
             <el-input type="text" v-model="form.endUser.contactNumber" ></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Email">
+          <el-form-item label="Email" prop='endUser.address.contactEmail'>
             <el-input  v-model="form.endUser.contactEmail" prefix-icon="el-icon-message" placeholder="separated by ';'">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Address Line 1">
+          <el-form-item label="Address Line 1" prop='endUser.address.addressLine1'>
             <el-input v-model="form.endUser.address.addressLine1"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Address Line 2">
+          <el-form-item label="Address Line 2" prop='endUser.address.addressLine2'>
             <el-input v-model="form.endUser.address.addressLine2"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="City/District">
+          <el-form-item label="City/District" prop='endUser.address.cityName'> 
             <el-input v-model="form.endUser.address.cityName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="State/Province">
+          <el-form-item label="State/Province" prop='endUser.address.stateName'>
             <el-input v-model="form.endUser.address.stateName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Post code">
+          <el-form-item label="Post code" prop='endUser.address.postCode'>
             <el-input v-model="form.endUser.address.postCode"></el-input>
           </el-form-item>
         </el-col>
@@ -155,7 +155,7 @@
           <h2>Fault Details</h2>
           <el-row :gutter="20">
             <el-col :span="24">
-              <el-form-item label="The fault is">
+              <el-form-item label="The fault is" prop='serviceCall.fault'>
                   <el-radio-group v-model="form.serviceCall.fault">
                     <el-radio label="Permanent">Permanent</el-radio>
                     <el-radio label="Intermittent">Intermittent</el-radio>
@@ -168,7 +168,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item label="Fault description:">
+              <el-form-item label="Fault description:" prop='serviceCall.description'>
                 <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.description" ></el-input>
               </el-form-item>
             </el-col>
@@ -178,7 +178,7 @@
           <h2>Shipping Address</h2>
             <el-row :gutter="20">
               <el-col :span="24">
-                <el-form-item label="">
+                <el-form-item label="" >
                     <el-radio-group v-model="shippingAddressRadio" @change="shippingAddressRadioChangeHandle">
                       <el-radio label="1" value='1'>Same as claimant</el-radio>
                       <!-- <el-radio label="2" value='2'>Same as end user</el-radio> -->
@@ -188,7 +188,7 @@
               </el-col>
               
               <el-col :span="24">
-                <el-form-item label="Shipping Address (in case that a replacement unit needs to be delivered) or Installation Adderss (in case that Sungrow Service Engineer will go on site)">
+                <el-form-item prop="serviceCall.shippingAddress" label="Shipping Address (in case that a replacement unit needs to be delivered) or Installation Adderss (in case that Sungrow Service Engineer will go on site)">
                   <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.shippingAddress" :readonly="shippingAddressRadio=='3' ? false: true" ></el-input>
                 </el-form-item>
               </el-col>
@@ -278,7 +278,7 @@
 
 
       <el-form-item class="sub">
-        <el-button type="primary" @click="onSubmit" :disabled="!form.checked" :loading='submitLoading'>Submit</el-button>
+        <el-button type="primary" @click="onSubmit('form')" :disabled="!form.checked" :loading='submitLoading'>Submit</el-button>
         <el-button @click="reset">reset</el-button>
       </el-form-item>
     </el-form>
@@ -343,6 +343,75 @@ export default {
         type:2
       };
     return {
+      rules:{
+        'contact.billType':[
+          {required:true,message:'Type is required',triggle:['change','blur']}
+        ],
+        'contact.contactEmail':[
+          {required:true,message:'Email is required',triggle:['change','blur']}
+        ],
+        'contact.person':[
+          {required:true,message:'Person is required',triggle:['change','blur']}
+        ],
+        'contact.contactNumber':[
+          {required:true,message:'ContactNumber is required',triggle:['change','blur']}
+        ],
+        'contact.address.cityName':[
+          {required:true,message:'City is required',triggle:['change','blur']}
+        ],
+        'contact.address.addressLine1':[
+          {required:true,message:'AddressLine1 is required',triggle:['change','blur']}
+        ],
+        'contact.address.addressLine2':[
+          {required:true,message:'AddressLine2 is required',triggle:['change','blur']}
+        ],
+        'contact.address.stateName':[
+          {required:true,message:'State is required',triggle:['change','blur']}
+        ],
+        'contact.address.postCode':[
+          {required:true,message:'Post code is required',triggle:['change','blur']}
+        ],
+
+        'endUser.address.contactEmail':[
+          {required:true,message:'Email is required',triggle:['change','blur']}
+        ],
+        'endUser.address.person':[
+          {required:true,message:'Person is required',triggle:['change','blur']}
+        ],
+        'endUser.address.contactNumber':[
+          {required:true,message:'ContactNumber is required',triggle:['change','blur']}
+        ],
+        'endUser.address.cityName':[
+          {required:true,message:'City is required',triggle:['change','blur']}
+        ],
+        'endUser.address.addressLine1':[
+          {required:true,message:'AddressLine1 is required',triggle:['change','blur']}
+        ],
+        'endUser.address.addressLine2':[
+          {required:true,message:'AddressLine2 is required',triggle:['change','blur']}
+        ],
+        'endUser.address.stateName':[
+          {required:true,message:'State is required',triggle:['change','blur']}
+        ],
+        'endUser.address.postCode':[
+          {required:true,message:'Post code is required',triggle:['change','blur']}
+        ],
+        installDate:[
+          {required:true,message:'InstallDate is required',triggle:['change','blur']}
+        ],
+        productNumber:[
+          {required:true,message:'Serial number is required',triggle:['change','blur']}
+        ],
+        'serviceCall.fault':[
+          {required:true,message:'Fault is required',triggle:['change','blur']}
+        ],
+        'serviceCall.description':[
+          {required:true,message:'Fault Description is required',triggle:['change','blur']}
+        ],
+        'serviceCall.shippingAddress':[
+          {required:true,message:'ShippingAddress is required',triggle:['change','blur']}
+        ],
+      },
       radio:'',
       submitLoading:false,
       options: [{
@@ -458,7 +527,7 @@ export default {
         this.form.accessory = ''
       }
     },
-    onSubmit() {
+    submit(){
       this.submitLoading = true
       this.form.country = Bus.dropValue
       var params = new FormData()
@@ -510,8 +579,58 @@ export default {
         this.submitLoading = false
       })
     },
+    onSubmit(form) {
+      this.$formTest.submitForm(this.$refs[form],this.submit)
+    },
     reset(){
-      this.form={ ...this.formMod }
+      this.form={
+        accessory: '',
+        country:Bus.dropValue,
+        endUser:{
+          person:'',
+          contactNumber:"",
+          contactEmail:'',
+          address:{
+            cityName:'',
+            stateName:'',
+            postCode:'',
+            addressLine1:'',
+            addressLine2:'',
+          }
+        },
+        contact:{
+          billType:'Business',
+          abn:'',
+          businessName:"",
+          person:'',
+          contactNumber:"",
+          contactEmail:'',
+          address:{
+            cityName:'',
+            stateName:'',
+            postCode:'',
+            addressLine1:'',
+            addressLine2:'',
+          }
+        },
+        serviceCall:{
+          weather:'',
+          location:'',
+          weatherMsg:'',
+          battery:'',
+          model:'',
+          batteryMsg:'',
+          shippingAddress:'',
+        },
+        businessPartner:'',
+        productNumber: '',
+        productModel: '',
+        productId:[],
+        products:[],
+        installDate:'',
+        type:2
+      }
+      console.log(this.form)
       this.$refs.upload.clearFiles();
     },
     changeFile(val){
