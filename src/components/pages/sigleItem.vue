@@ -319,11 +319,12 @@ export default {
   },
   methods: {
     openTerm(){
-      window.open('../../../sun-portal/static/Sungrow Manufacturer Warranty.pdf')
+      window.open('../../../sun-portal-api/sunportal/static/Sungrow Manufacturer Warranty.pdf')
     },
     getAmount(){
       if(this.form.warrantyType){
         var data ={
+          serialNumber:this.form.serialNumber,
           productId:this.product.id,
           productModel:this.product.productModelValue,
           deliveryDate:this.product.deliveryDate,
@@ -333,7 +334,6 @@ export default {
           if(res.data.code==1){
             this.form.amount  = res.data.data
             this.form.products = [{
-              serialNumber:this.form.serialNumber,
               productId:this.product.id,
               productModel:this.product.productModelValue,
               warrantyType:this.form.warrantyType,

@@ -249,7 +249,7 @@
       <h2>File Upload</h2>
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-form-item label="Please upload any pictures or documents that can support your warranty claim, such as the data sticker on a side of the inverter, and the LCD status or other LCD info that may be relevant.">
+          <el-form-item label="Please upload any pictures or documents that can support your warranty claim, such as the data sticker on a side of the inverter, and the LCD status or other LCD info that may be relevant.Note: The maximum attachment size per file is 10 MB.">
             <el-upload
               class=""
               ref="upload"
@@ -466,7 +466,7 @@ export default {
   },
   methods: {
     openTerm(){
-      window.open('../../../sun-portal/static/Sungrow Manufacturer Warranty.pdf')
+      window.open('../../../sun-portal-api/sunportal/static/Sungrow Manufacturer Warranty.pdf')
     },
     shippingAddressRadioChangeHandle(v) {
         if(v === '1' ){

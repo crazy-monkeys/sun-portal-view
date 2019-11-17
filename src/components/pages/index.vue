@@ -20,7 +20,7 @@
                 <template slot="title">Warranty</template>
                 <el-menu-item index="/warranty/claim/form">Online Warranty Claim</el-menu-item>
                 <!-- <el-menu-item index="/warranty/procedure">Warranty Claim Procedure</el-menu-item> -->
-                <el-menu-item index="/warranty/registration" >Warranty Registration</el-menu-item>
+                <el-menu-item index="/warranty/registration" :disabled="drop!='Australia'? true:false">Warranty Registration</el-menu-item>
                 <el-menu-item index="/warranty/extension" :disabled="drop!='Australia'? true:false">Warranty Extension</el-menu-item>
             </el-submenu>
             <div class="drop">
@@ -133,7 +133,6 @@ export default {
 {"name": "Aland Islan","code": "AX"},
 {"name": "Albania","code": "AL"},
 {"name": "Algeria","code": "DZ"},
-{"name": "American Samoa","code": "AS"},
 {"name": "Andorra","code": "AD"},
 {"name": "Angola","code": "AO"},
 {"name": "Anguilla","code": "AI"},
