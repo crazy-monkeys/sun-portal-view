@@ -469,7 +469,7 @@ export default {
   },
   methods: {
     openTerm(){
-      window.open('../../../sun-portal-api/sunportal/static/Sungrow Manufacturer Warranty.pdf')
+      window.open('../../../sun-portal/v/static/Sungrow Manufacturer Warranty.pdf')
     },
     disableType(value){
       const arr2 = this.form.productList.map(item=>{
