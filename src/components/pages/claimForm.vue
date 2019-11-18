@@ -38,112 +38,112 @@
       <el-row :gutter="20">
         <el-col :span="24">
           <el-form-item label="Type" prop='contact.billType'>
-              <el-radio-group v-model="form.contact.billType">
+              <el-radio-group v-model="form.contact.billType" >
                 <el-radio label="Business" value='Business'>Business</el-radio>
                 <el-radio label="Individual" vlaue='Individual'>Individual</el-radio>
               </el-radio-group>
           </el-form-item>
         </el-col>
       </el-row>
-      <el-row :gutter="20" v-if="form.contact.billType=='Business'">
+      <el-row :gutter="20" >
         <el-col :span="6">
-          <el-form-item label="ABN" v-if="form.country=='AU'" >
+          <el-form-item label="ABN" v-if="form.country=='AU'&&form.contact.billType=='Business'" >
             <el-input v-model="form.contact.abn" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         
-        <el-col :span="6">
-          <el-form-item label="Business Name">
+        <el-col :span="6" v-if="form.contact.billType=='Business'">
+          <el-form-item label="Business Name" >
             <el-input v-model="form.contact.businessName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
 
 
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType=='Business'">
           <el-form-item label="Contact person" prop='contact.person'>
             <el-input v-model="form.contact.person" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType=='Business'">
           <el-form-item label="Contact number" prop='contact.contactNumber'>
             <el-input v-model="form.contact.contactNumber" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
 
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType=='Business'">
           <el-form-item label="Email" prop='contact.contactEmail'>
             <el-input  v-model="form.contact.contactEmail" prefix-icon="el-icon-message" :disabled="form.contact.billType=='Individual' ? true :false" placeholder="separated by ','">
             </el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType=='Business'">
           <el-form-item label="Address Line 1" prop='contact.address.addressLine1'>
             <el-input v-model="form.contact.address.addressLine1" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType=='Business'">
           <el-form-item label="Address Line 2" prop='contact.address.addressLine2'>
             <el-input v-model="form.contact.address.addressLine2" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType=='Business'">
           <el-form-item label="City/District" prop='contact.address.cityName'>
             <el-input v-model="form.contact.address.cityName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType=='Business'">
           <el-form-item label="State/Province" prop='contact.address.stateName'>
             <el-input v-model="form.contact.address.stateName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType=='Business'">
           <el-form-item label="Post code" prop='contact.address.postCode'>
             <el-input v-model="form.contact.address.postCode" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         
-      </el-row>
+      <!-- </el-row> -->
 
       <!-- <h2 v-if="form.contact.billType!='Business'">End User Contact Details</h2> -->
-      <el-row v-if="form.contact.billType!='Business'" :gutter="20">
-        <el-col :span="6">
-          <el-form-item label="Name" prop='endUser.address.person'>
+      <!-- <el-row v-if="form.contact.billType!='Business'" :gutter="20"> -->
+        <el-col :span="6" v-if="form.contact.billType!='Business'">
+          <el-form-item label="Name" prop='endUser.person'>
             <el-input type="text" v-model="form.endUser.person" ></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
-          <el-form-item label="Contact number" prop='endUser.address.contactNumber'>
+        <el-col :span="6" v-if="form.contact.billType!='Business'">
+          <el-form-item label="Contact number"  prop='endUser.contactNumber'>
             <el-input type="text" v-model="form.endUser.contactNumber" ></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
-          <el-form-item label="Email" prop='endUser.address.contactEmail'>
+        <el-col :span="6" v-if="form.contact.billType!='Business'">
+          <el-form-item label="Email" prop='endUser.contactEmail'>
             <el-input  v-model="form.endUser.contactEmail" prefix-icon="el-icon-message" placeholder="separated by ';'">
             </el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType!='Business'">
           <el-form-item label="Address Line 1" prop='endUser.address.addressLine1'>
             <el-input v-model="form.endUser.address.addressLine1"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType!='Business'">
           <el-form-item label="Address Line 2" prop='endUser.address.addressLine2'>
             <el-input v-model="form.endUser.address.addressLine2"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType!='Business'">
           <el-form-item label="City/District" prop='endUser.address.cityName'> 
             <el-input v-model="form.endUser.address.cityName"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType!='Business'">
           <el-form-item label="State/Province" prop='endUser.address.stateName'>
             <el-input v-model="form.endUser.address.stateName"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" v-if="form.contact.billType!='Business'">
           <el-form-item label="Post code" prop='endUser.address.postCode'>
             <el-input v-model="form.endUser.address.postCode"></el-input>
           </el-form-item>
@@ -372,13 +372,16 @@ export default {
           {required:true,message:'Post code is required',triggle:['change','blur']}
         ],
 
-        'endUser.address.contactEmail':[
+        'endUser.contactEmail':[
           {required:true,message:'Email is required',triggle:['change','blur']}
         ],
-        'endUser.address.person':[
-          {required:true,message:'Person is required',triggle:['change','blur']}
+        'endUser.person':[
+          {required:true,message:'Name is required',triggle:['change','blur']}
         ],
-        'endUser.address.contactNumber':[
+        // 'endUser.contactNumber':[
+        //   {required:true,message:'ContactNumber is required',triggle:['change','blur']}
+        // ],
+        'endUser.contactNumber':[
           {required:true,message:'ContactNumber is required',triggle:['change','blur']}
         ],
         'endUser.address.cityName':[
@@ -441,6 +444,7 @@ export default {
     'form.contact.billType':{
       handler:function(n,o){
         if(n=='Individual'){
+          console.log(1111)
           this.form.contact.abn=''
           this.form.contact.businessName=''
           this.form.contact.person=''
@@ -451,7 +455,9 @@ export default {
           this.form.contact.address.postCode=''
           this.form.contact.address.addressLine1=''
           this.form.contact.address.addressLine2=''
+          this.$formTest.resetForm(this.$refs['form'],['contact.abn','contact.businessName','contact.person','contact.contactNumber','contact.contactEmail','contact.address.cityName','contact.address.stateName','contact.address.postCode','contact.address.addressLine1','contact.address.addressLine2'])
         }else{
+          console.log(2222)
           this.form.endUser.person=''
           this.form.endUser.contactNumber=''
           this.form.endUser.contactEmail=''
@@ -460,6 +466,7 @@ export default {
           this.form.endUser.address.postCode=''
           this.form.endUser.address.addressLine1=''
           this.form.endUser.address.addressLine2=''
+          this.$formTest.resetForm(this.$refs['form'],['endUser.person','endUser.contactNumber','endUser.contactEmail','endUser.address.cityName','endUser.address.stateName','endUser.address.postCode','endUser.address.addressLine1','endUser.address.addressLine2'])
         }
       }
     }

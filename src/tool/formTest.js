@@ -12,13 +12,13 @@ export default {
             }
         }
     },
-    resetForm(formRef) {
+    resetForm(formRef, arr) {
         if (formRef) {
             if (formRef !== undefined) {
-                formRef.resetFields();
+                formRef.clearValidate(arr);
             } else {
                 this.$nextTick(() => {
-                    formRef.resetFields();
+                    formRef.clearValidate(arr);
                 });
             }
         }
