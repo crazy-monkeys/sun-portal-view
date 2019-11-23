@@ -5,20 +5,20 @@
       <img src="../../../static/reg.jpeg" alt="图片">
     </div> -->
     <el-form :disabled="submitLoading" size="small" :rules='rules' class="form" ref="form" :model="form" label-width="80px" label-position="top">
-      <h2>Product Details</h2>
+      <h2>{{ $t('claimForm.productDetails.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="Serial number" prop='productNumber'>
+          <el-form-item :label="$t('claimForm.productDetails.serialNumber')" prop='productNumber'>
             <el-input v-model="form.productNumber" @blur='getProductInfo'></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Product model">
+          <el-form-item :label="$t('claimForm.productDetails.productModel')">
             <el-input v-model="form.productModel" :readonly="true"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Date of installation" prop='installDate'>
+          <el-form-item :label="$t('claimForm.productDetails.dateOfInstallation')" prop='installDate'>
             <el-date-picker
               class="datePicker"
               v-model="form.installDate"
@@ -29,15 +29,15 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Want to claim an accessory?">
+          <el-form-item :label="$t('claimForm.productDetails.wantToClaimAnAccessory')">
             <el-input v-model="form.accessory" :disabled="form.productNumber.length==0" ></el-input>
           </el-form-item>
         </el-col>
       </el-row>
-      <h2>Claimant Contact Details</h2>
+      <h2>{{ $t('claimForm.claimantContactDetails.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="24">
-          <el-form-item label="Type" prop='contact.billType'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.type')" prop='contact.billType'>
               <el-radio-group v-model="form.contact.billType" >
                 <el-radio label="Business" value='Business'>Business</el-radio>
                 <el-radio label="Individual" vlaue='Individual'>Individual</el-radio>
@@ -47,58 +47,57 @@
       </el-row>
       <el-row :gutter="20" >
         <el-col :span="6">
-          <el-form-item label="ABN" v-if="form.country=='AU'&&form.contact.billType=='Business'" >
+          <el-form-item :label="$t('claimForm.claimantContactDetails.ABN')" v-if="form.country=='AU'&&form.contact.billType=='Business'" >
             <el-input v-model="form.contact.abn" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         
         <el-col :span="6" v-if="form.contact.billType=='Business'">
-          <el-form-item label="Business Name" >
+          <el-form-item :label="$t('claimForm.claimantContactDetails.business.name')" >
             <el-input v-model="form.contact.businessName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
 
-
         <el-col :span="6" v-if="form.contact.billType=='Business'">
-          <el-form-item label="Contact person" prop='contact.person'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.business.contactPerson')" prop='contact.person'>
             <el-input v-model="form.contact.person" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         
         <el-col :span="6" v-if="form.contact.billType=='Business'">
-          <el-form-item label="Contact number" prop='contact.contactNumber'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.business.contactNumber')" prop='contact.contactNumber'>
             <el-input v-model="form.contact.contactNumber" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
 
         <el-col :span="6" v-if="form.contact.billType=='Business'">
-          <el-form-item label="Email" prop='contact.contactEmail'>
-            <el-input  v-model="form.contact.contactEmail" prefix-icon="el-icon-message" :disabled="form.contact.billType=='Individual' ? true :false" placeholder="separated by ','">
+          <el-form-item :label="$t('claimForm.claimantContactDetails.business.email')" prop='contact.contactEmail'>
+            <el-input  v-model="form.contact.contactEmail" prefix-icon="el-icon-message" :disabled="form.contact.billType=='Individual' ? true :false" :placeholder="$t('claimForm.claimantContactDetails.business.emailPlaceholder')">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType=='Business'">
-          <el-form-item label="Address Line 1" prop='contact.address.addressLine1'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.business.addressLine1')" prop='contact.address.addressLine1'>
             <el-input v-model="form.contact.address.addressLine1" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType=='Business'">
-          <el-form-item label="Address Line 2" prop='contact.address.addressLine2'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.business.addressLine2')" prop='contact.address.addressLine2'>
             <el-input v-model="form.contact.address.addressLine2" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType=='Business'">
-          <el-form-item label="City/District" prop='contact.address.cityName'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.business.citydistrict')" prop='contact.address.cityName'>
             <el-input v-model="form.contact.address.cityName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType=='Business'">
-          <el-form-item label="State/Province" prop='contact.address.stateName'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.business.stateProvince')" prop='contact.address.stateName'>
             <el-input v-model="form.contact.address.stateName" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType=='Business'">
-          <el-form-item label="Post code" prop='contact.address.postCode'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.business.postCode')" prop='contact.address.postCode'>
             <el-input v-model="form.contact.address.postCode" :disabled="form.contact.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
@@ -108,43 +107,43 @@
       <!-- <h2 v-if="form.contact.billType!='Business'">End User Contact Details</h2> -->
       <!-- <el-row v-if="form.contact.billType!='Business'" :gutter="20"> -->
         <el-col :span="6" v-if="form.contact.billType!='Business'">
-          <el-form-item label="Name" prop='endUser.person'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.person.name')" prop='endUser.person'>
             <el-input type="text" v-model="form.endUser.person" ></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType!='Business'">
-          <el-form-item label="Contact number"  prop='endUser.contactNumber'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.person.contactNumber')"  prop='endUser.contactNumber'>
             <el-input type="text" v-model="form.endUser.contactNumber" ></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType!='Business'">
-          <el-form-item label="Email" prop='endUser.contactEmail'>
-            <el-input  v-model="form.endUser.contactEmail" prefix-icon="el-icon-message" placeholder="separated by ';'">
+          <el-form-item :label="$t('claimForm.claimantContactDetails.person.email')" prop='endUser.contactEmail'>
+            <el-input  v-model="form.endUser.contactEmail" prefix-icon="el-icon-message"  :placeholder="$t('claimForm.claimantContactDetails.person.emailPlaceholder')">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType!='Business'">
-          <el-form-item label="Address Line 1" prop='endUser.address.addressLine1'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.person.addressLine1')" prop='endUser.address.addressLine1'>
             <el-input v-model="form.endUser.address.addressLine1"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType!='Business'">
-          <el-form-item label="Address Line 2" prop='endUser.address.addressLine2'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.person.addressLine2')" prop='endUser.address.addressLine2'>
             <el-input v-model="form.endUser.address.addressLine2"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType!='Business'">
-          <el-form-item label="City/District" prop='endUser.address.cityName'> 
+          <el-form-item :label="$t('claimForm.claimantContactDetails.person.citydistrict')" prop='endUser.address.cityName'> 
             <el-input v-model="form.endUser.address.cityName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType!='Business'">
-          <el-form-item label="State/Province" prop='endUser.address.stateName'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.person.stateProvince')" prop='endUser.address.stateName'>
             <el-input v-model="form.endUser.address.stateName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.contact.billType!='Business'">
-          <el-form-item label="Post code" prop='endUser.address.postCode'>
+          <el-form-item :label="$t('claimForm.claimantContactDetails.person.postCode')" prop='endUser.address.postCode'>
             <el-input v-model="form.endUser.address.postCode"></el-input>
           </el-form-item>
         </el-col>
@@ -152,10 +151,10 @@
       </el-row>
       <el-row  :gutter="20">
         <el-col :span="12">
-          <h2>Fault Details</h2>
+          <h2>{{ $t('claimForm.faultDetails.title') }}</h2>
           <el-row :gutter="20">
             <el-col :span="24">
-              <el-form-item label="The fault is" prop='serviceCall.fault'>
+              <el-form-item :label="$t('claimForm.faultDetails.theFaultIs')" prop='serviceCall.fault'>
                   <el-radio-group v-model="form.serviceCall.fault">
                     <el-radio label="Permanent">Permanent</el-radio>
                     <el-radio label="Intermittent">Intermittent</el-radio>
@@ -163,32 +162,32 @@
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item label="Status message on the LCD:" >
+              <el-form-item :label="$t('claimForm.faultDetails.lcd')">
                 <el-input v-model="form.serviceCall.lcd" ></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item label="Fault description:" prop='serviceCall.description'>
+              <el-form-item :label="$t('claimForm.faultDetails.description')" prop='serviceCall.description'>
                 <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.description" ></el-input>
               </el-form-item>
             </el-col>
           </el-row>
         </el-col>
         <el-col :span="12">
-          <h2>Shipping Address</h2>
+          <h2>{{ $t('claimForm.addressDetails.title') }}</h2>
             <el-row :gutter="20">
               <el-col :span="24">
                 <el-form-item label="" >
                     <el-radio-group v-model="shippingAddressRadio" @change="shippingAddressRadioChangeHandle">
-                      <el-radio label="1" value='1'>Same as claimant</el-radio>
+                      <el-radio label="1" value='1'>{{ $t('claimForm.addressDetails.sameAsClaimant') }}</el-radio>
                       <!-- <el-radio label="2" value='2'>Same as end user</el-radio> -->
-                      <el-radio label="3" value='3'>Other</el-radio>
+                      <el-radio label="3" value='3'>{{ $t('claimForm.addressDetails.other') }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
               </el-col>
               
               <el-col :span="24">
-                <el-form-item prop="serviceCall.shippingAddress" label="Shipping Address (in case that a replacement unit needs to be delivered) or Installation Adderss (in case that Sungrow Service Engineer will go on site)">
+                <el-form-item :label="$t('claimForm.addressDetails.shippingAddress')" prop="serviceCall.shippingAddress">
                   <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.shippingAddress" :readonly="shippingAddressRadio=='3' ? false: true" ></el-input>
                 </el-form-item>
               </el-col>
@@ -198,12 +197,12 @@
         </el-col>
       </el-row>
 
-      <h2 >Other Details</h2>
+      <h2>{{ $t('claimForm.otherDetails.title') }}</h2>
       <el-row :gutter="20" >
         <el-col :span="12">
           <el-row :gutter="20">
             <el-col :span="24" v-if="form.country=='AU'">
-              <el-form-item label="Is the inverter exposed to the weather (e.g. rain)?">
+              <el-form-item :label="$t('claimForm.otherDetails.title')">
                   <el-radio-group v-model="form.serviceCall.weather">
                     <el-radio label="Yes">Yes</el-radio>
                     <el-radio label="No">No</el-radio>
@@ -211,12 +210,12 @@
               </el-form-item>
             </el-col>
             <el-col :span="24" v-if="form.country=='AU'">
-              <el-form-item class="one" label="Inverter Installation Location" v-if="form.serviceCall.weather=='Yes' ? true:false">
+              <el-form-item class="one" :label="$t('claimForm.otherDetails.location')" v-if="form.serviceCall.weather=='Yes' ? true:false">
                 <el-input v-model="form.serviceCall.location" ></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item label="Please provide the reference number that provided by Sungrow staff (either Phone call reference or 5 digits Email ticket number#).">
+              <el-form-item :label="$t('claimForm.otherDetails.weatherMsg')">
                 <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.weatherMsg" ></el-input>
               </el-form-item>
             </el-col>
@@ -225,7 +224,7 @@
         <el-col :span="12">
           <el-row :gutter="20">
             <el-col :span="24" v-if="form.country=='AU'">
-              <el-form-item label="Does the inverter connect with a battery?">
+              <el-form-item :label="$t('claimForm.otherDetails.battery')">
                   <el-radio-group v-model="form.serviceCall.battery">
                     <el-radio label="Yes">Yes</el-radio>
                     <el-radio label="No">No</el-radio>
@@ -233,12 +232,12 @@
               </el-form-item>
             </el-col>
             <el-col :span="24" v-if="form.country=='AU'">
-              <el-form-item class="one" label="Battery brand/model" v-if="form.serviceCall.battery=='Yes' ? true:false">
+              <el-form-item class="one" :label="$t('claimForm.otherDetails.model')" v-if="form.serviceCall.battery=='Yes' ? true:false">
                 <el-input v-model="form.serviceCall.model" ></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item class="one" label="Please leave any comments here">
+              <el-form-item class="one" :label="$t('claimForm.otherDetails.batteryMsg')">
                 <el-input type="textarea" resize="none" :rows="4" v-model="form.serviceCall.batteryMsg" ></el-input>
               </el-form-item>
             </el-col>
@@ -246,10 +245,10 @@
         </el-col>
       </el-row>
 
-      <h2>File Upload</h2>
+      <h2>{{ $t('claimForm.fileUpload.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-form-item label="Please upload any pictures or documents that can support your warranty claim, such as the data sticker on a side of the inverter, and the LCD status or other LCD info that may be relevant.Note: The maximum attachment size per file is 10 MB.">
+          <el-form-item :label="$t('claimForm.fileUpload.uploadLabel')">
             <el-upload
               class=""
               ref="upload"
@@ -257,29 +256,27 @@
               :on-change="uploadOnChangeHandle"
               :file-list="fileList"
               :auto-upload="false">
-              <el-button slot="trigger" size="small" type="primary">Choose File</el-button>
+              <el-button slot="trigger" size="small" type="primary">{{ $t('claimForm.fileUpload.uploadBtn') }}</el-button>
               <!-- <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button> -->
               <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
             </el-upload>
           </el-form-item>
         </el-col>
         
-        
         <el-col :span="24">
           <el-form-item label=" ">
-            <el-checkbox v-model="form.checked">I have read and agree to <el-button type="text" @click="openTerm">Sungrow's warranty terms.</el-button>  </el-checkbox>
+            <el-checkbox v-model="form.checked">
+              <i18n path="claimForm.fileUpload.toTerm" tag="label" for="claimForm.fileUpload.tos">
+                <el-button type="text" @click="openTerm">{{ $t('claimForm.fileUpload.tos') }}</el-button> 
+              </i18n>
+            </el-checkbox>
           </el-form-item>
         </el-col>
       </el-row>
 
-      
-
-
-
-
       <el-form-item class="sub">
-        <el-button type="primary" @click="onSubmit('form')" :disabled="!form.checked" :loading='submitLoading'>Submit</el-button>
-        <el-button @click="reset">reset</el-button>
+        <el-button type="primary" @click="onSubmit('form')" :disabled="!form.checked" :loading='submitLoading'>{{ $t('claimForm.fileUpload.submit') }}</el-button>
+        <el-button @click="reset">{{ $t('claimForm.fileUpload.reset') }}</el-button>
       </el-form-item>
     </el-form>
   </el-container>

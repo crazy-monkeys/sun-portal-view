@@ -6,13 +6,13 @@
     </div>
     <div class="link">
       <h2>
-        <el-checkbox v-model="checked">Check here to indicate that</el-checkbox>
+        <el-checkbox v-model="checked">{{ $t('claim.link.checkbox') }}</el-checkbox>
       </h2>
       <el-button type="primary" size="small" @click="go" :disabled="!checked">
-        Go to Warranty Claim Page
+        {{ $t('claim.link.goToWarranty') }}
       </el-button>
       <el-button type="primary" size="small" @click="reset">
-        Reset
+        {{ $t('claim.link.reset') }}
       </el-button>
       
     </div>
@@ -32,11 +32,11 @@ export default {
       breadcrumbList:[
         {
           path:'/warranty/extension',
-          name:'Warranty'
+          name:this.$t('claim.breadcrumb.warranty')
         },
         {
           path:'/warranty/claim',
-          name:'Online Warranty Claim'
+          name:this.$t('claim.breadcrumb.warranty')
         }
       ]
     };
