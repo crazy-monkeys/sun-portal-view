@@ -135,4 +135,15 @@ export default {
       multipleBtn: 'Sungrow warranty extension for multiple items',
     },
   },
+  procedure: {
+    breadcrumb: {
+      warranty: 'Warranty',
+      procedure: 'Warranty Claim Procedure'
+    },
+    link: {
+      title: 'Download',
+      singleBtn: 'Sungrow service report form',
+      multipeBtn: 'Service photos guide',
+    }
+  },
 };
