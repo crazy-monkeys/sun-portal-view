@@ -414,21 +414,14 @@ export default {
       },
       radio:'',
       submitLoading:false,
-      options: [{
-          value: 'AU',
-          label: 'Australia'
-        }, {
-          value: '2',
-          label: '选项2'
-        }],
       breadcrumbList:[
         {
           path:'/warranty/registration',
-          name:'Warranty'
+          name:this.$t('claimForm.breadcrumb.warranty')
         },
         {
           path:'/warranty/claim/form',
-          name:'Online Warranty Claim Form'
+          name:this.$t('claimForm.breadcrumb.claimForm')
         }
       ],
       shippingAddressRadio:'',

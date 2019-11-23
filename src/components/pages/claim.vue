@@ -36,7 +36,7 @@ export default {
         },
         {
           path:'/warranty/claim',
-          name:this.$t('claim.breadcrumb.warranty')
+          name:this.$t('claim.breadcrumb.claim')
         }
       ]
     };

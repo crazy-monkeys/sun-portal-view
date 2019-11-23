@@ -15,13 +15,13 @@
             text-color="#fff"
             :router="true"
             active-text-color="#FF7F00">
-            <el-menu-item index="/home">{{ $t('menu.home') }}</el-menu-item>
+            <el-menu-item index="/home">{{ $t('index.menu.home') }}</el-menu-item>
             <el-submenu index="2">
-                <template slot="title">{{ $t('menu.warranty') }}</template>
-                <el-menu-item index="/warranty/claim/form">{{ $t('menu.claim') }}</el-menu-item>
+                <template slot="title">{{ $t('index.menu.warranty') }}</template>
+                <el-menu-item index="/warranty/claim/form">{{ $t('index.menu.claim') }}</el-menu-item>
                 <!-- <el-menu-item index="/warranty/procedure">Warranty Claim Procedure</el-menu-item> -->
-                <el-menu-item index="/warranty/registration" :disabled="drop!='Australia'? true:false">{{ $t('menu.registration') }}</el-menu-item>
-                <el-menu-item index="/warranty/extension" :disabled="drop!='Australia'? true:false">{{ $t('menu.extension') }}</el-menu-item>
+                <el-menu-item index="/warranty/registration" :disabled="drop!='Australia'? true:false">{{ $t('index.menu.registration') }}</el-menu-item>
+                <el-menu-item index="/warranty/extension" :disabled="drop!='Australia'? true:false">{{ $t('index.menu.extension') }}</el-menu-item>
             </el-submenu>
             <div class="drop">
               <el-dropdown @command="handleCommand" trigger='click'>
@@ -44,54 +44,54 @@
           <div class="linkBox">
             <el-row :gutter="0">
               <el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/company" >{{ $t('footer.company') }}</a>
+                <a href="https://en.sungrowpower.com/en/company" >{{ $t('index.footer.company') }}</a>
               </el-col>
               <el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/products">{{ $t('footer.products') }}</a>
+                <a href="https://en.sungrowpower.com/en/products">{{ $t('index.footer.products') }}</a>
               </el-col><el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/news">{{ $t('footer.news') }}</a>
+                <a href="https://en.sungrowpower.com/en/news">{{ $t('index.footer.news') }}</a>
 
               </el-col>
             </el-row>
             <el-row :gutter="0">
               <el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/career">{{ $t('footer.career') }}</a>
+                <a href="https://en.sungrowpower.com/en/career">{{ $t('index.footer.career') }}</a>
                 
               </el-col>
               <el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/mission">{{ $t('footer.mission') }}</a>
+                <a href="https://en.sungrowpower.com/en/mission">{{ $t('index.footer.mission') }}</a>
 
                 
               </el-col><el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/how-to-buy">{{ $t('footer.howTobBuy') }}</a>
+                <a href="https://en.sungrowpower.com/en/how-to-buy">{{ $t('index.footer.howTobBuy') }}</a>
 
                
               </el-col>
             </el-row>
             <el-row :gutter="0">
               <el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/events">{{ $t('footer.events') }}</a>
+                <a href="https://en.sungrowpower.com/en/events">{{ $t('index.footer.events') }}</a>
 
               
               </el-col>
               <el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/downloads">{{ $t('footer.downloads') }}</a>
+                <a href="https://en.sungrowpower.com/en/downloads">{{ $t('index.footer.downloads') }}</a>
                
               </el-col>
               <el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/social-responsibility">{{ $t('footer.socialResponsibility') }}</a>
+                <a href="https://en.sungrowpower.com/en/social-responsibility">{{ $t('index.footer.socialResponsibility') }}</a>
 
               
               </el-col>
             </el-row>
             <el-row :gutter="0">
               <el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/service">{{ $t('footer.service') }}</a>
+                <a href="https://en.sungrowpower.com/en/service">{{ $t('index.footer.service') }}</a>
 
               
               </el-col>
               <el-col :span="8">
-                <a href="https://en.sungrowpower.com/en/webinars">{{ $t('footer.webinars') }}</a>
+                <a href="https://en.sungrowpower.com/en/webinars">{{ $t('index.footer.webinars') }}</a>
                
               </el-col>
             </el-row>
@@ -105,13 +105,13 @@
           <div class="linkBox">
             <el-row :gutter="100">
               <el-col :span="8">
-                <a href="">{{ $t('footer.contactUs') }}</a>
+                <a href="">{{ $t('index.footer.contactUs') }}</a>
               </el-col>
               <el-col :span="8">
-                <a href="">{{ $t('footer.legalNotice') }}</a>
+                <a href="">{{ $t('index.footer.legalNotice') }}</a>
               </el-col>
               <el-col :span="8">
-                <a href="">{{ $t('footer.privacyPolicy') }}</a>
+                <a href="">{{ $t('index.footer.privacyPolicy') }}</a>
               </el-col>
             </el-row>
           </div>

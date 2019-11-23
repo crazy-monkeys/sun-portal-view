@@ -40,6 +40,10 @@ export default {
     },
   },
   claimForm: {
+    breadcrumb: {
+      warranty: 'Warranty',
+      claimForm: 'Online Warranty Claim Form'
+    },
     productDetails: {
       title: 'Product Details',
       serialNumber: 'Serial number',
@@ -104,6 +108,31 @@ export default {
       tos: "Sungrow's warranty terms.",
       submit: 'Submit',
       reset: 'Reset',
+    },
+  },
+  extension: {
+    breadcrumb: {
+      warranty: 'Warranty',
+      extension: 'Extension'
+    },
+    table: {
+      model: 'Model',
+      partsWarranty: {
+        title: 'Add 5 Years Parts Warranty',
+        discount: 'Early-bird Discount',
+        standard: 'Standard',
+      },
+      standardWarranty: {
+        title: 'Add 5 Years Parts Warranty',
+        discount: 'Early-bird Discount',
+        standard: 'Standard',
+      },
+      desc: 'Prices are effective from 31 July 2019',
+    },
+    link: {
+      title: 'Warranty extension online order',
+      singleBtn: 'Sungrow warranty extension for single item',
+      multipleBtn: 'Sungrow warranty extension for multiple items',
     },
   },
 };
