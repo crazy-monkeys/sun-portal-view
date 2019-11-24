@@ -20,8 +20,8 @@
                 <template slot="title">Warranty</template>
                 <el-menu-item index="/warranty/claim/form">Online Warranty Claim</el-menu-item>
                 <!-- <el-menu-item index="/warranty/procedure">Warranty Claim Procedure</el-menu-item> -->
-                <el-menu-item index="/warranty/registration" :disabled="drop!='Australia'? true:false">Warranty Registration</el-menu-item>
-                <el-menu-item index="/warranty/extension" :disabled="drop!='Australia'? true:false">Warranty Extension</el-menu-item>
+                <el-menu-item index="/warranty/registration" :disabled="authList.find(i => i === drop)">Warranty Registration</el-menu-item>
+                <el-menu-item index="/warranty/extension" :disabled="authList.find(i => i === drop)">Warranty Extension</el-menu-item>
             </el-submenu>
             <div class="drop">
               <el-dropdown @command="handleCommand" trigger='click'>
@@ -128,6 +128,10 @@ export default {
   data() {
     return {
       activeIndex2: '/',
+      authList: [
+        'Brazil',
+        'Australia',
+      ],
       options: [
 {"name": "Afghanistan","code": "AF"},
 {"name": "Aland Islan","code": "AX"},
