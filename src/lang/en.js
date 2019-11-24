@@ -146,4 +146,36 @@ export default {
       multipeBtn: 'Service photos guide',
     }
   },
+  singleItem: {
+    billingDetails: {
+      type: 'Type',
+      ABN: 'ABN',
+      businessName: 'Business Name',
+      addressLine1: 'Address Line 1',
+      addressLine2: 'Address Line 2',
+      cityDistrict: 'City/District',
+      stateProvince: 'State/Province',
+      postCode: 'Post code',
+    },
+    contactDetails: {
+      firstName: 'First name',
+      lastName: 'Last name',
+      email: 'Email',
+    },
+    billTypes: {
+      business: 'Business',
+      individual: 'Individual',
+    },
+    warrantyTypes: {
+      partsWarranty: 'Additional 5 Years Parts Warranty',
+      standard: 'Additional 5 Years Standard Warranty',
+    },
+    breadcrumb: {
+      warranty: 'Warranty',
+      extension: 'Extension',
+      singleItem: 'Sigle Item',
+    },
+    submit: 'Submit',
+    reset: 'Reset',
+  },
 };

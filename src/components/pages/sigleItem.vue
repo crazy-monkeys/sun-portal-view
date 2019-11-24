@@ -198,8 +198,8 @@
 
       
       <el-form-item class="sub">
-        <el-button type="primary" @click="onSubmit">Submit</el-button>
-        <el-button @click="reset">reset</el-button>
+        <el-button type="primary" @click="onSubmit">{{ $t('singleItem.breadcrumb.submit') }}</el-button>
+        <el-button @click="reset">{{ $t('singleItem.breadcrumb.reset') }}</el-button>
       </el-form-item>
     </el-form>
   </el-container>
@@ -262,31 +262,23 @@ export default {
       }],
       warrantyTypes:[{
         value: 'W5YP',
-        label: 'Additional 5 Years Parts Warranty'
+        label: this.$t('singleItem.warrantyTypes.partsWarranty')
       }, {
         value: 'W5YS',
-        label: 'Additional 5 Years Standard Warranty'
+        label: this.$t('singleItem.warrantyTypes.standard')
       }],
-      options: [{
-
-          value: 'AU',
-          label: 'Australia'
-        }, {
-          value: '2',
-          label: '选项2'
-        }],
       breadcrumbList:[
         {
           path:'/warranty/extension',
-          name:'Warranty'
+          name:this.$t('singleItem.breadcrumb.warranty')
         },
         {
           path:'/warranty/extension',
-          name:'Extension'
+          name:this.$t('singleItem.breadcrumb.extension')
         },
         {
           path:'/warranty/extension/sigleItem',
-          name:'Sigle Item'
+          name:this.$t('singleItem.breadcrumb.singleItem')
         }
       ],
       fileList:[],
