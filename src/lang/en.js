@@ -104,11 +104,11 @@ export default {
       title: 'File Upload',
       uploadLabel: 'Please upload any pictures or documents that can support your warranty claim, such as the data sticker on a side of the inverter, and the LCD status or other LCD info that may be relevant.Note: The maximum attachment size per file is 10 MB.',
       uploadBtn: 'Choose File',
-      toTerm: 'I have read and agree to {0}',
-      tos: "Sungrow's warranty terms.",
-      submit: 'Submit',
-      reset: 'Reset',
     },
+    toTerm: 'I have read and agree to {0}',
+    tos: "Sungrow's warranty terms.",
+    submit: 'Submit',
+    reset: 'Reset',
   },
   extension: {
     breadcrumb: {
@@ -148,6 +148,7 @@ export default {
   },
   singleItem: {
     billingDetails: {
+      title: 'Billing Details',
       type: 'Type',
       ABN: 'ABN',
       businessName: 'Business Name',
@@ -158,10 +159,46 @@ export default {
       postCode: 'Post code',
     },
     contactDetails: {
+      title: 'Contact Details',
       firstName: 'First name',
       lastName: 'Last name',
       email: 'Email',
+      confirmYourEmail: 'Confirm your Email',
+      contactNumber: 'Contact Number',
     },
+    productDetails: {
+      title: 'Product Details',
+      serialNumber: 'Serial number',
+      productModel: 'Product model',
+      installDate: 'Installation date (if applicable)',
+    },
+    installationAddress: {
+      title: 'Installation Address',
+      installationAddressType: {
+        title: 'The installation address is',
+        sameAsBillingAddress: 'Same as billing address',
+        otherAddress: 'Other address (Please fill in below)',
+        notApplicable: 'Not applicable',
+      },
+      addressLine1: 'Address Line 1',
+      addressLine2: 'Address Line 2',
+      cityDistrict: 'City/District',
+      stateProvinc: 'State/Provinc',
+      postCode: 'Post code',
+    },
+    warrantyTypeToPurchase: {
+      title: 'Warranty type to purchase',
+      warrantyType: 'Warranty type',
+      purchaseOrder: 'Purchase order (if applicable)',
+    },
+    totalAmountNeedToPay: {
+      title: 'The total amount you need to pay is (GST excluded):',
+      totalAmount: 'Total amount',
+    },
+    toTerm: 'I have read and agree to {0}',
+    tos: "Sungrow's warranty terms.",
+    submit: 'Submit',
+    reset: 'Reset',
     billTypes: {
       business: 'Business',
       individual: 'Individual',
@@ -175,7 +212,5 @@ export default {
       extension: 'Extension',
       singleItem: 'Sigle Item',
     },
-    submit: 'Submit',
-    reset: 'Reset',
   },
 };

@@ -266,8 +266,8 @@
         <el-col :span="24">
           <el-form-item label=" ">
             <el-checkbox v-model="form.checked">
-              <i18n path="claimForm.fileUpload.toTerm" tag="label" for="claimForm.fileUpload.tos">
-                <el-button type="text" @click="openTerm">{{ $t('claimForm.fileUpload.tos') }}</el-button> 
+              <i18n path="claimForm.toTerm" tag="label" for="claimForm.tos">
+                <el-button type="text" @click="openTerm">{{ $t('claimForm.tos') }}</el-button> 
               </i18n>
             </el-checkbox>
           </el-form-item>
@@ -275,8 +275,8 @@
       </el-row>
 
       <el-form-item class="sub">
-        <el-button type="primary" @click="onSubmit('form')" :disabled="!form.checked" :loading='submitLoading'>{{ $t('claimForm.fileUpload.submit') }}</el-button>
-        <el-button @click="reset">{{ $t('claimForm.fileUpload.reset') }}</el-button>
+        <el-button type="primary" @click="onSubmit('form')" :disabled="!form.checked" :loading='submitLoading'>{{ $t('claimForm.submit') }}</el-button>
+        <el-button @click="reset">{{ $t('claimForm.reset') }}</el-button>
       </el-form-item>
     </el-form>
   </el-container>

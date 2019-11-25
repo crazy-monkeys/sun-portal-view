@@ -62,13 +62,13 @@
       <p style="text-align:right;font-size:16px">{{ $t('extension.table.desc') }}</p>
     </div>
     <div class="link">
-      <h2>{{ $t('extension.title') }}</h2>
+      <h2>{{ $t('extension.link.title') }}</h2>
       <ul>
         <li>
-          <el-button type="text" @click="sigleBtn">{{ $t('extension.singleBtn') }}</el-button>
+          <el-button type="text" @click="sigleBtn">{{ $t('extension.link.singleBtn') }}</el-button>
         </li>
         <li>
-          <el-button type="text" @click="multipleBtn">{{ $t('extension.multipleBtn') }}</el-button>
+          <el-button type="text" @click="multipleBtn">{{ $t('extension.link.multipleBtn') }}</el-button>
         </li>
       </ul>
     </div>
