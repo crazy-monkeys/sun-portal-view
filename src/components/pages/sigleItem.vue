@@ -259,10 +259,10 @@ export default {
       shippingAddressRadio:"",
       billTypes:[{
         value: 'Business',
-        label: 'Business'
+        label: this.$t('singleItem.billTypes.business')
       },{
         value: 'Individual',
-        label: 'Individual'
+        label: this.$t('singleItem.billTypes.individual')
       }],
       warrantyTypes:[{
         value: 'W5YP',

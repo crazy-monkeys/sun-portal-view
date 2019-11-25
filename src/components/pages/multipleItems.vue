@@ -6,10 +6,10 @@
     </div>
           
     <el-form v-loading='reviewLoading'  :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
-      <h2>Billing Details</h2>
+      <h2>{{ $t('multipleItems.billingDetails.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="Type">
+          <el-form-item :label="$t('multipleItems.billingDetails.type')">
             <el-select v-model="form.billType" placeholder="" clearable filterable>
               <el-option
                 v-for="item in billTypes"
@@ -21,38 +21,38 @@
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.country=='AU'">
-          <el-form-item label="ABN" >
+          <el-form-item :label="$t('multipleItems.billingDetails.ABN')">
             <el-input v-model="form.abn" :disabled="form.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         
         <el-col :span="6">
-          <el-form-item label="Business Name">
+          <el-form-item :label="$t('multipleItems.billingDetails.businessName')">
             <el-input v-model="form.businessName" :disabled="form.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Address Line 1">
+          <el-form-item :label="$t('multipleItems.billingDetails.addressLine1')">
             <el-input v-model="form.address.addressLine1"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Address Line 2">
+          <el-form-item :label="$t('multipleItems.billingDetails.addressLine2')">
             <el-input v-model="form.address.addressLine2"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="City/District">
+          <el-form-item :label="$t('multipleItems.billingDetails.cityDistrict')">
             <el-input v-model="form.address.cityName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="State/Province">
+          <el-form-item :label="$t('multipleItems.billingDetails.stateProvince')">
             <el-input v-model="form.address.stateName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Post code">
+          <el-form-item :label="$t('multipleItems.billingDetails.postCode')">
             <el-input v-model="form.address.postCode"></el-input>
           </el-form-item>
         </el-col>
@@ -60,38 +60,38 @@
       </el-row>
 
 
-      <h2>Contact Details</h2>
+      <h2>{{ $t('multipleItems.contactDetails.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="First name">
+          <el-form-item :label="$t('multipleItems.contactDetails.firstName')">
             <el-input v-model="form.firstName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Last name">
+          <el-form-item :label="$t('multipleItems.contactDetails.lastName')">
             <el-input v-model="form.lastName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Email">
+          <el-form-item :label="$t('multipleItems.contactDetails.email')">
             <el-input v-model="form.email" prefix-icon="el-icon-message">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Confirm your Email">
+          <el-form-item :label="$t('multipleItems.contactDetails.confirmYourEmail')">
             <el-input v-model="form.sendEmail" prefix-icon="el-icon-message">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Contact Number">
+          <el-form-item :label="$t('multipleItems.contactDetails.contactNumber')">
             <el-input v-model="form.contactNumber"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
 
-      <h2>Product list</h2>
+      <h2>{{ $t('multipleItems.productList.title') }}</h2>
       <el-row :gutter="20">
         
       </el-row>
@@ -99,15 +99,15 @@
         <el-col :span="24">
           <el-row >
             <el-col :span="6">
-              <el-form-item label="Purchase Order">
+              <el-form-item :label="$t('multipleItems.productList.purchaseOrder')">
                 <el-input v-model="form.purchaseOrder"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
         </el-col>
         <el-col :span="24">
-          <el-form-item label="Type">
-            <el-checkbox v-model="form.checked1">Please select here to add multiple inverters</el-checkbox>
+          <el-form-item :label="$t('multipleItems.productList.type')">
+            <el-checkbox v-model="form.checked1">{{ $t('multipleItems.productList.TypeContext') }}</el-checkbox>
           </el-form-item>
         </el-col>
         <el-table
@@ -118,7 +118,7 @@
           show-summary>
           <el-table-column
             prop=""
-            label="Serial number"
+            :label="$t('multipleItems.productList.singleInverter.serialNumber')"
             width="">
             <template slot-scope="scope">
               <el-form-item label="">
@@ -128,7 +128,7 @@
           </el-table-column>
           <el-table-column
             prop=""
-            label="Product model"
+            :label="$t('multipleItems.productList.singleInverter.productModel')"
             width="">
             <template slot-scope="scope">
               <el-form-item label="">
@@ -138,7 +138,7 @@
           </el-table-column>
           <el-table-column
             prop=""
-            label="Warranty type">
+            :label="$t('multipleItems.productList.singleInverter.warrantyType')">
             <template slot-scope="scope">
               <el-form-item label="">
                 <el-select v-model="scope.row.warrantyType" placeholder=""
@@ -157,26 +157,26 @@
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column
+          <!-- <el-table-column
             prop="amount"
-            label="Amount">
+            label="Amount"> -->
             <!-- <template slot-scope="scope">
               <el-form-item label="">
                 <el-input v-model="scope.row.amount" size="small" :readonly="true"></el-input>
               </el-form-item>
             </template> -->
-          </el-table-column>
+          <!-- </el-table-column> -->
           <el-table-column
             prop=""
-            label="Amount">
+            :label="$t('multipleItems.productList.singleInverter.amount')">
             <template slot="header" slot-scope="scope">
-                <el-button size="small" type='text' @click="addRow(1)">Add</el-button>
+                <el-button size="small" type='text' @click="addRow(1)">{{ $t('multipleItems.productList.singleInverter.add') }}</el-button>
            </template>
             <template slot-scope="scope">
-               <el-button
-                size="small"
-                type="text"
-                @click="delRow(scope.$index,1)">Delete</el-button>
+                <el-button
+                  size="small"
+                  type="text"
+                  @click="delRow(scope.$index,1)">{{ $t('multipleItems.productList.singleInverter.delete') }}</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -190,7 +190,7 @@
           
           <el-table-column
             prop=""
-            label="Warranty type">
+            :label="$t('multipleItems.productList.multipleInverters.warrantyType')">
             <template slot-scope="scope">
               <el-form-item label="">
                 <el-select v-model="scope.row.warrantyType" placeholder=""
@@ -209,11 +209,11 @@
           </el-table-column>
           <el-table-column
             prop=""
-            label="Serial number List"
+            :label="$t('multipleItems.productList.multipleInverters.serialNumberList')"
             width="">
             <template slot-scope="scope">
               <el-form-item label="">
-                <el-input placeholder='Please enter the device serial number separated by ","' type="textarea" resize="none" :rows='4' v-model="scope.row.serialNumbers" size="small"  ></el-input>
+                <el-input :placeholder='$t('multipleItems.productList.multipleInverters.serialNumberListPlaceholder')' type="textarea" resize="none" :rows='4' v-model="scope.row.serialNumbers" size="small"  ></el-input>
               </el-form-item>
             </template>
           </el-table-column>
@@ -221,13 +221,13 @@
             prop=""
             label="Amount">
             <template slot="header" slot-scope="scope">
-                <el-button size="small" type='text' @click="addRow(2)">Add</el-button>
+                <el-button size="small" type='text' @click="addRow(2)">{{ $t('multipleItems.productList.multipleInverters.add') }}</el-button>
            </template>
             <template slot-scope="scope">
                <el-button
                 size="small"
                 type="text"
-                @click="delRow(scope.$index,2)">Delete</el-button>
+                @click="delRow(scope.$index,2)">{{ $t('multipleItems.productList.multipleInverters.delete') }}</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -244,58 +244,60 @@
 
       <el-row :gutter="20">
         <el-col :span="24">
-          <el-form-item label=" ">
-            <el-checkbox v-model="form.checked">I have read and agree to <el-button type="text" @click="openTerm">Sungrow's warranty terms.</el-button>  </el-checkbox>
-          </el-form-item>
+            <el-checkbox v-model="form.checked">
+              <i18n path="multipleItems.toTerm" tag="label" for="multipleItems.tos">
+                <el-button type="text" @click="openTerm">{{ $t('multipleItems.tos') }}</el-button> 
+              </i18n>
+            </el-checkbox>
         </el-col>
       </el-row>
       
       <el-form-item class="sub">
-        <el-button v-if="form.checked1" type="primary" @click="review" :loading="reviewLoading">Review</el-button>
-        <el-button type="primary" @click="onSubmit" :disabled="!form.checked">Submit</el-button>
-        <el-button @click="reset">reset</el-button>
+        <el-button v-if="form.checked1" type="primary" @click="review" :loading="reviewLoading">{{ $t('multipleItems.reView') }}</el-button>
+        <el-button type="primary" @click="onSubmit" :disabled="!form.checked">{{ $t('multipleItems.submit') }}</el-button>
+        <el-button @click="reset">{{ $t('multipleItems.reset') }}</el-button>
       </el-form-item>
     </el-form>
     <el-dialog
-      title="Order Review"
+      :title="$t('multipleItems.OrderReview.title')"
       :visible.sync="reviewDia"
       width="600px"
       class="dia"
       :before-close="handleClose">
-      <h3 >Please check all the contents below. If any items are incorrect, please go back to the form and update before submitting.</h3>
+      <h3 >{{ $t('multipleItems.OrderReview.headerTxt') }}</h3>
     <el-form  size="small" :model="reviewForm" label-width="auto" label-position="top">
       <el-row :gutter="20" style="border-bottom:1px dashed #000">
         <el-col :span='12'>
-          <el-form-item label="Business name:">
+          <el-form-item :label="$t('multipleItems.OrderReview.form.businessName')">
             {{form.businessName}}
           </el-form-item>
         </el-col>
         <el-col :span='12'>
-          <el-form-item label="Contact name:">
+          <el-form-item :label="$t('multipleItems.OrderReview.form.ContactName')">
             {{form.firstName + ' ' + form.lastName}}
             
       </el-form-item>
         </el-col>
         <el-col :span='12'>
-          <el-form-item label="Email address:">
+          <el-form-item :label="$t('multipleItems.OrderReview.form.emailAddress')">
             {{form.email}}
             
       </el-form-item>
         </el-col>
         <el-col :span='12'>
-          <el-form-item label="Contact number:">
+          <el-form-item :label="$t('multipleItems.OrderReview.form.contactNumber')">
             {{form.contactNumber}}
         
       </el-form-item>
         </el-col>
         <el-col :span='12'>
-          <el-form-item label="Address:">
+          <el-form-item :label="$t('multipleItems.OrderReview.form.address')">
             {{form.address.addressLine1+','+form.address.addressLine2+','+form.address.stateName+','+form.address.cityName+' '+form.address.postCode}}
         
       </el-form-item>
         </el-col>
         <el-col :span='12'>
-          <el-form-item label="ABN:">
+          <el-form-item :label="$t('multipleItems.OrderReview.form.ABN')">
             {{form.abn}}
         
       </el-form-item>
@@ -303,28 +305,28 @@
       </el-row>
       <el-row :gutter="20">
         <el-col :span='12'>
-      <el-form-item label="Total item:">
+      <el-form-item :label="$t('multipleItems.OrderReview.form.totalItem')">
         {{'$ ' +reviewForm.item}}
       </el-form-item>
         </el-col>
 
 
         <el-col :span='12'>
-          <el-form-item label="Total amount (excl. GST):">
+          <el-form-item :label="$t('multipleItems.OrderReview.form.totalAmount1')">
         {{'$ ' +reviewForm.exclGst}}
         
       </el-form-item>
         </el-col>
 
         <el-col :span='12'>
-          <el-form-item label="Total GST:">
+          <el-form-item :label="$t('multipleItems.OrderReview.form.totalGST')">
         {{'$ ' +reviewForm.gst}}
         
       </el-form-item>
         </el-col>
 
         <el-col :span='12'>
-          <el-form-item label="Total amount (incl. GST):">
+          <el-form-item :label="$t('multipleItems.OrderReview.form.totalAmount2')">
         {{ '$ ' +reviewForm.inclGst}}
         
       </el-form-item>
@@ -337,27 +339,26 @@
       
     </el-form>
     <el-table
-    	
       :data="reviewData"
       style="width: 100%">
       <el-table-column
         prop="productModel"
-        label="Product model"
+        :label="$t('multipleItems.OrderReview.table.productModel')"
         width="180">
       </el-table-column>
       <el-table-column
         prop="serialNumber"
-        label="Serial number"
+        :label="$t('multipleItems.OrderReview.table.serialNumber')"
         width="180">
       </el-table-column>
       <el-table-column
         prop="type"
-        label="Warranty type"
+        :label="$t('multipleItems.OrderReview.table.warrantyType')"
          width="300">
       </el-table-column>
       <el-table-column
         prop="amount"
-        label="Amount"
+        :label="$t('multipleItems.OrderReview.table.discount')"
          width="180"
         >
         <template slot-scope="scope">
@@ -366,14 +367,14 @@
       </el-table-column>
       <el-table-column
         prop="discount"
-        label="Discount"
+        :label="$t('multipleItems.OrderReview.table.productModel')"
          width="180">
       </el-table-column>
     </el-table>
 
       <span slot="footer" class="dialog-footer">
-        <el-button size="small" @click="reviewDia = false">取 消</el-button>
-        <el-button size="small" type="primary" @click="reviewDia = false">确 定</el-button>
+        <el-button size="small" @click="reviewDia = false">{{ $t('multipleItems.OrderReview.cancel') }}</el-button>
+        <el-button size="small" type="primary" @click="reviewDia = false">{{ $t('multipleItems.OrderReview.confirm') }}</el-button>
       </span>
     </el-dialog>
 
@@ -425,38 +426,30 @@ export default {
       shippingAddressRadio:"",
       billTypes:[{
         value: 'Business',
-        label: 'Business'
+        label: this.$t('multipleItems.billTypes.business')
       },{
         value: 'Individual',
-        label: 'Individual'
+        label: this.$t('multipleItems.billTypes.individual')
       }],
       warrantyTypes:[{
         value: 'W5YP',
-        label: 'Additional 5 Years Parts Warranty'
+        label: this.$t('multipleItems.warrantyTypes.partsWarranty')
       }, {
         value: 'W5YS',
-        label: 'Additional 5 Years Standard Warranty'
-      }],
-      options: [{
-
-        value: 'AU',
-        label: 'Australia'
-      }, {
-        value: '2',
-        label: '选项2'
+        label: this.$t('multipleItems.warrantyTypes.standard')
       }],
       breadcrumbList:[
         {
           path:'/warranty/extension',
-          name:'Warranty'
+          name:this.$t('multipleItems.breadcrumb.warranty')
         },
         {
           path:'/warranty/extension',
-          name:'Extension'
+          name:this.$t('multipleItems.breadcrumb.extension')
         },
         {
           path:'/warranty/extension/multipleItems',
-          name:'Multiple Items'
+          name:this.$t('multipleItems.breadcrumb.multipleItems')
         }
       ],
       fileList:[],
