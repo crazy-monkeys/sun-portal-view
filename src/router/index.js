@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import i18n from '@/i18n'
 // import HelloWorld from '@/components/coms/HelloWorld'
 import Index from '@/components/pages/index'
 import Home from '@/components/pages/home'
@@ -23,7 +24,7 @@ const router = new Router({
                 name: 'Home',
                 component: Home,
                 meta: {
-                    title: 'Sungrow Power - Home'
+                    title: i18n.t('router.home')
                 }
             },
             {
@@ -31,7 +32,7 @@ const router = new Router({
                 name: 'Registration',
                 component: resolve => require(['@/components/pages/registration'], resolve),
                 meta: {
-                    title: 'Sungrow Power - Warranty Registration'
+                    title: i18n.t('router.registration')
                 }
             },
             {
@@ -39,7 +40,7 @@ const router = new Router({
                 name: 'Procedure',
                 component: resolve => require(['@/components/pages/procedure'], resolve),
                 meta: {
-                    title: 'Sungrow Power - Online Warranty Claim'
+                    title: i18n.t('router.procedure')
                 }
             },
             {
@@ -47,7 +48,7 @@ const router = new Router({
                 name: 'Claim',
                 component: resolve => require(['@/components/pages/claim'], resolve),
                 meta: {
-                    title: 'Sungrow Power - Online Warranty Claim'
+                    title: i18n.t('router.claim')
                 }
             },
             {
@@ -55,7 +56,7 @@ const router = new Router({
                 name: 'ClaimForm',
                 component: resolve => require(['@/components/pages/claimForm'], resolve),
                 meta: {
-                    title: 'Sungrow Power - Online Warranty Claim'
+                    title: i18n.t('router.form')
                 }
             },
             {
@@ -63,7 +64,7 @@ const router = new Router({
                 name: 'Extension',
                 component: resolve => require(['@/components/pages/extension'], resolve),
                 meta: {
-                    title: 'Sungrow Power - Warranty Extension'
+                    title: i18n.t('router.extension')
                 }
             },
             {
@@ -71,7 +72,7 @@ const router = new Router({
                 name: 'SigleItem',
                 component: resolve => require(['@/components/pages/sigleItem'], resolve),
                 meta: {
-                    title: 'Sungrow Power - Warranty Extension'
+                    title: i18n.t('router.sigleItem')
                 }
             },
             {
@@ -79,7 +80,7 @@ const router = new Router({
                 name: 'MultipleItems',
                 component: resolve => require(['@/components/pages/multipleItems'], resolve),
                 meta: {
-                    title: 'Sungrow Power - Warranty Extension'
+                    title: i18n.t('router.multipleItems')
                 }
             }
 

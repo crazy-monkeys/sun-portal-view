@@ -2,6 +2,16 @@ import enLocale from 'element-ui/lib/locale/lang/en'
 
 export default {
   ...enLocale,
+  router: {
+    home: 'Sungrow Power - Home',
+    registration: 'Sungrow Power - Warranty Registration',
+    procedure: 'Sungrow Power - Online Warranty Claim',
+    claim: 'Sungrow Power - Online Warranty Claim',
+    form: 'Sungrow Power - Online Warranty Claim',
+    extension: 'Sungrow Power - Warranty Extension',
+    sigleItem: 'Sungrow Power - Warranty Extension',
+    multipleItems: 'Sungrow Power - Warranty Extensionn',
+  },
   index: {
     menu: {
       home: 'Home',

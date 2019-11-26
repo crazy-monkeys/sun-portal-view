@@ -381,9 +381,6 @@ export default {
 
     }
   },
-  created(){
-    console.log(process.env.API_ROOT)
-  },
   mounted(){
     Bus.$on('dropValue',(res)=>{
       this.form.country = res
