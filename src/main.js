@@ -6,22 +6,11 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '../ele/index.css'
+import i18n from './i18n'
 
-// Vue.use(ElementUI);
 import formTest from './tool/formTest.js'
 Vue.prototype.$formTest = formTest;
 
-import VueI18n from 'vue-i18n'
-import messages from './lang'
-
-Vue.use(VueI18n);
-// en-AU Australia 澳大利亚
-// pt-BR Brazil 巴西
-// console.log(navigator.language)
-const i18n = new VueI18n({
-    locale: navigator.language === 'pt-BR' ? navigator.language : 'en',
-    messages,
-});
 
 Vue.use(ElementUI, {
     // element-ui 兼容i18n@6.x
