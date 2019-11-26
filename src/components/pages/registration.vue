@@ -5,80 +5,80 @@
       <img src="../../../static/reg.jpeg" alt="图片">
     </div> -->
     <el-form :disabled="submitLoading" :rules='rules' size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
-      <h2>Contact Details</h2>
+      <h2>{{ $t('registration.contactDetails.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="First name" prop='contacts.contactFirstName'>
+          <el-form-item :label="$t('registration.contactDetails.firstName')" prop='contacts.contactFirstName'>
             <el-input v-model="form.contacts.contactFirstName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Last name">
+          <el-form-item :label="$t('registration.contactDetails.lastName')">
             <el-input v-model="form.contacts.contactLastName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Email" prop='contacts.contactEmail' >
+          <el-form-item :label="$t('registration.contactDetails.email')" prop='contacts.contactEmail' >
             <el-input  v-model="form.contacts.contactEmail" prefix-icon="el-icon-message" placeholder="separated by ';'">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Contact Number">
+          <el-form-item :label="$t('registration.contactDetails.contactNumber')">
             <el-input v-model="form.contacts.contactNumber"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
-      <h2>Product Details</h2>
+      <h2>{{ $t('registration.productDetails.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6" v-loading='pNumLoding'>
-          <el-form-item label="Product serial number" prop='productNumber'>
+          <el-form-item :label="$t('registration.productDetails.serialNumber')" prop='productNumber'>
             <el-tooltip class="tooltip" effect="dark" :content="pNumTooltip" placement="top-start">
               <el-input v-model="form.productNumber" @change='getProductInfo'></el-input>
             </el-tooltip>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Product model">
+          <el-form-item :label="$t('registration.productDetails.productModel')">
             <el-input v-model="form.productModel" :readonly="true"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
-      <h2>Installation Details</h2>
+      <h2>{{ $t('registration.installationDetails.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="Address Line 1">
+          <el-form-item :label="$t('registration.installationDetails.addressLine1')">
             <el-input v-model="form.address.addressLine1"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Address Line 2">
+          <el-form-item :label="$t('registration.installationDetails.addressLine2')">
             <el-input v-model="form.address.addressLine2"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="City/District" prop='address.cityName'>
+          <el-form-item :label="$t('registration.installationDetails.cityDistrict')" prop='address.cityName'>
             <el-input v-model="form.address.cityName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="State/Province" prop='address.stateName'>
+          <el-form-item :label="$t('registration.installationDetails.stateProvince')" prop='address.stateName'>
             <el-input v-model="form.address.stateName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Post code"  prop='address.postCode'>
+          <el-form-item :label="$t('registration.installationDetails.postCode')"  prop='address.postCode'>
             <el-input v-model="form.address.postCode"></el-input>
           </el-form-item>
         </el-col>
         
         <el-col :span="6">
-          <el-form-item label="Installer">
+          <el-form-item :label="$t('registration.installationDetails.installer')">
             <el-input v-model="form.installInstaller"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Installation date" prop='installDate'>
+          <el-form-item :label="$t('registration.installationDetails.installDate')" prop='installDate'>
             <el-date-picker
               :picker-options="pickerOptions"
               class="datePicker"
@@ -90,12 +90,12 @@
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.country === 'AU'">
-          <el-form-item label="CEC accreditation number">
+          <el-form-item :label="$t('registration.installationDetails.installCec')">
             <el-input v-model="form.installCec"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.country === 'AU'">
-          <el-form-item label="Invoice upload" >
+          <el-form-item :label="$t('registration.installationDetails.invoiceUpload')">
             <el-tooltip class="tooltip" effect="dark" :content="ivcTooltip" placement="top-start">
               <el-upload
                 class="upload-demo"
@@ -108,13 +108,13 @@
                 :on-remove="handleRemove1"
                 :file-list="fileList1"
                 :auto-upload="false">
-                  <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">Choose File</el-input>
+                  <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">{{ $t('registration.installationDetails.invoiceUploadBtn') }}</el-input>
               </el-upload>
             </el-tooltip>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Electrical Compliance Certificate">
+          <el-form-item :label="$t('registration.installationDetails.cecFileUpload')">
             <el-tooltip class="tooltip" effect="dark" :content="cecTooltip" placement="top-start">
               <el-upload
                 class="upload-demo"
@@ -127,28 +127,32 @@
                 :on-remove="handleRemove"
                 :file-list="fileList"
                 :auto-upload="false">
-                  <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">Choose File</el-input>
+                  <el-input style="width:100%" class="fileBtn" slot="trigger" size="small" type="primary">{{ $t('registration.installationDetails.cecFileUploadBtn') }}</el-input>
               </el-upload>
             </el-tooltip>
           </el-form-item>
         </el-col>
       </el-row>
-      <h2>Suggestions</h2>
+      <h2>{{ $t('registration.Suggestions.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-form-item label="Do you have any product suggestions?">
+          <el-form-item :label="$t('registration.Suggestions.suggestionsContext')">
             <el-input type="textarea" v-model="form.suggestions" resize="none" :rows="4"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
           <el-form-item label=" ">
-            <el-checkbox v-model="form.checked">I have read and agree to <el-button type="text" @click="openTerm">Sungrow's warranty terms.</el-button>  </el-checkbox>
+            <el-checkbox v-model="form.checked">
+              <i18n path="registration.toTerm" tag="label" for="registration.tos">
+                <el-button type="text" @click="openTerm">{{ $t('registration.tos') }}</el-button> 
+              </i18n>
+            </el-checkbox>
           </el-form-item>
         </el-col>
       </el-row>
       <el-form-item class="sub">
-        <el-button type="primary" @click="onSubmit('form')" :disabled="!form.checked" :loading='submitLoading'>Submit</el-button>
-        <el-button @click="reset">reset</el-button>
+        <el-button type="primary" @click="onSubmit('form')" :disabled="!form.checked" :loading='submitLoading'>{{ $t('registration.submit') }}</el-button>
+        <el-button @click="reset">{{ $t('registration.reset') }}</el-button>
       </el-form-item>
     </el-form>
   </el-container>
@@ -159,6 +163,7 @@ import Bus from "../../bus/bus.js";
 
 import Breadcrumb from '../coms/Breadcrumb'
 import { productInfo,submitReg } from '@/api/registration'
+
 export default {
   name: "Registration",
   components:{
@@ -198,9 +203,9 @@ export default {
       };
     return {
       Bus,
-      pNumTooltip:'Please refer to the nameplate on the side of the Sungrow product.',
-      ivcTooltip:`Please attach the invoice as the evidence of the installation.Note: The maximum attachment size per file is 10 MB.`,
-      cecTooltip:'Please attach the Electrical Compliance Certifcate as the evidence of the installation.Normally it will provided by the installer after installation.For different states.the name for such certifcate may vary. Note: The maximum attachment size per file is 10 MB.',
+      pNumTooltip: this.$t('registration.pNumTooltip'),
+      ivcTooltip: this.$t('registration.ivcTooltip'),
+      cecTooltip: this.$t('registration.cecTooltip'),
       pickerOptions:{
         disabledDate: (time) => {
           return time.getTime()>Date.now()
