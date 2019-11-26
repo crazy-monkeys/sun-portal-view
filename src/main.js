@@ -15,8 +15,11 @@ import VueI18n from 'vue-i18n'
 import messages from './lang'
 
 Vue.use(VueI18n);
+// en-AU Australia 澳大利亚
+// pt-BR Brazil 巴西
+// console.log(navigator.language)
 const i18n = new VueI18n({
-    locale: 'en',
+    locale: navigator.language === 'pt-BR' ? navigator.language : 'en',
     messages,
 });
 
