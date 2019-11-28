@@ -47,3 +47,8 @@ export const priceTab = () => {
 export const multiplePrice = data => {
     return request('post', `${serverUrl}/product/multiple/price`, data).then(result => result)
 }
+
+
+export const setLan = data => {
+    return request('get', `${serverUrl}/i18n/change?lang=${data.lan}`).then(result => result)
+}

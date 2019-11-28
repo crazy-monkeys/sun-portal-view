@@ -20,19 +20,40 @@
                 <template slot="title">{{ $t('index.menu.warranty') }}</template>
                 <el-menu-item index="/warranty/claim/form">{{ $t('index.menu.claim') }}</el-menu-item>
                 <!-- <el-menu-item index="/warranty/procedure">Warranty Claim Procedure</el-menu-item> -->
-                <el-menu-item index="/warranty/registration" :disabled="drop!='Australia'? true:false">{{ $t('index.menu.registration') }}</el-menu-item>
-                <el-menu-item index="/warranty/extension" :disabled="drop!='Australia'? true:false">{{ $t('index.menu.extension') }}</el-menu-item>
+                <el-menu-item index="/warranty/registration" :disabled="dropValue!='AU'? true:false">{{ $t('index.menu.registration') }}</el-menu-item>
+                <el-menu-item index="/warranty/extension" :disabled="dropValue!='AU'? true:false">{{ $t('index.menu.extension') }}</el-menu-item>
             </el-submenu>
             <div class="drop">
-              <el-dropdown @command="handleCommand" trigger='click'>
+              <!-- <el-dropdown @command="handleCommand" trigger='click'>
                 <span class="el-dropdown-link">
                   {{ drop }}<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item v-for='item in options' :command="item" :key='item.code'>{{item.name}}</el-dropdown-item>
                 </el-dropdown-menu>
-              </el-dropdown>
+              </el-dropdown> -->
+
+
+              <el-select class="sel" v-model="dropValue" filterable  clearable size="small"  placeholder="country" @change='changeCountry'>
+                <el-option
+                  v-for="item in options"
+                  :key="item.code"
+                  :label="item.name"
+                  :value="item.code">
+                </el-option>
+              </el-select>
+
+              <el-select class="sel" v-model="lang" filterable  clearable size="small"  placeholder="language" @change='changeLang'>
+                <el-option
+                  v-for="item in langs"
+                  :key="item.code"
+                  :label="item.name"
+                  :value="item.code">
+                </el-option>
+              </el-select>
             </div>
+
+            
             
         </el-menu>
         <router-view></router-view>
@@ -123,41 +144,57 @@
 <script>
 import Bus from "../../bus/bus.js";
 import country from './country.js';
+import langs from './lan.js';
+import { setLan } from '@/api/registration'
+
 
 export default {
   name: "Index",
   data() {
     return {
+      lang:'en',
       activeIndex2: '/',
       options: country,
-      drop: sessionStorage.getItem('lanName') ?  sessionStorage.getItem('lanName'):'Country',
+      langs:langs,
+      // drop: sessionStorage.getItem('lanName') ?  sessionStorage.getItem('lanName'):'Country',
       dropValue:sessionStorage.getItem('lan')?sessionStorage.getItem('lan'):'',
     };
   },
   computed:{
   },
+  created(){
+    // this.lan()
+  },
   methods:{
-    
     handleSelect(key, keyPath) {
         // console.log(key, keyPath);
     },
-    handleCommand(command) {
-        // this.$message('click on item ' + command);
-        this.drop = command.name
-        this.dropValue = command.code
-        Bus.dropValue = command.code
-        Bus.$emit("dropValue", this.dropValue); 
-        sessionStorage.setItem('lan',command.code)
-        sessionStorage.setItem('lanName',command.name)
-        this.$i18n.locale = command.code=== 'BR' ? 'pt-BR' : 'en'
-        // console.log(this.$i18n.locale)
+    lan(){
+      var data ={
+        lan:this.$i18n.locale ==='BR' ? 'pt-BR' : 'en'
       }
+      setLan(data).then((res)=>{
+          
+        }).catch((err)=>{
+          console.log(err)
+        })
+    },
+    changeCountry(val) {
+      console.log(val)
+      this.dropValue = val
+      Bus.dropValue = val
+      sessionStorage.setItem('lan',val)
+    },
+    changeLang(val){
+      this.$i18n.locale = val=== 'pt-BR' ? 'pt-BR' : 'en'
+      this.lan()
+    }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style   scoped>
+<style  lang='scss'  >
 
 .index {
   height: 100%;
@@ -168,7 +205,23 @@ export default {
   position: absolute;
   right: 50px;
   height: 60px;
+  display: flex;
+  align-items: center;
+  &:focus{
+      outline: none !important;
+    }
 }
+.sel{
+    
+    border: none ;
+    background: transparent;
+  .el-input__inner{
+    border: none;
+    background: transparent;
+    color: #ee7800;
+    
+  }
+  }
 .el-dropdown{
   /* position: absolute;
   right: 50px;
