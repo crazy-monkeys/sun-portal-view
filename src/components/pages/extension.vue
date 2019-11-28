@@ -89,7 +89,15 @@ export default {
     return {
       country:Bus.dropValue,
       tableData:[],
-      breadcrumbList:[
+      
+    };
+  },
+  created(){
+    this.getPriceTab()
+  },
+  computed:{
+    breadcrumbList(){
+      return [
         {
           path:'/warranty/extension',
           name:this.$t('extension.breadcrumb.warranty')
@@ -99,10 +107,7 @@ export default {
           name:this.$t('extension.breadcrumb.extension')
         }
       ]
-    };
-  },
-  created(){
-    this.getPriceTab()
+    }
   },
   methods: {
     formatter(row, column, cellValue, index){

@@ -243,16 +243,7 @@ export default {
           value: '2',
           label: '选项2'
         }],
-      breadcrumbList:[
-        {
-          path:'/warranty/registration',
-          name:'Warranty'
-        },
-        {
-          path:'/warranty/registration',
-          name:'Registration'
-        }
-      ],
+      
       fileList:[],
       fileList1:[],
       formMod,
@@ -386,6 +377,20 @@ export default {
       this.form.country = res
     })
   },
+  computed:{
+    breadcrumbList(){
+      return [
+        {
+          path:'/warranty/registration',
+          name:this.$t('registration.breadcrumb.warranty')
+        },
+        {
+          path:'/warranty/registration',
+          name:this.$t('registration.breadcrumb.registration') 
+        }
+      ]
+    }
+  }
 };
 </script>
 

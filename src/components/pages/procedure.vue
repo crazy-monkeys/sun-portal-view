@@ -27,7 +27,11 @@ export default {
   },
   data() {
     return {
-      breadcrumbList:[
+    };
+  },
+  computed:{
+    breadcrumbList(){
+      return [
         {
           path:'/warranty/extension',
           name:this.$t('procedure.breadcrumb.warranty')
@@ -37,7 +41,7 @@ export default {
           name:this.$t('procedure.breadcrumb.procedure')
         }
       ]
-    };
+    }
   },
   methods: {
     sigleBtn(){

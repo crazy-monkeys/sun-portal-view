@@ -39,8 +39,8 @@
         <el-col :span="24">
           <el-form-item :label="$t('claimForm.claimantContactDetails.type')" prop='contact.billType'>
               <el-radio-group v-model="form.contact.billType" >
-                <el-radio label="Business" value='Business'>Business</el-radio>
-                <el-radio label="Individual" vlaue='Individual'>Individual</el-radio>
+                <el-radio label="Business" value='Business'>{{ $t('claimForm.claimantContactDetails.Business') }}</el-radio>
+                <el-radio label="Individual" vlaue='Individual'>{{ $t('claimForm.claimantContactDetails.Individual') }}</el-radio>
               </el-radio-group>
           </el-form-item>
         </el-col>
@@ -156,8 +156,8 @@
             <el-col :span="24">
               <el-form-item :label="$t('claimForm.faultDetails.theFaultIs')" prop='serviceCall.fault'>
                   <el-radio-group v-model="form.serviceCall.fault">
-                    <el-radio label="Permanent">Permanent</el-radio>
-                    <el-radio label="Intermittent">Intermittent</el-radio>
+                    <el-radio label="Permanent">{{ $t('claimForm.faultDetails.permanent') }}</el-radio>
+                    <el-radio label="Intermittent">{{ $t('claimForm.faultDetails.intermittent') }}</el-radio>
                   </el-radio-group>
               </el-form-item>
             </el-col>
@@ -414,7 +414,16 @@ export default {
       },
       radio:'',
       submitLoading:false,
-      breadcrumbList:[
+      
+      shippingAddressRadio:'',
+      fileList:[],
+      formMod,
+      form: { ...formMod }
+    };
+  },
+  computed:{
+    breadcrumbList(){
+      return [
         {
           path:'/warranty/registration',
           name:this.$t('claimForm.breadcrumb.warranty')
@@ -423,12 +432,8 @@ export default {
           path:'/warranty/claim/form',
           name:this.$t('claimForm.breadcrumb.claimForm')
         }
-      ],
-      shippingAddressRadio:'',
-      fileList:[],
-      formMod,
-      form: { ...formMod }
-    };
+      ]
+    }
   },
   watch:{
     'form.contact.billType':{

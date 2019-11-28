@@ -271,20 +271,7 @@ export default {
         value: 'W5YS',
         label: this.$t('singleItem.warrantyTypes.standard')
       }],
-      breadcrumbList:[
-        {
-          path:'/warranty/extension',
-          name:this.$t('singleItem.breadcrumb.warranty')
-        },
-        {
-          path:'/warranty/extension',
-          name:this.$t('singleItem.breadcrumb.extension')
-        },
-        {
-          path:'/warranty/extension/sigleItem',
-          name:this.$t('singleItem.breadcrumb.singleItem')
-        }
-      ],
+      
       fileList:[],
       productId:'',
       formMod,
@@ -440,6 +427,24 @@ export default {
       this.form.country = res
     })
   },
+  computed:{
+    breadcrumbList(){
+      return [
+        {
+          path:'/warranty/extension',
+          name:this.$t('singleItem.breadcrumb.warranty')
+        },
+        {
+          path:'/warranty/extension',
+          name:this.$t('singleItem.breadcrumb.extension')
+        },
+        {
+          path:'/warranty/extension/sigleItem',
+          name:this.$t('singleItem.breadcrumb.singleItem')
+        }
+      ]
+    }
+  }
 };
 </script>
 

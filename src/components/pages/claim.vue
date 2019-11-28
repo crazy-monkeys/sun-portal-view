@@ -26,10 +26,9 @@ export default {
   components:{
     Breadcrumb
   },
-  data() {
-    return {
-      checked:false,
-      breadcrumbList:[
+  computed:{
+    breadcrumbList(){
+      return  [
         {
           path:'/warranty/extension',
           name:this.$t('claim.breadcrumb.warranty')
@@ -39,6 +38,12 @@ export default {
           name:this.$t('claim.breadcrumb.claim')
         }
       ]
+    }
+  },
+  data() {
+    return {
+      checked:false,
+      
     };
   },
   methods: {
