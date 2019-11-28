@@ -1,7 +1,7 @@
-import enLocale from 'element-ui/lib/locale/lang/en'
+import ptLocale from 'element-ui/lib/locale/lang/pt-br'
 
 export default {
-    ...enLocale,
+    ...ptLocale,
     router: {
         home: 'Garantia - Home',
         registration: 'Garantia - Registro',
