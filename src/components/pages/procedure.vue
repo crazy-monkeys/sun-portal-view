@@ -5,15 +5,13 @@
       <img src="../../../static/reg.jpeg" alt="图片">
     </div>
     <div class="link">
-      <h2>
-        Download
-      </h2>
+      <h2>{{ $t('procedure.link.title') }}</h2>
       <ul>
         <li>
-          <el-button type="text" @click="sigleBtn">Sungrow service report form</el-button>
+          <el-button type="text" @click="sigleBtn">{{ $t('procedure.link.singleBtn') }}</el-button>
         </li>
         <li>
-          <el-button type="text" @click="multipleBtn">Service photos guide</el-button>
+          <el-button type="text" @click="multipleBtn">{{ $t('procedure.link.multipeBtn') }}</el-button>
         </li>
       </ul>
     </div>
@@ -29,17 +27,21 @@ export default {
   },
   data() {
     return {
-      breadcrumbList:[
+    };
+  },
+  computed:{
+    breadcrumbList(){
+      return [
         {
           path:'/warranty/extension',
-          name:'Warranty'
+          name:this.$t('procedure.breadcrumb.warranty')
         },
         {
           path:'/warranty/procedure',
-          name:'Warranty Claim Procedure'
+          name:this.$t('procedure.breadcrumb.procedure')
         }
       ]
-    };
+    }
   },
   methods: {
     sigleBtn(){

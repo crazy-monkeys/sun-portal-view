@@ -5,11 +5,10 @@
       <el-table
         v-if="country=='AU'"
         :data="tableData"
-        style="width: 100%;margin:20px 0;"
-        >
+        style="width: 100%;margin:20px 0;">
         <el-table-column
           prop="model"
-          label="Model"
+          :label="$t('extension.table.model')"
           header-align='center'
           align='enter'
           width="">
@@ -18,23 +17,22 @@
           prop=""
           header-align='center'
           align='enter'
-          label="Add 5 Years Parts Warranty"
+          :label="$t('extension.table.partsWarranty.title')"
           width="">
           <el-table-column
             prop="partEarlyBirdDiscount"
-          header-align='center'
-          align='enter'
-              :formatter='formatter'
-
-            label="Early-bird Discount"
+            header-align='center'
+            align='enter'
+            :formatter='formatter'
+            :label="$t('extension.table.partsWarranty.discount')"
             width="">
           </el-table-column>
           <el-table-column
             prop="partStandard"
-              :formatter='formatter'
-          header-align='center'
-          align='enter'
-            label="Standard"
+            :formatter='formatter'
+            header-align='center'
+            align='enter'
+            :label="$t('extension.table.partsWarranty.standard')"
             width="">
           </el-table-column>
         </el-table-column>
@@ -42,38 +40,35 @@
           prop="address"
           header-align='center'
           align='enter'
-          label="Add 5 Years Standard Warranty">
+          :label="$t('extension.table.standardWarranty.title')">
             <el-table-column
               prop="standardEarlyBirdDiscount"
-          header-align='center'
-          align='enter'
-              label="Early-bird Discount"
+              header-align='center'
+              align='enter'
+              :label="$t('extension.table.standardWarranty.discount')"
               :formatter='formatter'
               width="">
             </el-table-column>
             <el-table-column
               prop="standardStandard"
-          align='enter'
+              align='enter'
               :formatter='formatter'
-
-          header-align='center'
-              label="Standard"
+              header-align='center'
+              :label="$t('extension.table.standardWarranty.standard')"
               width="">
             </el-table-column>
         </el-table-column>
       </el-table>
-      <p style="text-align:right;font-size:16px">Prices are effective from 31 July 2019</p>
+      <p style="text-align:right;font-size:16px">{{ $t('extension.table.desc') }}</p>
     </div>
     <div class="link">
-      <h2>
-        Warranty extension online order
-      </h2>
+      <h2>{{ $t('extension.link.title') }}</h2>
       <ul>
         <li>
-          <el-button type="text" @click="sigleBtn">Sungrow warranty extension for single item</el-button>
+          <el-button type="text" @click="sigleBtn">{{ $t('extension.link.singleBtn') }}</el-button>
         </li>
         <li>
-          <el-button type="text" @click="multipleBtn">Sungrow warranty extension for multiple items</el-button>
+          <el-button type="text" @click="multipleBtn">{{ $t('extension.link.multipleBtn') }}</el-button>
         </li>
       </ul>
     </div>
@@ -94,20 +89,25 @@ export default {
     return {
       country:Bus.dropValue,
       tableData:[],
-      breadcrumbList:[
-        {
-          path:'/warranty/extension',
-          name:'Warranty'
-        },
-        {
-          path:'/warranty/extension',
-          name:'Extension'
-        }
-      ]
+      
     };
   },
   created(){
     this.getPriceTab()
+  },
+  computed:{
+    breadcrumbList(){
+      return [
+        {
+          path:'/warranty/extension',
+          name:this.$t('extension.breadcrumb.warranty')
+        },
+        {
+          path:'/warranty/extension',
+          name:this.$t('extension.breadcrumb.extension')
+        }
+      ]
+    }
   },
   methods: {
     formatter(row, column, cellValue, index){

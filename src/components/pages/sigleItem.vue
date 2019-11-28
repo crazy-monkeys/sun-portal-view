@@ -5,10 +5,10 @@
       <img src="../../../static/reg.jpeg" alt="图片">
     </div>
     <el-form :disabled="submitLoading" size="small" class="form" ref="form" :model="form" label-width="80px" label-position="top">
-      <h2>Billing Details</h2>
+      <h2>{{ $t('singleItem.billingDetails.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="Type">
+          <el-form-item :label="$t('singleItem.billingDetails.type')">
             <el-select v-model="form.billType" placeholder="" clearable filterable>
               <el-option
                 v-for="item in billTypes"
@@ -20,38 +20,38 @@
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="form.country=='AU'">
-          <el-form-item label="ABN" >
+          <el-form-item :label="$t('singleItem.billingDetails.ABN')">
             <el-input v-model="form.abn" :disabled="form.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         
         <el-col :span="6">
-          <el-form-item label="Business Name">
+          <el-form-item :label="$t('singleItem.billingDetails.businessName')">
             <el-input v-model="form.businessName" :disabled="form.billType=='Individual' ? true :false"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Address Line 1">
+          <el-form-item :label="$t('singleItem.billingDetails.addressLine1')">
             <el-input v-model="form.address.addressLine1"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Address Line 2">
+          <el-form-item :label="$t('singleItem.billingDetails.addressLine2')">
             <el-input v-model="form.address.addressLine2"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="City/District">
+          <el-form-item :label="$t('singleItem.billingDetails.cityDistrict')">
             <el-input v-model="form.address.cityName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="State/Province">
+          <el-form-item :label="$t('singleItem.billingDetails.stateProvince')">
             <el-input v-model="form.address.stateName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Post code">
+          <el-form-item :label="$t('singleItem.billingDetails.postCode')">
             <el-input v-model="form.address.postCode"></el-input>
           </el-form-item>
         </el-col>
@@ -59,52 +59,52 @@
       </el-row>
 
 
-      <h2>Contact Details</h2>
+      <h2>{{ $t('singleItem.contactDetails.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="First name">
+          <el-form-item :label="$t('singleItem.contactDetails.firstName')">
             <el-input v-model="form.firstName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Last name">
+          <el-form-item :label="$t('singleItem.contactDetails.lastName')">
             <el-input v-model="form.lastName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Email">
+          <el-form-item :label="$t('singleItem.contactDetails.email')">
             <el-input v-model="form.email" prefix-icon="el-icon-message">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Confirm your Email">
+          <el-form-item :label="$t('singleItem.contactDetails.confirmYourEmail')">
             <el-input v-model="form.sendEmail" prefix-icon="el-icon-message">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Contact Number">
+          <el-form-item :label="$t('singleItem.contactDetails.contactNumber')">
             <el-input v-model="form.contactNumber"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
 
-      <h2>Product Details</h2>
+      <h2>{{ $t('singleItem.productDetails.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="Serial number">
+          <el-form-item :label="$t('singleItem.productDetails.serialNumber')">
             <el-input v-model="form.serialNumber" @blur='getProductInfo'></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Product model">
+          <el-form-item :label="$t('singleItem.productDetails.productModel')">
             <el-input v-model="form.productModel" :readonly="true"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
 
-        <el-form-item label="Installation date (if applicable)">
+        <el-form-item :label="$t('singleItem.productDetails.installDate')">
             <el-date-picker
               class="datePicker"
               v-model="form.installDate"
@@ -117,49 +117,49 @@
       </el-row>
 
 
-      <h2>Installation Address</h2>
+      <h2>{{ $t('singleItem.installationAddress.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="24">
-          <el-form-item label="The installation address is">
+          <el-form-item :label="$t('singleItem.installationAddress.installationAddressType.title')">
             <el-radio-group v-model="shippingAddressRadio">
-              <el-radio label="1" value='1'>Same as billing address</el-radio>
-              <el-radio label="2" value='2'>Other address (Please fill in below)</el-radio>
-              <el-radio label="3" value='3'>Not applicable</el-radio>
+              <el-radio label="1" value='1'>{{ $t('singleItem.installationAddress.installationAddressType.sameAsBillingAddress') }}</el-radio>
+              <el-radio label="2" value='2'>{{ $t('singleItem.installationAddress.installationAddressType.otherAddress') }}</el-radio>
+              <el-radio label="3" value='3'>{{ $t('singleItem.installationAddress.installationAddressType.notApplicable') }}</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="Address Line 1">
+          <el-form-item :label="$t('singleItem.installationAddress.addressLine1')">
             <el-input v-model="form.addressLine1"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="Address Line 2">
+          <el-form-item :label="$t('singleItem.installationAddress.addressLine2')">
             <el-input v-model="form.addressLine2"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="City/District">
+          <el-form-item :label="$t('singleItem.installationAddress.cityDistrict')">
             <el-input v-model="form.cityName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="State/Province">
+          <el-form-item :label="$t('singleItem.installationAddress.stateProvinc')">
             <el-input v-model="form.stateName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" v-if="shippingAddressRadio==2">
-          <el-form-item label="Post code">
+          <el-form-item :label="$t('singleItem.installationAddress.postCode')">
             <el-input v-model="form.postCode"></el-input>
           </el-form-item>
         </el-col>
         
       </el-row>
 
-      <h2>Warranty type to purchase</h2>
+      <h2>{{ $t('singleItem.warrantyTypeToPurchase.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="Warranty type">
+          <el-form-item :label="$t('singleItem.warrantyTypeToPurchase.warrantyType')">
             <el-select v-model="form.warrantyType" placeholder="" clearable filterable @change="getAmount" @clear="form.amount=''">
               <el-option
                 v-for="item in warrantyTypes"
@@ -171,16 +171,16 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Purchase order (if applicable)">
+          <el-form-item :label="$t('singleItem.warrantyTypeToPurchase.purchaseOrder')">
             <el-input v-model="form.purchaseOrder"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
 
-      <h2>The total amount you need to pay is (GST excluded):</h2>
+      <h2>{{ $t('singleItem.totalAmountNeedToPay.title') }}</h2>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="Total amount (excl. GST)">
+          <el-form-item :label="$t('singleItem.totalAmountNeedToPay.totalAmount')">
             <el-input v-model="form.amount" :readonly="true"></el-input>
           </el-form-item>
         </el-col>
@@ -189,7 +189,11 @@
       <el-row :gutter="20">
         <el-col :span="24">
           <el-form-item label=" ">
-            <el-checkbox v-model="form.checked">I have read and agree to <el-button type="text" @click="openTerm">Sungrow's warranty terms.</el-button>  </el-checkbox>
+            <el-checkbox v-model="form.checked">
+              <i18n path="singleItem.toTerm" tag="label" for="singleItem.tos">
+                <el-button type="text" @click="openTerm">{{ $t('singleItem.tos') }}</el-button> 
+              </i18n>
+            </el-checkbox>
           </el-form-item>
         </el-col>
       </el-row>
@@ -198,8 +202,8 @@
 
       
       <el-form-item class="sub">
-        <el-button type="primary" @click="onSubmit">Submit</el-button>
-        <el-button @click="reset">reset</el-button>
+        <el-button type="primary" @click="onSubmit">{{ $t('singleItem.submit') }}</el-button>
+        <el-button @click="reset">{{ $t('singleItem.reset') }}</el-button>
       </el-form-item>
     </el-form>
   </el-container>
@@ -255,40 +259,19 @@ export default {
       shippingAddressRadio:"",
       billTypes:[{
         value: 'Business',
-        label: 'Business'
+        label: this.$t('singleItem.billTypes.business')
       },{
         value: 'Individual',
-        label: 'Individual'
+        label: this.$t('singleItem.billTypes.individual')
       }],
       warrantyTypes:[{
         value: 'W5YP',
-        label: 'Additional 5 Years Parts Warranty'
+        label: this.$t('singleItem.warrantyTypes.partsWarranty')
       }, {
         value: 'W5YS',
-        label: 'Additional 5 Years Standard Warranty'
+        label: this.$t('singleItem.warrantyTypes.standard')
       }],
-      options: [{
-
-          value: 'AU',
-          label: 'Australia'
-        }, {
-          value: '2',
-          label: '选项2'
-        }],
-      breadcrumbList:[
-        {
-          path:'/warranty/extension',
-          name:'Warranty'
-        },
-        {
-          path:'/warranty/extension',
-          name:'Extension'
-        },
-        {
-          path:'/warranty/extension/sigleItem',
-          name:'Sigle Item'
-        }
-      ],
+      
       fileList:[],
       productId:'',
       formMod,
@@ -444,6 +427,24 @@ export default {
       this.form.country = res
     })
   },
+  computed:{
+    breadcrumbList(){
+      return [
+        {
+          path:'/warranty/extension',
+          name:this.$t('singleItem.breadcrumb.warranty')
+        },
+        {
+          path:'/warranty/extension',
+          name:this.$t('singleItem.breadcrumb.extension')
+        },
+        {
+          path:'/warranty/extension/sigleItem',
+          name:this.$t('singleItem.breadcrumb.singleItem')
+        }
+      ]
+    }
+  }
 };
 </script>
 
