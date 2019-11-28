@@ -130,11 +130,14 @@ export default {
     return {
       activeIndex2: '/',
       options: country,
-      drop:'Country',
-      dropValue:'',
+      drop: sessionStorage.getItem('lanName') ?  sessionStorage.getItem('lanName'):'Country',
+      dropValue:sessionStorage.getItem('lan')?sessionStorage.getItem('lan'):'',
     };
   },
+  computed:{
+  },
   methods:{
+    
     handleSelect(key, keyPath) {
         // console.log(key, keyPath);
     },
@@ -144,6 +147,10 @@ export default {
         this.dropValue = command.code
         Bus.dropValue = command.code
         Bus.$emit("dropValue", this.dropValue); 
+        sessionStorage.setItem('lan',command.code)
+        sessionStorage.setItem('lanName',command.name)
+        this.$i18n.locale = command.code=== 'BR' ? 'pt-BR' : 'en'
+        // console.log(this.$i18n.locale)
       }
   }
 };
