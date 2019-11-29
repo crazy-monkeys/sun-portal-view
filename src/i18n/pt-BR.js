@@ -13,6 +13,8 @@ export default {
         multipleItems: 'Garantia - Warranty Extensionn',
     },
     index: {
+        country: 'País',
+        language: 'Língua',
         menu: {
             home: 'Home',
             warranty: 'Garantia',
@@ -45,13 +47,13 @@ export default {
             reset: 'Reset'
         },
         breadcrumb: {
-            warranty: 'Warranty',
+            warranty: 'Garantia',
             claim: 'Online Warranty Claim'
         },
     },
     claimForm: {
         breadcrumb: {
-            warranty: 'Warranty',
+            warranty: 'Garantia',
             claimForm: 'Solicitação de Garantia Online'
         },
         productDetails: {
@@ -126,8 +128,8 @@ export default {
     },
     extension: {
         breadcrumb: {
-            warranty: 'Warranty',
-            extension: 'Extension'
+            warranty: 'Garantia',
+            extension: 'Extensão'
         },
         table: {
             model: 'Model',
@@ -151,7 +153,7 @@ export default {
     },
     procedure: {
         breadcrumb: {
-            warranty: 'Warranty',
+            warranty: 'Garantia',
             procedure: 'Warranty Claim Procedure'
         },
         link: {
@@ -222,9 +224,9 @@ export default {
             standard: 'Additional 5 Years Standard Warranty',
         },
         breadcrumb: {
-            warranty: 'Warranty',
-            extension: 'Extension',
-            singleItem: 'Sigle Item',
+            warranty: 'Garantia',
+            extension: 'Extensão',
+            singleItem: 'Item de Sigilo',
         },
     },
     multipleItems: {
@@ -308,9 +310,9 @@ export default {
             standard: 'Additional 5 Years Standard Warranty',
         },
         breadcrumb: {
-            warranty: 'Warranty',
-            extension: 'Extension',
-            multipleItems: 'Multiple Items',
+            warranty: 'Garantia',
+            extension: 'Extensão',
+            multipleItems: 'Vários itens',
         },
     },
     registration: {
@@ -350,9 +352,9 @@ export default {
         submit: 'Enviar',
         reset: 'Limpar',
         breadcrumb: {
-            warranty: 'Warranty',
-            extension: 'Extension',
-            registration: 'Registration',
+            warranty: 'Garantia',
+            extension: 'Extensão',
+            registration: 'Registo',
         },
         pNumTooltip: 'Please refer to the nameplate on the side of the Sungrow product.',
         ivcTooltip: 'Please attach the invoice as the evidence of the installation.Note: The maximum attachment size per file is 10 MB.',

@@ -10,10 +10,10 @@ Vue.use(VueI18n)
 // pt-BR Brazil 巴西
 console.log(navigator.language)
 
-// console.log(sessionStorage.getItem('lan'))
+console.log(sessionStorage.getItem('lang'))
 const i18n = new VueI18n({
 
-    locale: navigator.language === 'pt-BR' ? navigator.language : 'en',
+    locale: sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') : navigator.language === 'pt-BR' ? navigator.language : 'en',
     messages: {
         en,
         'zh-CN': zhCN,

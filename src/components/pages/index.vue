@@ -20,8 +20,8 @@
                 <template slot="title">{{ $t('index.menu.warranty') }}</template>
                 <el-menu-item index="/warranty/claim/form">{{ $t('index.menu.claim') }}</el-menu-item>
                 <!-- <el-menu-item index="/warranty/procedure">Warranty Claim Procedure</el-menu-item> -->
-                <el-menu-item index="/warranty/registration" :disabled="dropValue!='AU'? true:false">{{ $t('index.menu.registration') }}</el-menu-item>
-                <el-menu-item index="/warranty/extension" :disabled="dropValue!='AU'? true:false">{{ $t('index.menu.extension') }}</el-menu-item>
+                <el-menu-item index="/warranty/registration" :disabled="dropValue=='AU' ||dropValue=='BR' ? false :true">{{ $t('index.menu.registration') }}</el-menu-item>
+                <el-menu-item index="/warranty/extension" :disabled="dropValue=='AU'  ? false :true">{{ $t('index.menu.extension') }}</el-menu-item>
             </el-submenu>
             <div class="drop">
               <!-- <el-dropdown @command="handleCommand" trigger='click'>
@@ -34,7 +34,7 @@
               </el-dropdown> -->
 
 
-              <el-select class="sel" v-model="dropValue" filterable  clearable size="small"  placeholder="country" @change='changeCountry'>
+              <el-select class="sel" v-model="dropValue" filterable  clearable size="small"  :placeholder="$t('index.country')" @change='changeCountry'>
                 <el-option
                   v-for="item in options"
                   :key="item.code"
@@ -43,7 +43,7 @@
                 </el-option>
               </el-select>
 
-              <el-select class="sel" v-model="lang" filterable  clearable size="small"  placeholder="language" @change='changeLang'>
+              <el-select class="sel" v-model="lang" filterable  clearable size="small"    :placeholder="$t('index.language')" @change='changeLang'>
                 <el-option
                   v-for="item in langs"
                   :key="item.code"
@@ -152,12 +152,11 @@ export default {
   name: "Index",
   data() {
     return {
-      lang:'en',
+      lang:sessionStorage.getItem('lang')?sessionStorage.getItem('lang'):'en',
       activeIndex2: '/',
       options: country,
       langs:langs,
-      // drop: sessionStorage.getItem('lanName') ?  sessionStorage.getItem('lanName'):'Country',
-      dropValue:sessionStorage.getItem('lan')?sessionStorage.getItem('lan'):'',
+      dropValue:sessionStorage.getItem('country')?sessionStorage.getItem('country'):'',
     };
   },
   computed:{
@@ -183,10 +182,11 @@ export default {
       console.log(val)
       this.dropValue = val
       Bus.dropValue = val
-      sessionStorage.setItem('lan',val)
+      sessionStorage.setItem('country',val)
     },
     changeLang(val){
       this.$i18n.locale = val=== 'pt-BR' ? 'pt-BR' : 'en'
+      sessionStorage.setItem('lang',val)
       this.lan()
     }
   }

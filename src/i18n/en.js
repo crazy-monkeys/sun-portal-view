@@ -13,6 +13,8 @@ export default {
         multipleItems: 'Sungrow Power - Warranty Extensionn',
     },
     index: {
+        country: 'country',
+        language: 'language',
         menu: {
             home: 'Home',
             warranty: 'Warranty',
