@@ -2,7 +2,7 @@ import enLocale from 'element-ui/lib/locale/lang/en'
 
 export default {
     ...enLocale,
-    pdfUrl: '/static/Sungrow Manufacturer Warranty.pdf',
+    pdfUrl: '../../../sun-portal/v/static/Sungrow Manufacturer Warranty.pdf',
     router: {
         home: 'Sungrow Power - Home',
         registration: 'Sungrow Power - Warranty Registration',

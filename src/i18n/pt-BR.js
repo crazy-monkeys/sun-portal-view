@@ -2,7 +2,7 @@ import ptLocale from 'element-ui/lib/locale/lang/pt-br'
 
 export default {
     ...ptLocale,
-    pdfUrl: '/static/01_Politica de Garantia_Rev.3.pdf',
+    pdfUrl: '../../../sun-portal/v/static/01_Politica de Garantia_Rev.3.pdf',
     router: {
         home: 'Garantia - Home',
         registration: 'Garantia - Registro',
