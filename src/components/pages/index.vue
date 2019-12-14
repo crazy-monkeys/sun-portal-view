@@ -34,7 +34,7 @@
               </el-dropdown> -->
 
 
-              <el-select class="sel" v-model="dropValue" filterable  clearable size="small"  :placeholder="$t('index.country')" @change='changeCountry'>
+              <el-select class="sel" v-model="dropValue" filterable size="small"  :placeholder="$t('index.country')" @change='changeCountry'>
                 <el-option
                   v-for="item in options"
                   :key="item.code"
@@ -43,7 +43,7 @@
                 </el-option>
               </el-select>
 
-              <el-select class="sel" v-model="lang" filterable  clearable size="small"    :placeholder="$t('index.language')" @change='changeLang'>
+              <el-select class="sel" v-model="lang" filterable size="small"    :placeholder="$t('index.language')" @change='changeLang'>
                 <el-option
                   v-for="item in langs"
                   :key="item.code"

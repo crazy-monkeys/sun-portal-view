@@ -468,7 +468,7 @@ export default {
   },
   methods: {
     openTerm(){
-      window.open('../../../sun-portal/v/static/Sungrow Manufacturer Warranty.pdf')
+      window.open(this.$t('pdfUrl'));
     },
     shippingAddressRadioChangeHandle(v) {
         if(v === '1' ){
