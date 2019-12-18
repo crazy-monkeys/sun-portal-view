@@ -468,7 +468,7 @@ export default {
   },
   methods: {
     openTerm(){
-      window.open(this.$t('pdfUrl'));
+      window.open(Bus.dropValue =='BR' ?'../../../sun-portal/v/static/01_Politica de Garantia_Rev.3.pdf':'../../../sun-portal/v/static/Sungrow Manufacturer Warranty.pdf');
     },
     shippingAddressRadioChangeHandle(v) {
         if(v === '1' ){
