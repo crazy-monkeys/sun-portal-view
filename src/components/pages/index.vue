@@ -170,7 +170,7 @@ export default {
     },
     lan(){
       var data ={
-        lan:this.$i18n.locale ==='BR' ? 'pt-BR' : 'en'
+        lan: this.$i18n.locale ==='pt-BR' ? 'pt-BR' : 'en'
       }
       setLan(data).then((res)=>{
           
