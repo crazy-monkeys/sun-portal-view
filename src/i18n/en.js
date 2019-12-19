@@ -126,6 +126,7 @@ export default {
         tos: "Sungrow's warranty terms.",
         submit: 'Submit',
         reset: 'Reset',
+        submitSuccessMsg: 'submitted successfully, Doc No.{0}and will jump to home page in 3 seconds',
     },
     extension: {
         breadcrumb: {
@@ -229,6 +230,7 @@ export default {
             extension: 'Extension',
             singleItem: 'Sigle Item',
         },
+        submitSuccessMsg: 'submitted successfully, Doc No.{0}and will jump to home page in 3 seconds',
     },
     multipleItems: {
         billingDetails: {
@@ -315,6 +317,7 @@ export default {
             extension: 'Extension',
             multipleItems: 'Multiple Items',
         },
+        submitSuccessMsg: 'submitted successfully, Doc No.{0}and will jump to home page in 3 seconds',
     },
     registration: {
         contactDetails: {
@@ -360,5 +363,6 @@ export default {
         pNumTooltip: 'Please refer to the nameplate on the side of the Sungrow product.',
         ivcTooltip: 'Please attach the invoice as the evidence of the installation.Note: The maximum attachment size per file is 10 MB.',
         cecTooltip: 'Please attach the Electrical Compliance Certifcate as the evidence of the installation.Normally it will provided by the installer after installation.For different states.the name for such certifcate may vary. Note: The maximum attachment size per file is 10 MB.',
+        submitSuccessMsg: 'submitted successfully, Doc No.{0}and will jump to home page in 3 seconds',
     }
 };

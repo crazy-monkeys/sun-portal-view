@@ -327,8 +327,7 @@ export default {
       submitReg(params).then(res=>{
         if(res.data.code==1){
           this.submitLoading = false
-          this.$message.success('submitted successfully, Doc No.'+res.data.data+ 'and will jump to home page in 3 seconds')
-
+          this.$message.success(this.$t('registration.submitSuccessMsg', [res.data.data]))
           const timer = setTimeout(() => {
             this.$router.push({
               name:'Home'
