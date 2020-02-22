@@ -342,59 +342,59 @@ export default {
     return {
       rules:{
         'contact.billType':[
-          {required:true,message:'Type is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.billType'),triggle:['change','blur']}
         ],
         'contact.contactEmail':[
-          {required:true,message:'Email is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.contactEmail'),triggle:['change','blur']}
         ],
         'contact.person':[
-          {required:true,message:'Person is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.person'),triggle:['change','blur']}
         ],
         'contact.contactNumber':[
-          {required:true,message:'ContactNumber is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.contactNumber'),triggle:['change','blur']}
         ],
         'contact.address.cityName':[
-          {required:true,message:'City is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.cityName'),triggle:['change','blur']}
         ],
         'contact.address.addressLine1':[
-          {required:true,message:'AddressLine1 is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.addressLine1'),triggle:['change','blur']}
         ],
         'contact.address.addressLine2':[
-          {required:true,message:'AddressLine2 is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.addressLine2'),triggle:['change','blur']}
         ],
         'contact.address.stateName':[
-          {required:true,message:'State is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.stateName'),triggle:['change','blur']}
         ],
         'contact.address.postCode':[
-          {required:true,message:'Post code is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.postCode'),triggle:['change','blur']}
         ],
 
         'endUser.contactEmail':[
-          {required:true,message:'Email is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.contactEmail'),triggle:['change','blur']}
         ],
         'endUser.person':[
-          {required:true,message:'Name is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.person'),triggle:['change','blur']}
         ],
         // 'endUser.contactNumber':[
         //   {required:true,message:'ContactNumber is required',triggle:['change','blur']}
         // ],
         'endUser.contactNumber':[
-          {required:true,message:'ContactNumber is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.contactNumber'),triggle:['change','blur']}
         ],
         'endUser.address.cityName':[
-          {required:true,message:'City is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.cityName'),triggle:['change','blur']}
         ],
         'endUser.address.addressLine1':[
-          {required:true,message:'AddressLine1 is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.addressLine1'),triggle:['change','blur']}
         ],
         'endUser.address.addressLine2':[
-          {required:true,message:'AddressLine2 is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.addressLine2'),triggle:['change','blur']}
         ],
         'endUser.address.stateName':[
-          {required:true,message:'State is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.stateName'),triggle:['change','blur']}
         ],
         'endUser.address.postCode':[
-          {required:true,message:'Post code is required',triggle:['change','blur']}
+          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.postCode'),triggle:['change','blur']}
         ],
         installDate:[
           {required:true,message:'InstallDate is required',triggle:['change','blur']}

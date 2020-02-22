@@ -65,6 +65,23 @@ export default {
             wantToClaimAnAccessory: 'Incluir um acessório?',
         },
         claimantContactDetails: {
+            formTest:{
+                billType:'Type is required',
+                contactEmail:'Email is required',
+                person:'Person is required',
+                contactNumber:'ContactNumber is required',
+                cityName:'City is required',
+                addressLine1:'AddressLine1 is required',
+                addressLine2:'AddressLine2 is required',
+                stateName:'StateName is required',
+                postCode:'PostCode is required',
+                installDate:'InstallDate is required',
+                productNumber:'Serial number is required',
+                fault:'Fault is required',
+                description:'Description is required',
+                shippingAddresslt:'ShippingAddress is required',
+                contactFirstName:'ContactFirstName is required'
+            },
             title: 'Dados do solicitante',
             type: 'Tipo',
             ABN: 'ABN',

@@ -170,7 +170,7 @@ export default {
     },
     lan(){
       var data ={
-        lan: this.$i18n.locale ==='pt-BR' ? 'pt-BR' : 'en'
+        lan: this.$i18n.locale ==='pt_BR' ? 'pt_BR' : 'en'
       }
       setLan(data).then((res)=>{
           
@@ -185,7 +185,7 @@ export default {
       sessionStorage.setItem('country',val)
     },
     changeLang(val){
-      this.$i18n.locale = val=== 'pt-BR' ? 'pt-BR' : 'en'
+      this.$i18n.locale = val=== 'pt_BR' ? 'pt_BR' : 'en'
       sessionStorage.setItem('lang',val)
       this.lan()
     }
