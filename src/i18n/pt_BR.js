@@ -6,9 +6,9 @@ export default {
     router: {
         home: 'Garantia - Home',
         registration: 'Garantia - Registro',
-        procedure: 'Garantia - Online Warranty Claim',
-        claim: 'Garantia - Online Warranty Claim',
-        form: 'Garantia - Online Warranty Claim',
+        procedure: 'Garantia - Solicitação de Garantia Online',
+        claim: 'Garantia - Solicitação de Garantia Online',
+        form: 'Garantia - Solicitação de Garantia Online',
         extension: 'Garantia - Warranty Extension',
         sigleItem: 'Garantia - Warranty Extension',
         multipleItems: 'Garantia - Warranty Extensionn',
@@ -49,7 +49,7 @@ export default {
         },
         breadcrumb: {
             warranty: 'Garantia',
-            claim: 'Online Warranty Claim'
+            claim: 'Solicitação de Garantia Online'
         },
     },
     claimForm: {
@@ -66,21 +66,21 @@ export default {
         },
         claimantContactDetails: {
             formTest:{
-                billType:'Type is required',
-                contactEmail:'Email is required',
-                person:'Person is required',
-                contactNumber:'ContactNumber is required',
-                cityName:'City is required',
-                addressLine1:'AddressLine111111 is required',
-                addressLine2:'AddressLine2 is required',
-                stateName:'StateName is required',
-                postCode:'PostCode is required',
-                installDate:'InstallDate is required',
-                productNumber:'Serial number is required',
-                fault:'Fault is required',
+                billType:'Tipo é obrigatório',
+                contactEmail:'Email é obrigatório',
+                person:'Name do contato é obrigatório',
+                contactNumber:'Número para contato é obrigatório',
+                cityName:'Cidade é obrigatório',
+                addressLine1:'Endereço é obrigatório',
+                addressLine2:'Bairro é obrigatório',
+                stateName:'Estado é obrigatório',
+                postCode:'CEP é obrigatório',
+                installDate:'Data da instalação é obrigatório',
+                productNumber:'Número de série é obrigatório',
+                fault:'Descrição da falha é obrigatório',
                 description:'Description is required',
-                shippingAddress:'ShippingAddress is required',
-                contactFirstName:'ContactFirstName is required'
+                shippingAddress:'Endereço de entrega é obrigatório',
+                contactFirstName:'O nome do contato é necessário'
             },
             title: 'Dados do solicitante',
             type: 'Tipo',
