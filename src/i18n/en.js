@@ -65,6 +65,23 @@ export default {
             wantToClaimAnAccessory: 'Want to claim an accessory?',
         },
         claimantContactDetails: {
+            formTest:{
+                billType:'Type is required',
+                contactEmail:'Email is required',
+                person:'Person is required',
+                contactNumber:'ContactNumber is required',
+                cityName:'City is required',
+                addressLine1:'AddressLine1 is required',
+                addressLine2:'AddressLine2 is required',
+                stateName:'StateName is required',
+                postCode:'PostCode is required',
+                installDate:'InstallDate is required',
+                productNumber:'Serial number is required',
+                fault:'Fault is required',
+                description:'Description is required',
+                shippingAddress:'ShippingAddress is required',
+                contactFirstName:'ContactFirstName is required'
+            },
             title: 'Claimant Contact Details',
             type: 'Type',
             ABN: 'ABN',

@@ -12,8 +12,7 @@ Vue.use(VueI18n)
 
 // console.log(sessionStorage.getItem('lang'))
 const i18n = new VueI18n({
-
-    locale: sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') : navigator.language === 'pt-BR' ? navigator.language : 'en',
+    locale: sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') : navigator.language === 'pt-BR' ? navigator.language  : 'en',
     messages: {
         en,
         'zh-CN': zhCN,

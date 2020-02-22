@@ -1,3 +1,5 @@
+
+
 export default {
     emailTest: (rule, value, callback) => {
         // let emailReg =/^([a-z0-9A-Z]+[-|\\.]?)+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$/
@@ -32,7 +34,5 @@ export default {
                 return false;
             }
         });
-    },
-
-
+    }
 }

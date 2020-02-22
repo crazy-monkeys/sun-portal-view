@@ -201,7 +201,290 @@ export default {
         a:'',
         b:'',
       };
+      let billType = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.billType"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let contactEmail = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.contactEmail"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let person = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.person"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let contactNumber = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.contactNumber"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let cityName = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.cityName"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let addressLine1 = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.addressLine1"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let addressLine2 = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.addressLine2"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let stateName = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.stateName"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let postCode = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.postCode"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let installDate = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.installDate"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let productNumber = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.productNumber"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let fault = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.fault"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let description = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.description"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let shippingAddress = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.shippingAddress"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
+    let contactFirstName = (rule, value, callback) => {
+      if (!value) {
+        return callback(
+          new Error(
+            this.$t(
+              "claimForm.claimantContactDetails.formTest.contactFirstName"
+            )
+          )
+        );
+      } else {
+        return callback();
+      }
+    };
     return {
+      rules: {
+          "contact.billType": [
+            {required: true,validator: billType, trigger: 'blur'}
+          ],
+          "contact.contactEmail": [
+            {required: true,validator: contactEmail, trigger: 'blur'}
+          ],
+          "contact.person": [
+            {required: true,validator: person, trigger: 'blur'}
+          ],
+          "contact.contactNumber": [
+            {required: true,validator: contactNumber, trigger: 'blur'}
+          ],
+          "contact.address.cityName": [
+            {required: true,validator: cityName, trigger: 'blur'}
+          ],
+          "contact.address.addressLine1": [
+            {required: true,validator: addressLine1, trigger: 'blur'}
+          ],
+          "contact.address.addressLine2": [
+            {required: true,validator: addressLine2, trigger: 'blur'}
+          ],
+          "contact.address.stateName": [
+                        {required: true,validator: stateName, trigger: 'blur'}
+
+          ],
+          "contact.address.postCode": [
+                        {required: true,validator: postCode, trigger: 'blur'}
+
+          ],
+
+          "endUser.contactEmail": [
+                        {required: true,validator: contactEmail, trigger: 'blur'}
+
+          ],
+          "endUser.person": [
+                        {required: true,validator: person, trigger: 'blur'}
+
+          ],
+          
+          "endUser.contactNumber": [
+                        {required: true,validator: contactNumber, trigger: 'blur'}
+
+          ],
+          "endUser.address.cityName": [
+                        {required: true,validator: cityName, trigger: 'blur'}
+
+          ],
+          "endUser.address.addressLine1": [
+                        {required: true,validator: addressLine1, trigger: 'blur'}
+
+          ],
+          "endUser.address.addressLine2": [
+                        {required: true,validator: addressLine2, trigger: 'blur'}
+
+          ],
+          "endUser.address.stateName": [
+                        {required: true,validator: stateName, trigger: 'blur'}
+
+          ],
+          "endUser.address.postCode": [
+                        {required: true,validator: postCode, trigger: 'blur'}
+
+          ],
+          'installDate': [
+                        {required: true,validator: installDate, trigger: 'blur'}
+
+          ],
+          'productNumber': [
+                        {required: true,validator: productNumber, trigger: 'blur'}
+
+          ],
+          "serviceCall.fault": [
+                        {required: true,validator: fault, trigger: 'blur'}
+
+          ],
+          "serviceCall.description": [
+                        {required: true,validator: description, trigger: 'blur'}
+
+          ],
+          "serviceCall.shippingAddress": [
+                        {required: true,validator: shippingAddress, trigger: 'blur'}
+
+          ],
+          'contacts.contactFirstName':[
+                        {required: true,validator: contactFirstName, trigger: 'blur'}
+        ],
+      },
       Bus,
       pNumTooltip: this.$t('registration.pNumTooltip'),
       ivcTooltip: this.$t('registration.ivcTooltip'),
@@ -211,29 +494,7 @@ export default {
           return time.getTime()>Date.now()
         }
       },
-      rules:{
-        'contacts.contactFirstName':[
-          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.contactFirstName'),triggle:['change','blur']}
-        ],
-        'productNumber':[
-          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.productNumber'),triggle:['change','blur']}
-        ],
-        'contacts.contactEmail':[
-          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.contactEmail'),triggle:['change','blur']}
-        ],
-        'address.cityName':[
-          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.cityName'),triggle:['change','blur']}
-        ],
-        'address.stateName':[
-          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.stateName'),triggle:['change','blur']}
-        ],
-        'address.postCode':[
-          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.postCode'),triggle:['change','blur']}
-        ],
-        'installDate':[
-          {required:true,message:this.$t('claimForm.claimantContactDetails.formTest.installDate'),triggle:['change','blur']}
-        ]
-      },
+      
       pNumLoding:false,
       submitLoading:false,
       options: [{

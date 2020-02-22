@@ -71,7 +71,7 @@ export default {
                 person:'Person is required',
                 contactNumber:'ContactNumber is required',
                 cityName:'City is required',
-                addressLine1:'AddressLine1 is required',
+                addressLine1:'AddressLine111111 is required',
                 addressLine2:'AddressLine2 is required',
                 stateName:'StateName is required',
                 postCode:'PostCode is required',
@@ -79,7 +79,7 @@ export default {
                 productNumber:'Serial number is required',
                 fault:'Fault is required',
                 description:'Description is required',
-                shippingAddresslt:'ShippingAddress is required',
+                shippingAddress:'ShippingAddress is required',
                 contactFirstName:'ContactFirstName is required'
             },
             title: 'Dados do solicitante',
