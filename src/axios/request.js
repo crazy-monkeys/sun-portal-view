@@ -81,8 +81,11 @@ axios.interceptors.response.use(
 
 // 参数过滤函数
 export const request = (method, url, data = {}, header = {}) => {
-
     const dataType = method.toLocaleLowerCase() === 'get' ? 'params' : 'data'
+    if(url.indexOf('?lang=') == -1){
+        let symbolFlag = url.indexOf('?')==-1?'?':'&';
+        url = url+symbolFlag+'lang='+sessionStorage.getItem('lang')
+    }
     let options = {
         url,
         method,
